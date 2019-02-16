@@ -1,0 +1,61 @@
+disabled_rules:
+  - file_length
+  - for_where
+  - function_body_length
+  - identifier_name
+  - large_tuple
+  - line_length
+  - type_name
+  - function_parameter_count
+  - type_body_length
+
+opt_in_rules:
+  - anyobject_protocol
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - conditional_returns_on_newline
+  - contains_over_first_not_nil
+  - convenience_type
+  - discouraged_object_literal
+  - empty_count
+  - empty_string
+  - empty_xctest_method
+  - extension_access_modifier
+  - fallthrough
+  - fatal_error_message
+  - first_where
+  - joined_default_parameter
+  - legacy_random
+  - let_var_whitespace
+  - lower_acl_than_parent
+  - modifier_order
+  - multiline_arguments
+  - multiline_arguments_brackets
+  - multiline_literal_brackets
+  - multiline_parameters
+  - multiline_parameters_brackets
+  - number_separator
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - prohibited_interface_builder
+  - prohibited_super_call
+  - redundant_type_annotation
+  - single_test_class
+  - sorted_first_last
+  - sorted_imports
+  - static_operator
+  - switch_case_on_newline
+  - toggle_bool
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - unused_private_declaration
+
+custom_rules:
+  avoid_redundant_init:
+    name: "Avoid redundant calls to init"
+    regex: "(?<![Ss]el|supe)[a-zA-Z0-9]\\.init((\\([a-zA-Z0-9]+\\))|(\\([a-zA-Z0-9]+: )|(\\([a-zA-Z0-9]+, )|(\\($))"
+    message: "Either remove .init, or remove the type"
+    severity: warning
