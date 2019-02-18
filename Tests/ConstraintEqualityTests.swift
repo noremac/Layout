@@ -94,8 +94,8 @@ extension NSLayoutConstraint {
             return false
         }
         return self.firstItem === otherConstraint.firstItem
-            && self.firstAttribute == otherConstraint.firstAttribute
             && self.secondItem === otherConstraint.secondItem
+            && self.firstAttribute == otherConstraint.firstAttribute
             && self.secondAttribute == otherConstraint.secondAttribute
             && self.relation == otherConstraint.relation
             && self.multiplier == otherConstraint.multiplier

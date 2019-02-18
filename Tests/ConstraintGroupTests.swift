@@ -30,19 +30,41 @@ import XCTest
 class ConstraintGroupTests: XCTestCase {
 
     var parentView: UIView!
-    var view: UIView!
+    var view1: UIView!
+    var view2: UIView!
+    var layoutGuide: UILayoutGuide!
 
     override func setUp() {
         super.setUp()
         parentView = UIView()
-        view = UIView()
-        parentView.addSubview(view)
+        view1 = UIView()
+        view2 = UIView()
+        layoutGuide = UILayoutGuide()
+        parentView.addSubview(view1)
+        parentView.addSubview(view2)
+        parentView.addLayoutGuide(layoutGuide)
     }
 
     func testAlignX() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .leading,
+                relatedBy: .greaterThanOrEqual,
+                toItem: view2,
+                attribute: .trailing,
+                multiplier: 2,
+                constant: 8
+            )
+        ]
+        let constraints = view1.makeConstraints(.align(.leading, .greaterThanOrEqual, to: .trailing, of: view2, multiplier: 2, offsetBy: 8))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testAlignXDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .leading,
                 relatedBy: .equal,
                 toItem: parentView,
@@ -51,27 +73,30 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 0
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-
-        constraints = view.makeConstraints(.align(.leading, .equal, to: .leading, of: parentView, multiplier: 1, offsetBy: 0))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.leading, .equal, to: .leading, of: parentView, multiplier: 1))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.leading, .equal, to: .leading, of: parentView))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.leading, .equal, to: .leading))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.leading, .equal))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.leading))
+        let constraints = view1.makeConstraints(.align(.leading))
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testAlignY() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .top,
+                relatedBy: .greaterThanOrEqual,
+                toItem: view2,
+                attribute: .bottom,
+                multiplier: 2,
+                constant: 8
+            )
+        ]
+        let constraints = view1.makeConstraints(.align(.top, .greaterThanOrEqual, to: .bottom, of: view2, multiplier: 2, offsetBy: 8))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testAlignYDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .top,
                 relatedBy: .equal,
                 toItem: parentView,
@@ -80,27 +105,30 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 0
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-
-        constraints = view.makeConstraints(.align(.top, .equal, to: .top, of: parentView, multiplier: 1, offsetBy: 0))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.top, .equal, to: .top, of: parentView, multiplier: 1))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.top, .equal, to: .top, of: parentView))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.top, .equal, to: .top))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.top, .equal))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.align(.top))
+        let constraints = view1.makeConstraints(.align(.top))
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testFixed() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .width,
+                relatedBy: .greaterThanOrEqual,
+                toItem: nil,
+                attribute: .notAnAttribute,
+                multiplier: 1,
+                constant: 100
+            )
+        ]
+        let constraints = view1.makeConstraints(.setFixed(.width, .greaterThanOrEqual, to: 100))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testFixedDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .width,
                 relatedBy: .equal,
                 toItem: nil,
@@ -109,148 +137,243 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 100
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-
-        constraints = view.makeConstraints(.setFixed(.width, .equal, to: 100))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.setFixed(.width, to: 100))
+        let constraints = view1.makeConstraints(.setFixed(.width, to: 100))
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testRelative() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .width,
+                relatedBy: .greaterThanOrEqual,
+                toItem: view2,
+                attribute: .height,
+                multiplier: 0.5,
+                constant: 2
+            )
+        ]
+        let constraints = view1.makeConstraints(.setRelative(.width, .greaterThanOrEqual, to: 0.5, of: view2, attribute: .height, constant: 2))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testRelativeDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .width,
                 relatedBy: .equal,
                 toItem: parentView,
                 attribute: .width,
-                multiplier: 0.5,
+                multiplier: 1,
                 constant: 0
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-
-        constraints = view.makeConstraints(.setRelative(.width, .equal, to: 0.5, of: parentView, attribute: .width, constant: 0))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.setRelative(.width, .equal, to: 0.5, of: parentView, attribute: .width))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.setRelative(.width, .equal, to: 0.5, of: parentView))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.setRelative(.width, .equal, to: 0.5))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.setRelative(.width, to: 0.5))
+        let constraints = view1.makeConstraints(.setRelative(.width))
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testAlignToEdges() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .top,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .top,
                 multiplier: 1,
                 constant: 1
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .leading,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .leading,
                 multiplier: 1,
                 constant: 2
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .bottom,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .bottom,
                 multiplier: 1,
                 constant: -3
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .trailing,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .trailing,
                 multiplier: 1,
                 constant: -4
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.alignToEdges(of: parentView, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.alignToEdges(insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
-        XCTAssertEqual(desiredConstraints, constraints)
-
-        desiredConstraints.setConstant(0)
-        constraints = view.makeConstraints(.alignToEdges())
+        let constraints = view1.makeConstraints(.alignToEdges(of: view2, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
-    func testAlignToMargins() {
+    func testAlignToEdgesDefaults() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .top,
                 relatedBy: .equal,
                 toItem: parentView,
+                attribute: .top,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .leading,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .leading,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .bottom,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .bottom,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .trailing,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .trailing,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = view1.makeConstraints(.alignToEdges())
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testAlignEdgesToMargins() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .top,
+                relatedBy: .equal,
+                toItem: view2,
                 attribute: .topMargin,
                 multiplier: 1,
                 constant: 1
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .leading,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .leadingMargin,
                 multiplier: 1,
                 constant: 2
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .bottom,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .bottomMargin,
                 multiplier: 1,
                 constant: -3
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .trailing,
                 relatedBy: .equal,
-                toItem: parentView,
+                toItem: view2,
                 attribute: .trailingMargin,
                 multiplier: 1,
                 constant: -4
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.alignEdgesToMargins(of: parentView, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
+        let constraints = view1.makeConstraints(.alignEdgesToMargins(of: view2, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
         XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.alignEdgesToMargins(insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
-        XCTAssertEqual(desiredConstraints, constraints)
+    }
 
-        desiredConstraints.setConstant(0)
-        constraints = view.makeConstraints(.alignEdgesToMargins())
+    func testAlignEdgesToMarginsDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .top,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .topMargin,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .leading,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .leadingMargin,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .bottom,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .bottomMargin,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .trailing,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .trailingMargin,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = view1.makeConstraints(.alignEdgesToMargins())
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testCenter() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .centerX,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .centerY,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = view1.makeConstraints(.center(in: view2))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testCenterDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .centerX,
                 relatedBy: .equal,
                 toItem: parentView,
@@ -259,7 +382,7 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 0
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .centerY,
                 relatedBy: .equal,
                 toItem: parentView,
@@ -268,18 +391,39 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 0
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.center(in: parentView))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.center())
+        let constraints = view1.makeConstraints(.center())
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
-    func testCenterWithinMargins() {
+    func testCenterWithinMarginsOf() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .centerX,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .centerXWithinMargins,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .centerY,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .centerYWithinMargins,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = view1.makeConstraints(.centerWithinMargins(of: view2))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testCenterWithinMarginsOfDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .centerX,
                 relatedBy: .equal,
                 toItem: parentView,
@@ -288,7 +432,7 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 0
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .centerY,
                 relatedBy: .equal,
                 toItem: parentView,
@@ -297,18 +441,14 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 0
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.centerWithinMargins(of: parentView))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.centerWithinMargins())
+        let constraints = view1.makeConstraints(.centerWithinMargins())
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testSetSize() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .width,
                 relatedBy: .equal,
                 toItem: nil,
@@ -317,7 +457,7 @@ class ConstraintGroupTests: XCTestCase {
                 constant: 1
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .height,
                 relatedBy: .equal,
                 toItem: nil,
@@ -328,47 +468,64 @@ class ConstraintGroupTests: XCTestCase {
         ]
 
         var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.setSize(CGSize(width: 1, height: 2)))
+        constraints = view1.makeConstraints(.setSize(CGSize(width: 1, height: 2)))
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testMatchSize() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .width,
-                relatedBy: .equal,
-                toItem: parentView,
+                relatedBy: .greaterThanOrEqual,
+                toItem: view2,
                 attribute: .width,
                 multiplier: 0.5,
-                constant: 1
+                constant: 2
             ),
             NSLayoutConstraint(
-                item: view,
+                item: view1,
+                attribute: .height,
+                relatedBy: .greaterThanOrEqual,
+                toItem: view2,
+                attribute: .height,
+                multiplier: 0.5,
+                constant: 2
+            )
+        ]
+        let constraints = view1.makeConstraints(.matchSize(of: view2, .greaterThanOrEqual, ratio: 0.5, constant: 2))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testMatchSizeDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .width,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
                 attribute: .height,
                 relatedBy: .equal,
                 toItem: parentView,
                 attribute: .height,
-                multiplier: 0.5,
-                constant: 1
+                multiplier: 1,
+                constant: 0
             )
         ]
-
-        var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.matchSize(of: parentView, ratio: 0.5, constant: 1))
-        XCTAssertEqual(desiredConstraints, constraints)
-        constraints = view.makeConstraints(.matchSize(ratio: 0.5, constant: 1))
-        XCTAssertEqual(desiredConstraints, constraints)
-
-        desiredConstraints.setConstant(0)
-        constraints = view.makeConstraints(.matchSize(ratio: 0.5))
+        let constraints = view1.makeConstraints(.matchSize())
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testPriorityOperator() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .width,
                 relatedBy: .equal,
                 toItem: nil,
@@ -381,14 +538,14 @@ class ConstraintGroupTests: XCTestCase {
         desiredConstraints.forEach { $0.priority = .defaultLow }
 
         var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.setFixed(.width, to: 100) ~ .defaultLow)
+        constraints = view1.makeConstraints(.setFixed(.width, to: 100) ~ .defaultLow)
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testIdentifierOperator() {
         let desiredConstraints = [
             NSLayoutConstraint(
-                item: view,
+                item: view1,
                 attribute: .width,
                 relatedBy: .equal,
                 toItem: nil,
@@ -401,31 +558,82 @@ class ConstraintGroupTests: XCTestCase {
         desiredConstraints.forEach { $0.identifier = "hi" }
 
         var constraints = [NSLayoutConstraint]()
-        constraints = view.makeConstraints(.setFixed(.width, to: 100) <- "hi")
+        constraints = view1.makeConstraints(.setFixed(.width, to: 100) <- "hi")
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
     func testAppliedConstraintsAreActive() {
-        let constraints = view.applyConstraints(.setFixed(.width, to: 100))
+        let constraints = view1.applyConstraints(.setFixed(.width, to: 100))
         XCTAssertTrue(constraints.allSatisfy({ $0.isActive }))
     }
 
     func testActivateAndDeactivate() {
-        let constraints = view.applyConstraints(.setFixed(.width, to: 100))
+        let constraints = view1.applyConstraints(.setFixed(.width, to: 100))
         XCTAssertTrue(constraints.allSatisfy({ $0.isActive }))
         constraints.deactivate()
         XCTAssertTrue(constraints.allSatisfy({ !$0.isActive }))
     }
 
+    func testChangesAllConstants() {
+        let constraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .notAnAttribute,
+                multiplier: 1,
+                constant: 100
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: nil,
+                attribute: .notAnAttribute,
+                multiplier: 1,
+                constant: 100
+            )
+        ]
+        XCTAssertTrue(constraints.allSatisfy({ $0.constant == 100 }))
+        constraints.setConstant(50)
+        XCTAssertTrue(constraints.allSatisfy({ $0.constant == 50 }))
+    }
+
     func testAnchorEquality() {
-        let c1 = view.makeConstraints(
+        let c1 = view1.makeConstraints(
             .setFixed(.width, to: 100),
             .setFixed(.height, to: 100)
         )
-        let c2 = view.makeConstraints(
+        let c2 = view1.makeConstraints(
             .with({ $0.widthAnchor.constraint(equalToConstant: 100) }),
             .with({ $0.heightAnchor.constraint(equalToConstant: 100) })
         )
         XCTAssertEqual(c1, c2)
+    }
+
+    func testLayoutGuides() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: layoutGuide,
+                attribute: .width,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .width,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: layoutGuide,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .height,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = layoutGuide.makeConstraints(.matchSize())
+        XCTAssertEqual(desiredConstraints, constraints)
     }
 }
