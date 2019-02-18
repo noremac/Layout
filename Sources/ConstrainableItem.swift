@@ -24,26 +24,50 @@
 
 import UIKit
 
+/// This protocol defines an item that constraints can be applied to.
+/// - Note: Only `UIView` and `UILayoutGuide` should implement this protocol.
 public protocol ConstrainableItem {
 
+    /// This is used when creating constraints relative to an items parent view.
+    ///
+    /// - Returns: The `UIView`'s `superview` or the `UILayoutGuide`'s `owningView`.
+    /// - Throws: `NoParentViewError` if the item is not yet in the view hierarchy.
     func parentView() throws -> UIView
 
+    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` for `UIView`s.
+    /// It does nothing for `UILayoutGuide`s.
     func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
 
+    /// The item's leading anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var leadingAnchor: NSLayoutXAxisAnchor { get }
 
+    /// The item's trailing anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var trailingAnchor: NSLayoutXAxisAnchor { get }
 
+    /// The item's top anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var topAnchor: NSLayoutYAxisAnchor { get }
 
+    /// The item's bottom anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var bottomAnchor: NSLayoutYAxisAnchor { get }
 
+    /// The item's width anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var widthAnchor: NSLayoutDimension { get }
 
+    /// The item's height anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var heightAnchor: NSLayoutDimension { get }
 
+    /// The item's centerX anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var centerXAnchor: NSLayoutXAxisAnchor { get }
 
+    /// The item's centerY anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var centerYAnchor: NSLayoutYAxisAnchor { get }
 }
 
@@ -54,10 +78,20 @@ extension ConstrainableItem {
         return groups.flatMap { $0.constraints(withItem: self) }
     }
 
+    /// Creates and returns an array of `NSLayoutConstraint`s corresponding to the given groups.
+    ///
+    /// - Parameter groups: The groups of constraints you'd like.
+    /// - Returns: The `NSLayoutConstraint`s corresponding to the given `ConstraintGroup`s.
+    /// - Note: This method will call `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on the receiver automatically.
     public func makeConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         return makeConstraints(groups: groups)
     }
 
+    /// Creates, immediately activates, and returns an array of `NSLayoutConstraint`s corresponding to the given groups.
+    ///
+    /// - Parameter groups: The groups of constraints you'd like.
+    /// - Returns: The `NSLayoutConstraint`s corresponding to the given `ConstraintGroup`s.
+    /// - Note: This method will call `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on the receiver automatically.
     @discardableResult
     public func applyConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         let constraints = makeConstraints(groups: groups)
