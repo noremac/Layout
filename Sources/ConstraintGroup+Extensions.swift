@@ -26,6 +26,12 @@ import UIKit
 
 public extension ConstraintGroup {
 
+    /// Returns a `ConstraintGroup` for aligning an item's edges to another item.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - insets: The desired insets; defaults to `.zero`.
+    /// - Returns: A `ConstraintGroup` for aligning an item's edges to another item.
     static func alignToEdges(
         of item: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
@@ -41,6 +47,12 @@ public extension ConstraintGroup {
             ])
     }
 
+    /// Returns a `ConstraintGroup` for aligning an item's edges to another item's margins.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - insets: The desired insets; defaults to `.zero`.
+    /// - Returns: A `ConstraintGroup` for aligning an item's edges to another item's margins.
     static func alignEdgesToMargins(
         of item: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
@@ -56,6 +68,11 @@ public extension ConstraintGroup {
             ])
     }
 
+    /// Returns a `ConstraintGroup` for centering an item inside another item.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    /// - Returns: A `ConstraintGroup` for centering an item inside another item.
     static func center(
         in item: ConstrainableItem? = nil,
         file: StaticString = #file,
@@ -68,6 +85,11 @@ public extension ConstraintGroup {
             ])
     }
 
+    /// Returns a `ConstraintGroup` for centering an item inside another item's margins.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    /// - Returns: A `ConstraintGroup` for centering an item inside another item's margins.
     static func centerWithinMargins(
         of item: ConstrainableItem? = nil,
         file: StaticString = #file,
@@ -80,6 +102,12 @@ public extension ConstraintGroup {
             ])
     }
 
+    /// Returns a `ConstraintGroup` for setting the size of an item.
+    ///
+    /// - Parameters:
+    ///   - size: The desired size.
+    ///   - relation: The relation; defaults to `.equal`.
+    /// - Returns: A `ConstraintGroup` for setting the size of an item.
     static func setSize(
         _ size: CGSize,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -93,6 +121,14 @@ public extension ConstraintGroup {
             ])
     }
 
+    /// Returns a `ConstraintGroup` for matching the size of one item to another item.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - ratio: The desired ratio; defaults to `1`.
+    ///   - constant: The constant; defaults to `0`.
+    /// - Returns: A `ConstraintGroup` for matching the size of one item to another item.
     static func matchSize(
         of item: ConstrainableItem? = nil,
         _ relation: NSLayoutConstraint.Relation = .equal,

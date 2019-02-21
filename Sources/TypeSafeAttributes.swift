@@ -24,6 +24,18 @@
 
 import UIKit
 
+/// A wrapper around the "x" `NSLayoutConstraint.Attribute`s.
+/// - Note:
+/// `.left` and `.right` are purposefully elided as `.leading`
+/// and `.trailing` should generally be preferred.
+///
+/// Additionally, `.left` / `.right` / `.leading` / `.trailing` are also
+/// not safe to mix and cause crashes at run time.
+///
+/// If you absolutely need `.left` or `.right` use `ConstraintGroup`'s
+/// `.with` method like this:
+///
+///     view.makeConstraints(.with({ $0.leftAnchor.constraint(equalTo....) })
 public struct XAttribute {
 
     public let attribute: NSLayoutConstraint.Attribute
@@ -40,6 +52,7 @@ public struct XAttribute {
     public static let centerXWithinMargins = XAttribute(.centerXWithinMargins)
 }
 
+/// A wrapper around the "y" `NSLayoutConstraint.Attribute`s.
 public struct YAttribute {
 
     public let attribute: NSLayoutConstraint.Attribute
@@ -58,6 +71,7 @@ public struct YAttribute {
     public static let centerYWithinMargins = YAttribute(.centerYWithinMargins)
 }
 
+/// A wrapper around the "dimension" `NSLayoutConstraint.Attribute`s.
 public struct DimensionAttribute {
 
     public let attribute: NSLayoutConstraint.Attribute

@@ -24,6 +24,7 @@
 
 import UIKit
 
+/// A closure that takes a `ConstrainableItem` and returns an `NSLayoutConstraint`.
 public typealias ConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
 
 enum SecondItem {
@@ -38,7 +39,7 @@ func constraintGenerator(
     attribute2: NSLayoutConstraint.Attribute,
     multiplier: CGFloat,
     constant: CGFloat
-    ) -> (ConstrainableItem) -> NSLayoutConstraint {
+    ) -> ConstraintSpec {
     return { item in
         let otherItem: ConstrainableItem? = {
             switch item2 {

@@ -24,25 +24,41 @@
 
 import UIKit
 
+/// A struct that helps create constraints.
 public struct ConstraintGroup {
 
-    internal static var debugConstraints = true
+    /// When this is `true` a string with this format: `"\(file)::\(function)::\(line)"` is automatically added as each constraint's `identifier`.
+    public static var debugConstraints = true
 
-    var specs: [ConstraintSpec]
+    /// The `ConstraintSpec`s.
+    public var specs: [ConstraintSpec]
 
+    /// The priority of this group of constraints.
     public var priority: UILayoutPriority = .required
 
+    /// The identifier of this group of constraints.
+    /// - SeeAlso: `ConstraintGroup.debugConstraints`.
     public var identifier: String?
 
-    init(spec: @escaping ConstraintSpec) {
+    /// Creates a `ConstraintGroup` with a single spec.
+    ///
+    /// - Parameter spec: A `ConstraintSpec` for creating a single constraint.
+    public init(spec: @escaping ConstraintSpec) {
         self.specs = [spec]
     }
 
+    /// Creates a `ConstraintGroup` composed of other `ConstraintGroup`s.
+    ///
+    /// - Parameter groups: An array of `ConstraintGroup`s to concatenate together.
     public init(composedOf groups: [ConstraintGroup]) {
         self.specs = groups.flatMap { $0.specs }
     }
 
-    func constraints(withItem item: ConstrainableItem) -> [NSLayoutConstraint] {
+    /// Creates an array of `NSLayoutConstraint`s from the current group using the given item as each `NSLayoutConstraint`'s `firstItem`.
+    ///
+    /// - Parameter item: The `NSLayoutConstraint`'s
+    /// - Returns: An array of `NSLayoutConstraint`s.
+    public func constraints(withItem item: ConstrainableItem) -> [NSLayoutConstraint] {
         return specs.map { spec in
             let constraint = spec(item)
             constraint.priority = priority
@@ -51,6 +67,12 @@ public struct ConstraintGroup {
         }
     }
 
+    /// This is the base method for `ConstraintGroup` creation; all other methods funnel through here.
+    /// The initializers should not be used manually.
+    ///
+    /// - Parameters:
+    ///   - spec: A close that takes a `ConstrainableItem` and returns an `NSLayoutConstraint`.
+    /// - Returns: A `ConstraintGroup` wrapping the given spec.
     public static func with(
         _ spec: @escaping ConstraintSpec,
         file: StaticString = #file,
@@ -64,6 +86,16 @@ public struct ConstraintGroup {
         return group
     }
 
+    /// Returns a `ConstraintGroup` for aligning an item's x anchor to another item's x anchor.
+    ///
+    /// - Parameters:
+    ///   - firstAttr: The desired `XAttribute`.
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondAttr: The second `XAttribute`; defaults to `firstAttr` if left as `nil`.
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - offset: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's x anchor to another item's x anchor.
     public static func align(
         _ firstAttr: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -90,6 +122,16 @@ public struct ConstraintGroup {
         )
     }
 
+    /// Returns a `ConstraintGroup` for aligning an item's y anchor to another item's y anchor.
+    ///
+    /// - Parameters:
+    ///   - firstAttr: The desired `YAttribute`.
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondAttr: The second `YAttribute`; defaults to `firstAttr` if left as `nil`.
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - offset: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's y anchor to another item's y anchor.
     public static func align(
         _ firstAttr: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -116,6 +158,13 @@ public struct ConstraintGroup {
         )
     }
 
+    /// Returns a `ConstraintGroup` for applying a fixed dimension to an item.
+    ///
+    /// - Parameters:
+    ///   - firstAttr: The dimension, either `.width` or `.height`
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a fixed dimension to an item.
     public static func setFixed
         (
         _ firstAttr: DimensionAttribute,
@@ -141,6 +190,16 @@ public struct ConstraintGroup {
             )
     }
 
+    /// Returns a `ConstraintGroup` for applying a relative dimension in relation to another item.
+    ///
+    /// - Parameters:
+    ///   - firstAttr: The dimension, either `.width` or `.height`
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - secondAttr: The dimension of the second item; defaults to `firstAttr` if left as `nil`.
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a relative dimension in relation to another item.
     public static func setRelative
         (
         _ firstAttr: DimensionAttribute,

@@ -34,6 +34,12 @@ precedencegroup ConstraintGroupPriorityAssignment {
 
 infix operator ~ : ConstraintGroupPriorityAssignment
 
+/// Sets the priority of a `ConstraintGroup`.
+///
+/// - Parameters:
+///   - lhs: The constraint group.
+///   - rhs: The priority.
+/// - Returns: A new constraint group whose priority has been modified.
 public func ~ (lhs: ConstraintGroup, rhs: UILayoutPriority) -> ConstraintGroup {
     var new = lhs
     new.priority = rhs
@@ -47,6 +53,12 @@ precedencegroup ConstraintGroupIdentifierAssignment {
 
 infix operator <- : ConstraintGroupIdentifierAssignment
 
+/// Sets the identifier of a `ConstraintGroup`.
+///
+/// - Parameters:
+///   - lhs: The constraint group.
+///   - rhs: The identifier.
+/// - Returns: A new constraint group whose identifier has been modified.
 public func <- (lhs: ConstraintGroup, rhs: String?) -> ConstraintGroup {
     var new = lhs
     new.identifier = rhs
