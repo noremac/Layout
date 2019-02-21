@@ -35,6 +35,7 @@ class ConstraintGroupTests: XCTestCase {
     var layoutGuide: UILayoutGuide!
 
     override func setUp() {
+        ConstraintGroup.debugConstraints = false
         super.setUp()
         parentView = UIView()
         view1 = UIView()

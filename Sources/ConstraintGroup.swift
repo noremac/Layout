@@ -26,7 +26,7 @@ import UIKit
 
 public struct ConstraintGroup {
 
-    public static var debugConstraints = false
+    internal static var debugConstraints = true
 
     var specs: [ConstraintSpec]
 
