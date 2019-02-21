@@ -47,6 +47,48 @@ public extension ConstraintGroup {
             ])
     }
 
+    /// Returns a `ConstraintGroup` for aligning an item's vertical edges to another item.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - topInset: The desired top inset; defaults to zero.
+    ///   - bottomInset: The desired bottom inset; defaults to zero.
+    /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to another item.
+    static func alignToVerticalEdges(
+        of item: ConstrainableItem? = nil,
+        topInset: CGFloat = 0,
+        bottomInset: CGFloat = 0,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: Int = #line
+        ) -> ConstraintGroup {
+        return .init(composedOf: [
+            .align(.top, of: item, offsetBy: topInset, file: file, function: function, line: line),
+            .align(.bottom, of: item, offsetBy: -bottomInset, file: file, function: function, line: line)
+            ])
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to another item.
+    ///
+    /// - Parameters:
+    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - leadingInset: The desired leading inset; defaults to zero.
+    ///   - trailingInset: The desired trailing inset; defaults to zero.
+    /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges to another item.
+    static func alignToHorizontalEdges(
+        of item: ConstrainableItem? = nil,
+        leadingInset: CGFloat = 0,
+        trailingInset: CGFloat = 0,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: Int = #line
+        ) -> ConstraintGroup {
+        return .init(composedOf: [
+            .align(.leading, of: item, offsetBy: leadingInset, file: file, function: function, line: line),
+            .align(.trailing, of: item, offsetBy: -trailingInset, file: file, function: function, line: line)
+            ])
+    }
+
     /// Returns a `ConstraintGroup` for aligning an item's edges to another item's margins.
     ///
     /// - Parameters:
