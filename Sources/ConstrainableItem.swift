@@ -28,7 +28,7 @@ import UIKit
 /// - Note: Only `UIView` and `UILayoutGuide` should implement this protocol.
 public protocol ConstrainableItem {
 
-    /// This is used when creating constraints relative to an items parent view.
+    /// This is used when creating constraints relative to an item's parent view.
     ///
     /// - Returns: The `UIView`'s `superview` or the `UILayoutGuide`'s `owningView`.
     /// - Throws: `NoParentViewError` if the item is not yet in the view hierarchy.

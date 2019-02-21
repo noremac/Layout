@@ -260,6 +260,106 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqual(desiredConstraints, constraints)
     }
 
+    func testAlignToVerticalEdges() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .top,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .top,
+                multiplier: 1,
+                constant: 1
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .bottom,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .bottom,
+                multiplier: 1,
+                constant: -3
+            )
+        ]
+        let constraints = view1.makeConstraints(.alignToVerticalEdges(of: view2, topInset: 1, bottomInset: 3))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testAlignToVerticalEdgesDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .top,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .top,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .bottom,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .bottom,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = view1.makeConstraints(.alignToVerticalEdges())
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testAlignToHorizontalEdges() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .leading,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .leading,
+                multiplier: 1,
+                constant: 2
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .trailing,
+                relatedBy: .equal,
+                toItem: view2,
+                attribute: .trailing,
+                multiplier: 1,
+                constant: -4
+            )
+        ]
+        let constraints = view1.makeConstraints(.alignToHorizontalEdges(of: view2, leadingInset: 2, trailingInset: 4))
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
+    func testAlignToHorizontalEdgesDefaults() {
+        let desiredConstraints = [
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .leading,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .leading,
+                multiplier: 1,
+                constant: 0
+            ),
+            NSLayoutConstraint(
+                item: view1,
+                attribute: .trailing,
+                relatedBy: .equal,
+                toItem: parentView,
+                attribute: .trailing,
+                multiplier: 1,
+                constant: 0
+            )
+        ]
+        let constraints = view1.makeConstraints(.alignToHorizontalEdges())
+        XCTAssertEqual(desiredConstraints, constraints)
+    }
+
     func testAlignEdgesToMargins() {
         let desiredConstraints = [
             NSLayoutConstraint(
