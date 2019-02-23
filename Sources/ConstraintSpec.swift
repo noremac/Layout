@@ -47,7 +47,8 @@ func constraintGenerator(
                 do {
                     return try item.parentView()
                 } catch {
-                    fatalError("Your \(type(of: item)) must be part of the view hierarchy. \(error)")
+                    assertionFailure("Your \(type(of: item)) must be part of the view hierarchy. \(error)")
+                    return nil
                 }
             case .other(let other)?:
                 return other
