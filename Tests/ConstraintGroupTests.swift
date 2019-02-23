@@ -737,4 +737,15 @@ class ConstraintGroupTests: XCTestCase {
         let constraints = layoutGuide.makeConstraints(.matchSize())
         XCTAssertEqual(desiredConstraints, constraints)
     }
+
+    func testThrowsErrors() {
+        let view = UIView()
+        let layoutGuide = UILayoutGuide()
+        XCTAssertThrowsError(try view.parentView())
+        XCTAssertThrowsError(try layoutGuide.parentView())
+        parentView.addSubview(view)
+        parentView.addLayoutGuide(layoutGuide)
+        XCTAssertNoThrow(try view.parentView())
+        XCTAssertNoThrow(try layoutGuide.parentView())
+    }
 }
