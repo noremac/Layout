@@ -38,6 +38,14 @@ public protocol ConstrainableItem {
     /// It does nothing for `UILayoutGuide`s.
     func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
 
+    /// The item's left anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
+    var leftAnchor: NSLayoutXAxisAnchor { get }
+
+    /// The item's right anchor.
+    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
+    var rightAnchor: NSLayoutXAxisAnchor { get }
+
     /// The item's leading anchor.
     /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var leadingAnchor: NSLayoutXAxisAnchor { get }
