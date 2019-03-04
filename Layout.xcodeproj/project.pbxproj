@@ -18,6 +18,7 @@
 		1E76831D22184C2700A9CDDB /* ConstrainableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76831C22184C2700A9CDDB /* ConstrainableItem.swift */; };
 		1E934F5F2218C7190068F832 /* ConstraintGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E934F5E2218C7190068F832 /* ConstraintGroupTests.swift */; };
 		1E934F612218C9E50068F832 /* ConstraintEqualityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E934F602218C9E50068F832 /* ConstraintEqualityTests.swift */; };
+		1EE96204222DE885009D1426 /* ConstraintGroup+Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE96203222DE885009D1426 /* ConstraintGroup+Anchors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		1E76831C22184C2700A9CDDB /* ConstrainableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstrainableItem.swift; sourceTree = "<group>"; };
 		1E934F5E2218C7190068F832 /* ConstraintGroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintGroupTests.swift; sourceTree = "<group>"; };
 		1E934F602218C9E50068F832 /* ConstraintEqualityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintEqualityTests.swift; sourceTree = "<group>"; };
+		1EE96203222DE885009D1426 /* ConstraintGroup+Anchors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintGroup+Anchors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				1E76831C22184C2700A9CDDB /* ConstrainableItem.swift */,
 				1E7406DD2218C11200B6B4AD /* ConstrainableItem+Implementations.swift */,
 				1E51D7ED2218724300C70B22 /* ConstraintGroup.swift */,
+				1EE96203222DE885009D1426 /* ConstraintGroup+Anchors.swift */,
 				1E7406D92218A8CB00B6B4AD /* ConstraintGroup+Extensions.swift */,
 				1E7406D72218A7FC00B6B4AD /* ConstraintGroup+Operators.swift */,
 				1E51D7EF221875CD00C70B22 /* ConstraintSpec.swift */,
@@ -267,6 +270,7 @@
 				1E51D7EE2218724300C70B22 /* ConstraintGroup.swift in Sources */,
 				1E7406DC2218BE9D00B6B4AD /* NSLayoutConstraint+Extensions.swift in Sources */,
 				1E7406DE2218C11200B6B4AD /* ConstrainableItem+Implementations.swift in Sources */,
+				1EE96204222DE885009D1426 /* ConstraintGroup+Anchors.swift in Sources */,
 				1E76831D22184C2700A9CDDB /* ConstrainableItem.swift in Sources */,
 				1E51D7F0221875CD00C70B22 /* ConstraintSpec.swift in Sources */,
 				1E7406D82218A7FC00B6B4AD /* ConstraintGroup+Operators.swift in Sources */,

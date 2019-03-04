@@ -7,11 +7,12 @@ class Example: UIViewController {
     let loginButton: UIButton = {
         let button = UIButton(type: .system)
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        let image = UIGraphicsImageRenderer(bounds: rect).image(actions: { context in
+        let image = UIGraphicsImageRenderer(bounds: rect).image { _ in
             let path = UIBezierPath(rect: rect)
             UIColor.blue.setFill()
             path.fill()
-        })
+        }
+
         button.setBackgroundImage(image, for: .normal)
         button.setTitle("Log In", for: .normal)
         button.tintColor = .white
@@ -67,5 +68,6 @@ class Example: UIViewController {
 }
 
 let viewController = Example()
+
 PlaygroundPage.current.liveView = viewController
 PlaygroundPage.current.needsIndefiniteExecution = true

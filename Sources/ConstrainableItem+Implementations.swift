@@ -57,4 +57,16 @@ extension UILayoutGuide: ConstrainableItem {
     public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
 
     }
+
+    public var firstBaselineAnchor: NSLayoutYAxisAnchor {
+        return topAnchor
+    }
+
+    public var lastBaselineAnchor: NSLayoutYAxisAnchor {
+        return bottomAnchor
+    }
+
+    public var layoutMarginsGuide: UILayoutGuide {
+        return self
+    }
 }

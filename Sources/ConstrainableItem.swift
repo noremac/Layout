@@ -39,44 +39,43 @@ public protocol ConstrainableItem {
     func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
 
     /// The item's left anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var leftAnchor: NSLayoutXAxisAnchor { get }
 
     /// The item's right anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var rightAnchor: NSLayoutXAxisAnchor { get }
 
     /// The item's leading anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var leadingAnchor: NSLayoutXAxisAnchor { get }
 
     /// The item's trailing anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var trailingAnchor: NSLayoutXAxisAnchor { get }
 
     /// The item's top anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var topAnchor: NSLayoutYAxisAnchor { get }
 
     /// The item's bottom anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var bottomAnchor: NSLayoutYAxisAnchor { get }
 
     /// The item's width anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var widthAnchor: NSLayoutDimension { get }
 
     /// The item's height anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var heightAnchor: NSLayoutDimension { get }
 
     /// The item's centerX anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var centerXAnchor: NSLayoutXAxisAnchor { get }
 
     /// The item's centerY anchor.
-    /// - Note: This is only provided as a convenience when using `ConstraintGroup`'s `with` method.
     var centerYAnchor: NSLayoutYAxisAnchor { get }
+
+    // TODO: document
+    var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
+
+    // TODO: document
+    var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
+
+    // TODO: document
+    var layoutMarginsGuide: UILayoutGuide { get }
 }
 
 extension ConstrainableItem {
