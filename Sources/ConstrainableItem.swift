@@ -73,9 +73,6 @@ public protocol ConstrainableItem {
 
     // TODO: document
     var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
-
-    // TODO: document
-    var layoutMarginsGuide: UILayoutGuide { get }
 }
 
 extension ConstrainableItem {

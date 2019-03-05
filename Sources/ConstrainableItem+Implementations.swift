@@ -65,8 +65,4 @@ extension UILayoutGuide: ConstrainableItem {
     public var lastBaselineAnchor: NSLayoutYAxisAnchor {
         return bottomAnchor
     }
-
-    public var layoutMarginsGuide: UILayoutGuide {
-        return self
-    }
 }

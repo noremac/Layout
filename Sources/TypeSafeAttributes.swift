@@ -40,10 +40,7 @@ public struct XAttribute {
     public static let right = XAttribute(.right, { $0.rightAnchor })
     public static let leading = XAttribute(.leading, { $0.leadingAnchor })
     public static let trailing = XAttribute(.trailing, { $0.trailingAnchor })
-    public static let leadingMargin = XAttribute(.leadingMargin, { $0.layoutMarginsGuide.leadingAnchor })
-    public static let trailingMargin = XAttribute(.trailingMargin, { $0.layoutMarginsGuide.trailingAnchor })
     public static let centerX = XAttribute(.centerX, { $0.centerXAnchor })
-    public static let centerXWithinMargins = XAttribute(.centerXWithinMargins, { $0.layoutMarginsGuide.centerXAnchor })
 }
 
 /// A wrapper around the "y" `NSLayoutConstraint.Attribute`s.
@@ -60,12 +57,9 @@ public struct YAttribute {
 
     public static let top = YAttribute(.top, { $0.topAnchor })
     public static let bottom = YAttribute(.bottom, { $0.bottomAnchor })
-    public static let topMargin = YAttribute(.topMargin, { $0.layoutMarginsGuide.topAnchor })
-    public static let bottomMargin = YAttribute(.bottomMargin, { $0.layoutMarginsGuide.bottomAnchor })
     public static let firstBaseline = YAttribute(.firstBaseline, { $0.firstBaselineAnchor })
     public static let lastBaseline = YAttribute(.lastBaseline, { $0.lastBaselineAnchor })
     public static let centerY = YAttribute(.centerY, { $0.centerYAnchor })
-    public static let centerYWithinMargins = YAttribute(.centerYWithinMargins, { $0.layoutMarginsGuide.centerYAnchor })
 }
 
 /// A wrapper around the "dimension" `NSLayoutConstraint.Attribute`s.

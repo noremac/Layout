@@ -89,27 +89,6 @@ public extension ConstraintGroup {
             ])
     }
 
-    /// Returns a `ConstraintGroup` for aligning an item's edges to another item's margins.
-    ///
-    /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
-    ///   - insets: The desired insets; defaults to `.zero`.
-    /// - Returns: A `ConstraintGroup` for aligning an item's edges to another item's margins.
-    static func alignEdgesToMargins(
-        of item: ConstrainableItem? = nil,
-        insets: NSDirectionalEdgeInsets = .zero,
-        file: StaticString = #file,
-        function: StaticString = #function,
-        line: Int = #line
-        ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .align(.top, to: .topMargin, of: item, offsetBy: insets.top, file: file, function: function, line: line),
-            .align(.leading, to: .leadingMargin, of: item, offsetBy: insets.leading, file: file, function: function, line: line),
-            .align(.bottom, to: .bottomMargin, of: item, offsetBy: -insets.bottom, file: file, function: function, line: line),
-            .align(.trailing, to: .trailingMargin, of: item, offsetBy: -insets.trailing, file: file, function: function, line: line)
-            ])
-    }
-
     /// Returns a `ConstraintGroup` for centering an item inside another item.
     ///
     /// - Parameters:
@@ -124,23 +103,6 @@ public extension ConstraintGroup {
         return .init(composedOf: [
             .align(.centerX, of: item, file: file, function: function, line: line),
             .align(.centerY, of: item, file: file, function: function, line: line)
-            ])
-    }
-
-    /// Returns a `ConstraintGroup` for centering an item inside another item's margins.
-    ///
-    /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
-    /// - Returns: A `ConstraintGroup` for centering an item inside another item's margins.
-    static func centerWithinMargins(
-        of item: ConstrainableItem? = nil,
-        file: StaticString = #file,
-        function: StaticString = #function,
-        line: Int = #line
-        ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .align(.centerX, to: .centerXWithinMargins, of: item, file: file, function: function, line: line),
-            .align(.centerY, to: .centerYWithinMargins, of: item, file: file, function: function, line: line)
             ])
     }
 
