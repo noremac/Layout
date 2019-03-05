@@ -27,7 +27,7 @@ import UIKit
 public extension ConstraintGroup {
 
     // TODO: document
-    static func place(
+    static func align(
         _ firstAttr: XAttribute,
         _ relation: NSLayoutConstraint.Relation,
         toSystemSpacingAfter secondAnchor: NSLayoutXAxisAnchor,
@@ -56,7 +56,7 @@ public extension ConstraintGroup {
     }
 
     // TODO: document
-    static func place(
+    static func align(
         _ firstAttr: YAttribute,
         _ relation: NSLayoutConstraint.Relation,
         toSystemSpacingBelow secondAnchor: NSLayoutYAxisAnchor,
@@ -74,6 +74,70 @@ public extension ConstraintGroup {
                 return firstAnchor.constraint(equalToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
             case .greaterThanOrEqual:
                 return firstAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
+            }
+        }
+        return ConstraintGroup.with(
+            spec,
+            file: file,
+            function: function,
+            line: line
+        )
+    }
+
+    // TODO: document
+    static func match(
+        _ dimension: DimensionAttribute,
+        _ relation: NSLayoutConstraint.Relation = .equal,
+        toSpaceBetween firstAnchor: NSLayoutXAxisAnchor,
+        and secondAnchor: NSLayoutXAxisAnchor,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: Int = #line
+        ) -> ConstraintGroup {
+        let spec: ConstraintSpec = { item in
+            let anchor = dimension.anchor(item)
+            let space: NSLayoutDimension = firstAnchor.anchorWithOffset(to: secondAnchor)
+            switch relation {
+            case .lessThanOrEqual:
+                return anchor.constraint(lessThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+            case .equal:
+                return anchor.constraint(equalTo: space, multiplier: multiplier, constant: constant)
+            case .greaterThanOrEqual:
+                return anchor.constraint(greaterThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+            }
+        }
+        return ConstraintGroup.with(
+            spec,
+            file: file,
+            function: function,
+            line: line
+        )
+    }
+
+    // TODO: document
+    static func match(
+        _ dimension: DimensionAttribute,
+        _ relation: NSLayoutConstraint.Relation = .equal,
+        toSpaceBetween firstAnchor: NSLayoutYAxisAnchor,
+        and secondAnchor: NSLayoutYAxisAnchor,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: Int = #line
+        ) -> ConstraintGroup {
+        let spec: ConstraintSpec = { item in
+            let anchor = dimension.anchor(item)
+            let space: NSLayoutDimension = firstAnchor.anchorWithOffset(to: secondAnchor)
+            switch relation {
+            case .lessThanOrEqual:
+                return anchor.constraint(lessThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+            case .equal:
+                return anchor.constraint(equalTo: space, multiplier: multiplier, constant: constant)
+            case .greaterThanOrEqual:
+                return anchor.constraint(greaterThanOrEqualTo: space, multiplier: multiplier, constant: constant)
             }
         }
         return ConstraintGroup.with(
