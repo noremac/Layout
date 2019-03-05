@@ -67,10 +67,13 @@ public struct DimensionAttribute {
 
     public let attribute: NSLayoutConstraint.Attribute
 
-    public init(_ attribute: NSLayoutConstraint.Attribute) {
+    public let anchor: (ConstrainableItem) -> NSLayoutDimension
+
+    public init(_ attribute: NSLayoutConstraint.Attribute, _ anchor: @escaping (ConstrainableItem) -> NSLayoutDimension) {
         self.attribute = attribute
+        self.anchor = anchor
     }
 
-    public static let width = DimensionAttribute(.width)
-    public static let height = DimensionAttribute(.height)
+    public static let width = DimensionAttribute(.width, { $0.widthAnchor })
+    public static let height = DimensionAttribute(.height, { $0.heightAnchor })
 }
