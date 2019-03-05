@@ -96,15 +96,7 @@ class ConstraintGroupTests: XCTestCase {
 
     func testFixed() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .greaterThanOrEqual,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 100
-            )
+            view1.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ]
         let constraints = view1.makeConstraints(.setFixed(.width, .greaterThanOrEqual, to: 100))
         XCTAssertEqual(desiredConstraints, constraints)
@@ -194,24 +186,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testCenter() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .centerX,
-                relatedBy: .equal,
-                toItem: view2,
-                attribute: .centerX,
-                multiplier: 1,
-                constant: 0
-            ),
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .centerY,
-                relatedBy: .equal,
-                toItem: view2,
-                attribute: .centerY,
-                multiplier: 1,
-                constant: 0
-            )
+            view1.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
+            view1.centerYAnchor.constraint(equalTo: view2.centerYAnchor)
         ]
         let constraints = view1.makeConstraints(.center(in: view2))
         XCTAssertEqual(desiredConstraints, constraints)
@@ -219,24 +195,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testCenterDefaults() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .centerX,
-                relatedBy: .equal,
-                toItem: parentView,
-                attribute: .centerX,
-                multiplier: 1,
-                constant: 0
-            ),
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .centerY,
-                relatedBy: .equal,
-                toItem: parentView,
-                attribute: .centerY,
-                multiplier: 1,
-                constant: 0
-            )
+            view1.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            view1.centerYAnchor.constraint(equalTo: parentView.centerYAnchor)
         ]
         let constraints = view1.makeConstraints(.center())
         XCTAssertEqual(desiredConstraints, constraints)
@@ -244,24 +204,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testSetSize() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 1
-            ),
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .height,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 2
-            )
+            view1.widthAnchor.constraint(equalToConstant: 1),
+            view1.heightAnchor.constraint(equalToConstant: 2)
         ]
 
         var constraints = [NSLayoutConstraint]()
@@ -271,24 +215,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testMatchSize() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .greaterThanOrEqual,
-                toItem: view2,
-                attribute: .width,
-                multiplier: 0.5,
-                constant: 2
-            ),
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .height,
-                relatedBy: .greaterThanOrEqual,
-                toItem: view2,
-                attribute: .height,
-                multiplier: 0.5,
-                constant: 2
-            )
+            view1.widthAnchor.constraint(greaterThanOrEqualTo: view2.widthAnchor, multiplier: 0.5, constant: 2),
+            view1.heightAnchor.constraint(greaterThanOrEqualTo: view2.heightAnchor, multiplier: 0.5, constant: 2)
         ]
         let constraints = view1.makeConstraints(.matchSize(of: view2, .greaterThanOrEqual, ratio: 0.5, constant: 2))
         XCTAssertEqual(desiredConstraints, constraints)
@@ -296,24 +224,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testMatchSizeDefaults() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: parentView,
-                attribute: .width,
-                multiplier: 1,
-                constant: 0
-            ),
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .height,
-                relatedBy: .equal,
-                toItem: parentView,
-                attribute: .height,
-                multiplier: 1,
-                constant: 0
-            )
+            view1.widthAnchor.constraint(equalTo: parentView.widthAnchor),
+            view1.heightAnchor.constraint(equalTo: parentView.heightAnchor)
         ]
         let constraints = view1.makeConstraints(.matchSize())
         XCTAssertEqual(desiredConstraints, constraints)
@@ -321,15 +233,7 @@ class ConstraintGroupTests: XCTestCase {
 
     func testPriorityOperator() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 100
-            )
+            view1.widthAnchor.constraint(equalToConstant: 100)
         ]
 
         desiredConstraints.forEach { $0.priority = .defaultLow }
@@ -341,15 +245,7 @@ class ConstraintGroupTests: XCTestCase {
 
     func testIdentifierOperator() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 100
-            )
+            view1.widthAnchor.constraint(equalToConstant: 100)
         ]
 
         desiredConstraints.forEach { $0.identifier = "hi" }
@@ -373,24 +269,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testChangesAllConstants() {
         let constraints = [
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 100
-            ),
-            NSLayoutConstraint(
-                item: view1,
-                attribute: .height,
-                relatedBy: .equal,
-                toItem: nil,
-                attribute: .notAnAttribute,
-                multiplier: 1,
-                constant: 100
-            )
+            view1.widthAnchor.constraint(equalToConstant: 100),
+            view1.heightAnchor.constraint(equalToConstant: 100)
         ]
         XCTAssertTrue(constraints.allSatisfy({ $0.constant == 100 }))
         constraints.setConstant(50)
@@ -411,24 +291,8 @@ class ConstraintGroupTests: XCTestCase {
 
     func testLayoutGuides() {
         let desiredConstraints = [
-            NSLayoutConstraint(
-                item: layoutGuide,
-                attribute: .width,
-                relatedBy: .equal,
-                toItem: parentView,
-                attribute: .width,
-                multiplier: 1,
-                constant: 0
-            ),
-            NSLayoutConstraint(
-                item: layoutGuide,
-                attribute: .height,
-                relatedBy: .equal,
-                toItem: parentView,
-                attribute: .height,
-                multiplier: 1,
-                constant: 0
-            )
+            layoutGuide.widthAnchor.constraint(equalTo: parentView.widthAnchor),
+            layoutGuide.heightAnchor.constraint(equalTo: parentView.heightAnchor)
         ]
         let constraints = layoutGuide.makeConstraints(.matchSize())
         XCTAssertEqual(desiredConstraints, constraints)
