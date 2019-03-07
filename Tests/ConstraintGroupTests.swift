@@ -37,10 +37,10 @@ class ConstraintGroupTests: XCTestCase {
     override func setUp() {
         ConstraintGroup.debugConstraints = false
         super.setUp()
-        parentView = UIView()
-        view1 = UIView()
-        view2 = UIView()
-        layoutGuide = UILayoutGuide()
+        parentView = .init()
+        view1 = .init()
+        view2 = .init()
+        layoutGuide = .init()
         parentView.addSubview(view1)
         parentView.addSubview(view2)
         parentView.addLayoutGuide(layoutGuide)
@@ -59,7 +59,7 @@ class ConstraintGroupTests: XCTestCase {
             )
         ]
         let constraints = view1.makeConstraints(.align(.leading, .greaterThanOrEqual, to: .trailing, of: view2, multiplier: 2, offsetBy: 8))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignXDefaults() {
@@ -67,7 +67,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.leadingAnchor.constraint(equalTo: parentView.leadingAnchor)
         ]
         let constraints = view1.makeConstraints(.align(.leading))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignY() {
@@ -83,7 +83,7 @@ class ConstraintGroupTests: XCTestCase {
             )
         ]
         let constraints = view1.makeConstraints(.align(.top, .greaterThanOrEqual, to: .bottom, of: view2, multiplier: 2, offsetBy: 8))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignYDefaults() {
@@ -91,7 +91,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.topAnchor.constraint(equalTo: parentView.topAnchor)
         ]
         let constraints = view1.makeConstraints(.align(.top))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testFixed() {
@@ -99,7 +99,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
         ]
         let constraints = view1.makeConstraints(.setFixed(.width, .greaterThanOrEqual, to: 100))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testFixedDefaults() {
@@ -107,7 +107,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.widthAnchor.constraint(equalToConstant: 100)
         ]
         let constraints = view1.makeConstraints(.setFixed(.width, to: 100))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testRelative() {
@@ -115,7 +115,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.widthAnchor.constraint(greaterThanOrEqualTo: view2.heightAnchor, multiplier: 0.5, constant: 2)
         ]
         let constraints = view1.makeConstraints(.setRelative(.width, .greaterThanOrEqual, to: 0.5, of: view2, attribute: .height, constant: 2))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testRelativeDefaults() {
@@ -123,7 +123,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.widthAnchor.constraint(equalTo: parentView.widthAnchor, multiplier: 1, constant: 0)
         ]
         let constraints = view1.makeConstraints(.setRelative(.width))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToEdges() {
@@ -134,7 +134,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.trailingAnchor.constraint(equalTo: view2.trailingAnchor, constant: -4)
         ]
         let constraints = view1.makeConstraints(.alignToEdges(of: view2, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToEdgesDefaults() {
@@ -145,7 +145,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ]
         let constraints = view1.makeConstraints(.alignToEdges())
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToVerticalEdges() {
@@ -154,7 +154,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.bottomAnchor.constraint(equalTo: view2.bottomAnchor, constant: -3)
         ]
         let constraints = view1.makeConstraints(.alignToVerticalEdges(of: view2, topInset: 1, bottomInset: 3))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToVerticalEdgesDefaults() {
@@ -163,7 +163,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
         ]
         let constraints = view1.makeConstraints(.alignToVerticalEdges())
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToHorizontalEdges() {
@@ -172,7 +172,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.trailingAnchor.constraint(equalTo: view2.trailingAnchor, constant: -4)
         ]
         let constraints = view1.makeConstraints(.alignToHorizontalEdges(of: view2, leadingInset: 2, trailingInset: 4))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToHorizontalEdgesDefaults() {
@@ -181,7 +181,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ]
         let constraints = view1.makeConstraints(.alignToHorizontalEdges())
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testCenter() {
@@ -190,7 +190,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.centerYAnchor.constraint(equalTo: view2.centerYAnchor)
         ]
         let constraints = view1.makeConstraints(.center(in: view2))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testCenterDefaults() {
@@ -199,7 +199,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.centerYAnchor.constraint(equalTo: parentView.centerYAnchor)
         ]
         let constraints = view1.makeConstraints(.center())
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testSetSize() {
@@ -210,7 +210,7 @@ class ConstraintGroupTests: XCTestCase {
 
         var constraints = [NSLayoutConstraint]()
         constraints = view1.makeConstraints(.setSize(CGSize(width: 1, height: 2)))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testMatchSize() {
@@ -219,7 +219,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.heightAnchor.constraint(greaterThanOrEqualTo: view2.heightAnchor, multiplier: 0.5, constant: 2)
         ]
         let constraints = view1.makeConstraints(.matchSize(of: view2, .greaterThanOrEqual, ratio: 0.5, constant: 2))
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testMatchSizeDefaults() {
@@ -228,7 +228,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.heightAnchor.constraint(equalTo: parentView.heightAnchor)
         ]
         let constraints = view1.makeConstraints(.matchSize())
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testPriorityOperator() {
@@ -240,7 +240,7 @@ class ConstraintGroupTests: XCTestCase {
 
         var constraints = [NSLayoutConstraint]()
         constraints = view1.makeConstraints(.setFixed(.width, to: 100) ~ .defaultLow)
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testIdentifierOperator() {
@@ -252,7 +252,7 @@ class ConstraintGroupTests: XCTestCase {
 
         var constraints = [NSLayoutConstraint]()
         constraints = view1.makeConstraints(.setFixed(.width, to: 100) <- "hi")
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAppliedConstraintsAreActive() {
@@ -286,7 +286,7 @@ class ConstraintGroupTests: XCTestCase {
             .with({ $0.widthAnchor.constraint(equalToConstant: 100) }),
             .with({ $0.heightAnchor.constraint(equalToConstant: 100) })
         )
-        XCTAssertEqual(c1, c2)
+        XCTAssertEqualConstraints(c1, c2)
     }
 
     func testLayoutGuides() {
@@ -295,7 +295,7 @@ class ConstraintGroupTests: XCTestCase {
             layoutGuide.heightAnchor.constraint(equalTo: parentView.heightAnchor)
         ]
         let constraints = layoutGuide.makeConstraints(.matchSize())
-        XCTAssertEqual(desiredConstraints, constraints)
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testThrowsErrors() {
