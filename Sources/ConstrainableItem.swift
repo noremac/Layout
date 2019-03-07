@@ -68,10 +68,8 @@ public protocol ConstrainableItem {
     /// The item's centerY anchor.
     var centerYAnchor: NSLayoutYAxisAnchor { get }
 
-    // TODO: document
     var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
 
-    // TODO: document
     var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
 }
 

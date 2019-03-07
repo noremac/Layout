@@ -24,10 +24,9 @@
 
 import UIKit
 
-public extension ConstraintGroup {
+extension ConstraintGroup {
 
-    // TODO: document
-    static func align(
+    public static func align(
         _ firstAttr: XAttribute,
         _ relation: NSLayoutConstraint.Relation,
         toSystemSpacingAfter secondAnchor: NSLayoutXAxisAnchor,
@@ -55,8 +54,7 @@ public extension ConstraintGroup {
         )
     }
 
-    // TODO: document
-    static func align(
+    public static func align(
         _ firstAttr: YAttribute,
         _ relation: NSLayoutConstraint.Relation,
         toSystemSpacingBelow secondAnchor: NSLayoutYAxisAnchor,
@@ -84,8 +82,7 @@ public extension ConstraintGroup {
         )
     }
 
-    // TODO: document
-    static func match(
+    public static func match(
         _ dimension: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         toSpaceBetween firstAnchor: NSLayoutXAxisAnchor,
@@ -116,8 +113,7 @@ public extension ConstraintGroup {
         )
     }
 
-    // TODO: document
-    static func match(
+    public static func match(
         _ dimension: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         toSpaceBetween firstAnchor: NSLayoutYAxisAnchor,

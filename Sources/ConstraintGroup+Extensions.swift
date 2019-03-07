@@ -24,7 +24,7 @@
 
 import UIKit
 
-public extension ConstraintGroup {
+extension ConstraintGroup {
 
     /// Returns a `ConstraintGroup` for aligning an item's edges to another item.
     ///
@@ -32,7 +32,7 @@ public extension ConstraintGroup {
     ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     ///   - insets: The desired insets; defaults to `.zero`.
     /// - Returns: A `ConstraintGroup` for aligning an item's edges to another item.
-    static func alignToEdges(
+    public static func alignToEdges(
         of item: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
         file: StaticString = #file,
@@ -54,7 +54,7 @@ public extension ConstraintGroup {
     ///   - topInset: The desired top inset; defaults to zero.
     ///   - bottomInset: The desired bottom inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to another item.
-    static func alignToVerticalEdges(
+    public static func alignToVerticalEdges(
         of item: ConstrainableItem? = nil,
         topInset: CGFloat = 0,
         bottomInset: CGFloat = 0,
@@ -75,7 +75,7 @@ public extension ConstraintGroup {
     ///   - leadingInset: The desired leading inset; defaults to zero.
     ///   - trailingInset: The desired trailing inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges to another item.
-    static func alignToHorizontalEdges(
+    public static func alignToHorizontalEdges(
         of item: ConstrainableItem? = nil,
         leadingInset: CGFloat = 0,
         trailingInset: CGFloat = 0,
@@ -94,7 +94,7 @@ public extension ConstraintGroup {
     /// - Parameters:
     ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     /// - Returns: A `ConstraintGroup` for centering an item inside another item.
-    static func center(
+    public static func center(
         in item: ConstrainableItem? = nil,
         file: StaticString = #file,
         function: StaticString = #function,
@@ -112,7 +112,7 @@ public extension ConstraintGroup {
     ///   - size: The desired size.
     ///   - relation: The relation; defaults to `.equal`.
     /// - Returns: A `ConstraintGroup` for setting the size of an item.
-    static func setSize(
+    public static func setSize(
         _ size: CGSize,
         _ relation: NSLayoutConstraint.Relation = .equal,
         file: StaticString = #file,
@@ -133,7 +133,7 @@ public extension ConstraintGroup {
     ///   - ratio: The desired ratio; defaults to `1`.
     ///   - constant: The constant; defaults to `0`.
     /// - Returns: A `ConstraintGroup` for matching the size of one item to another item.
-    static func matchSize(
+    public static func matchSize(
         of item: ConstrainableItem? = nil,
         _ relation: NSLayoutConstraint.Relation = .equal,
         ratio: CGFloat = 1,
