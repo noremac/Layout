@@ -42,7 +42,7 @@ public class DynamicLayout<Environment> {
             self.predicate = predicate
         }
 
-        func evaluate(with environment: Environment) -> Bool {
+        public func evaluate(with environment: Environment) -> Bool {
             return predicate(environment)
         }
     }
@@ -114,26 +114,4 @@ extension DynamicLayout.Context where Environment: Equatable {
     public mutating func when(_ value: Environment, file: StaticString = #file, line: UInt = #line, _ using: (inout DynamicLayout.Context) -> Void) {
         when(.init({ $0 == value }), file: file, line: line, using)
     }
-}
-
-// TODO: remove this
-func foo() {
-    let view = UIView()
-    let layout = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
-    layout.addLayouts { ctx in
-        ctx.when(.verticallyRegular || .verticallyUnspecified || .widthGreaterThanOrEqualTo(1_024)) { ctx in
-            ctx.addConstraints(
-                for: view,
-                .align(.leading)
-            )
-
-            ctx.when(.horizontallyCompact) { ctx in
-                ctx.addConstraints(
-                    for: view,
-                    .align(.trailing)
-                )
-            }
-        }
-    }
-    layout.updateActiveConstraints(with: .init(traitCollection: view.traitCollection, size: view.bounds.size))
 }

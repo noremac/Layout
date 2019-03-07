@@ -35,10 +35,16 @@ class DynamicLayoutTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        ConstraintGroup.debugConstraints = false
         parentView = .init()
         view = .init()
         parentView.addSubview(view)
         sut = .init()
+    }
+
+    override func tearDown() {
+        ConstraintGroup.debugConstraints = true
+        super.tearDown()
     }
 
     func testGlobalConstraints() {

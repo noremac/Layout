@@ -24,82 +24,82 @@
 
 import UIKit
 
-public extension DynamicLayout.Predicate {
+extension DynamicLayout.Predicate {
 
-    static func || (lhs: DynamicLayout<Environment>.Predicate, rhs: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
+    public static func || (lhs: DynamicLayout<Environment>.Predicate, rhs: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
         return .init { env in
             lhs.evaluate(with: env) || rhs.evaluate(with: env)
         }
     }
 
-    static func && (lhs: DynamicLayout<Environment>.Predicate, rhs: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
+    public static func && (lhs: DynamicLayout<Environment>.Predicate, rhs: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
         return .init { env in
             lhs.evaluate(with: env) && rhs.evaluate(with: env)
         }
     }
 }
 
-public extension DynamicLayout.Predicate {
+extension DynamicLayout.Predicate {
 
-    static var always: DynamicLayout<Environment>.Predicate {
+    public static var always: DynamicLayout<Environment>.Predicate {
         return .init { _ in true }
     }
 }
 
-public extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironmentProtocol {
+extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironmentProtocol {
 
-    static var verticallyUnspecified: DynamicLayout<Environment>.Predicate {
+    public static var verticallyUnspecified: DynamicLayout<Environment>.Predicate {
         return .init { env in
             env.traitCollection.verticalSizeClass == .unspecified
         }
     }
 
-    static var verticallyRegular: DynamicLayout<Environment>.Predicate {
+    public static var verticallyRegular: DynamicLayout<Environment>.Predicate {
         return .init { env in
             env.traitCollection.verticalSizeClass == .regular
         }
     }
 
-    static var verticallyCompact: DynamicLayout<Environment>.Predicate {
+    public static var verticallyCompact: DynamicLayout<Environment>.Predicate {
         return .init { env in
             env.traitCollection.verticalSizeClass == .compact
         }
     }
 
-    static var horizontallyUnspecified: DynamicLayout<Environment>.Predicate {
+    public static var horizontallyUnspecified: DynamicLayout<Environment>.Predicate {
         return .init { env in
             env.traitCollection.horizontalSizeClass == .unspecified
         }
     }
 
-    static var horizontallyRegular: DynamicLayout<Environment>.Predicate {
+    public static var horizontallyRegular: DynamicLayout<Environment>.Predicate {
         return .init { env in
             env.traitCollection.horizontalSizeClass == .regular
         }
     }
 
-    static var horizontallyCompact: DynamicLayout<Environment>.Predicate {
+    public static var horizontallyCompact: DynamicLayout<Environment>.Predicate {
         return .init { env in
             env.traitCollection.horizontalSizeClass == .compact
         }
     }
 }
 
-public extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmentProtocol {
+extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmentProtocol {
 
-    static func widthGreaterThanOrEqualTo(_ dimension: CGFloat) -> DynamicLayout<Environment>.Predicate {
+    public static func widthGreaterThanOrEqualTo(_ dimension: CGFloat) -> DynamicLayout<Environment>.Predicate {
         return .init { env in
             return env.size.width >= dimension
         }
     }
 
-    static var tall: DynamicLayout<Environment>.Predicate {
+    public static var tall: DynamicLayout<Environment>.Predicate {
         return .init { env in
             return env.size.height > env.size.width
         }
     }
 
-    static var wide: DynamicLayout<Environment>.Predicate {
+    public static var wide: DynamicLayout<Environment>.Predicate {
         return .init { env in
             return env.size.width >= env.size.height
         }

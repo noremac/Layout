@@ -45,5 +45,21 @@ class TypeSafeAttributeAnchorTests: XCTestCase {
 
         XCTAssertEqual(view.widthAnchor, DimensionAttribute.width.anchor(view))
         XCTAssertEqual(view.heightAnchor, DimensionAttribute.height.anchor(view))
+
+        let guide = UILayoutGuide()
+        XCTAssertEqual(guide.leftAnchor, XAttribute.left.anchor(guide))
+        XCTAssertEqual(guide.rightAnchor, XAttribute.right.anchor(guide))
+        XCTAssertEqual(guide.leadingAnchor, XAttribute.leading.anchor(guide))
+        XCTAssertEqual(guide.trailingAnchor, XAttribute.trailing.anchor(guide))
+        XCTAssertEqual(guide.centerXAnchor, XAttribute.centerX.anchor(guide))
+
+        XCTAssertEqual(guide.topAnchor, YAttribute.top.anchor(guide))
+        XCTAssertEqual(guide.bottomAnchor, YAttribute.bottom.anchor(guide))
+        XCTAssertEqual(guide.topAnchor, YAttribute.firstBaseline.anchor(guide))
+        XCTAssertEqual(guide.bottomAnchor, YAttribute.lastBaseline.anchor(guide))
+        XCTAssertEqual(guide.centerYAnchor, YAttribute.centerY.anchor(guide))
+
+        XCTAssertEqual(guide.widthAnchor, DimensionAttribute.width.anchor(guide))
+        XCTAssertEqual(guide.heightAnchor, DimensionAttribute.height.anchor(guide))
     }
 }

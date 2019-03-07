@@ -81,7 +81,7 @@ public struct ConstraintGroup {
         ) -> ConstraintGroup {
         var group = ConstraintGroup(spec: spec)
         if debugConstraints {
-            group.identifier = "\(file)::\(function)::\(line)"
+            group.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(function)::\(line)"
         }
         return group
     }

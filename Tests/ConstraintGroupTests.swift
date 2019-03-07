@@ -46,6 +46,11 @@ class ConstraintGroupTests: XCTestCase {
         parentView.addLayoutGuide(layoutGuide)
     }
 
+    override func tearDown() {
+        ConstraintGroup.debugConstraints = true
+        super.tearDown()
+    }
+
     func testAlignX() {
         let desiredConstraints = [
             NSLayoutConstraint(
