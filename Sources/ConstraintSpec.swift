@@ -38,7 +38,9 @@ func constraintGenerator(
     item2: SecondItem?,
     attribute2: NSLayoutConstraint.Attribute,
     multiplier: CGFloat,
-    constant: CGFloat
+    constant: CGFloat,
+    file: StaticString = #file,
+    line: UInt = #line
     ) -> ConstraintSpec {
     return { item in
         let otherItem: ConstrainableItem? = {
@@ -47,7 +49,7 @@ func constraintGenerator(
                 do {
                     return try item.parentView()
                 } catch {
-                    assertionFailure("Your \(type(of: item)) must be part of the view hierarchy. \(error)")
+                    assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy \(error)", file: file, line: line)
                     return nil
                 }
             case .other(let other)?:

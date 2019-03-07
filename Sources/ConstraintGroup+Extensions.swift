@@ -37,7 +37,7 @@ public extension ConstraintGroup {
         insets: NSDirectionalEdgeInsets = .zero,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return .init(composedOf: [
             .align(.top, of: item, offsetBy: insets.top, file: file, function: function, line: line),
@@ -60,7 +60,7 @@ public extension ConstraintGroup {
         bottomInset: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return .init(composedOf: [
             .align(.top, of: item, offsetBy: topInset, file: file, function: function, line: line),
@@ -81,7 +81,7 @@ public extension ConstraintGroup {
         trailingInset: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return .init(composedOf: [
             .align(.leading, of: item, offsetBy: leadingInset, file: file, function: function, line: line),
@@ -98,7 +98,7 @@ public extension ConstraintGroup {
         in item: ConstrainableItem? = nil,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return .init(composedOf: [
             .align(.centerX, of: item, file: file, function: function, line: line),
@@ -117,7 +117,7 @@ public extension ConstraintGroup {
         _ relation: NSLayoutConstraint.Relation = .equal,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return .init(composedOf: [
             .setFixed(.width, relation, to: size.width, file: file, function: function, line: line),
@@ -140,7 +140,7 @@ public extension ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return .init(composedOf: [
             .setRelative(.width, relation, to: ratio, of: item, constant: constant, file: file, function: function, line: line),

@@ -77,7 +77,7 @@ public struct ConstraintGroup {
         _ spec: @escaping ConstraintSpec,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         var group = ConstraintGroup(spec: spec)
         if debugConstraints {
@@ -105,7 +105,7 @@ public struct ConstraintGroup {
         offsetBy offset: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return with(
             constraintGenerator(
@@ -114,7 +114,9 @@ public struct ConstraintGroup {
                 item2: item.map { .other($0) } ?? .parent,
                 attribute2: (secondAttr ?? firstAttr).attribute,
                 multiplier: multiplier,
-                constant: offset
+                constant: offset,
+                file: file,
+                line: line
             ),
             file: file,
             function: function,
@@ -141,7 +143,7 @@ public struct ConstraintGroup {
         offsetBy offset: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         return with(
             constraintGenerator(
@@ -150,7 +152,9 @@ public struct ConstraintGroup {
                 item2: item.map { .other($0) } ?? .parent,
                 attribute2: (secondAttr ?? firstAttr).attribute,
                 multiplier: multiplier,
-                constant: offset
+                constant: offset,
+                file: file,
+                line: line
             ),
             file: file,
             function: function,
@@ -172,7 +176,7 @@ public struct ConstraintGroup {
         to constant: CGFloat,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         )
         -> ConstraintGroup {
             return with(
@@ -182,7 +186,9 @@ public struct ConstraintGroup {
                     item2: nil,
                     attribute2: .notAnAttribute,
                     multiplier: 1,
-                    constant: constant
+                    constant: constant,
+                    file: file,
+                    line: line
                 ),
                 file: file,
                 function: function,
@@ -210,7 +216,7 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         )
         -> ConstraintGroup {
             return with(
@@ -220,7 +226,9 @@ public struct ConstraintGroup {
                     item2: item.map { .other($0) } ?? .parent,
                     attribute2: (secondAttr ?? firstAttr).attribute,
                     multiplier: multiplier,
-                    constant: constant
+                    constant: constant,
+                    file: file,
+                    line: line
                 ),
                 file: file,
                 function: function,

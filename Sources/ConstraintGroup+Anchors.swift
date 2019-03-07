@@ -34,7 +34,7 @@ public extension ConstraintGroup {
         multiplier: CGFloat = 1,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         let spec: ConstraintSpec = { item in
             let firstAnchor = firstAttr.anchor(item)
@@ -63,7 +63,7 @@ public extension ConstraintGroup {
         multiplier: CGFloat = 1,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         let spec: ConstraintSpec = { item in
             let firstAnchor = firstAttr.anchor(item)
@@ -94,7 +94,7 @@ public extension ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         let spec: ConstraintSpec = { item in
             let anchor = dimension.anchor(item)
@@ -126,7 +126,7 @@ public extension ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
-        line: Int = #line
+        line: UInt = #line
         ) -> ConstraintGroup {
         let spec: ConstraintSpec = { item in
             let anchor = dimension.anchor(item)
