@@ -68,8 +68,12 @@ public protocol ConstrainableItem {
     /// The item's centerY anchor.
     var centerYAnchor: NSLayoutYAxisAnchor { get }
 
+    /// The item's firstBaselineAnchor.
+    /// - Note: This will be the `topAnchor` for `UILayoutGuide`s which do not natively have this property.
     var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
 
+    /// The item's lastBaselineAnchor.
+    /// - Note: This will be the `bottom` for `UILayoutGuide`s which do not natively have this property.
     var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
 }
 

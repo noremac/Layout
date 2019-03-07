@@ -165,7 +165,7 @@ public struct ConstraintGroup {
     /// Returns a `ConstraintGroup` for applying a fixed dimension to an item.
     ///
     /// - Parameters:
-    ///   - firstAttr: The dimension, either `.width` or `.height`
+    ///   - firstAttr: The dimension, either `.width` or `.height`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - constant: The constant.
     /// - Returns: A `ConstraintGroup` for applying a fixed dimension to an item.
@@ -199,7 +199,7 @@ public struct ConstraintGroup {
     /// Returns a `ConstraintGroup` for applying a relative dimension in relation to another item.
     ///
     /// - Parameters:
-    ///   - firstAttr: The dimension, either `.width` or `.height`
+    ///   - firstAttr: The dimension, either `.width` or `.height`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - multiplier: The multiplier; defaults to 1.
     ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.

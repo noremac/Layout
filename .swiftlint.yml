@@ -29,7 +29,7 @@ opt_in_rules:
   - legacy_random
   - let_var_whitespace
   - lower_acl_than_parent
-  # - missing_docs
+  - missing_docs
   - modifier_order
   - multiline_arguments
   - multiline_arguments_brackets
