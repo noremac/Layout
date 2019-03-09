@@ -24,56 +24,49 @@
 
 import UIKit
 
+/// A class for creating, storing and activating `NSLayoutConstraint`s based on arbitrary conditions.
 public class DynamicLayout<Environment> {
 
-    private var predicatesAndConstraints: [(Predicate, Set<NSLayoutConstraint>)] = []
-
-    private var activeConstraints: Set<NSLayoutConstraint> = []
-
-    internal var activeConstraints_forTestingOnly: [NSLayoutConstraint] {
-        return .init(activeConstraints)
-    }
-
+    /// A struct defining a condition to be met for constraints to be activated.
     public struct Predicate {
 
-        private let predicate: (Environment) -> Bool
+        let predicate: (Environment) -> Bool
 
+        /// Initializes a new `Predicate` with the given closure.
+        ///
+        /// - Parameter predicate: The closure.
         public init(_ predicate: @escaping (Environment) -> Bool) {
             self.predicate = predicate
         }
-
-        public func evaluate(with environment: Environment) -> Bool {
-            return predicate(environment)
-        }
     }
 
+    /// A struct for holding a `Predicate` and its constraints.
     public struct Context {
 
-        fileprivate var predicate: Predicate
+        var predicate: Predicate
 
-        fileprivate var constraints: Set<NSLayoutConstraint> = []
+        var constraints: Set<NSLayoutConstraint> = []
 
-        private var finalize: (Context) -> Void
+        var finalize: (Context) -> Void
 
         init(predicate: Predicate, finalize: @escaping (Context) -> Void) {
             self.predicate = predicate
             self.finalize = finalize
         }
-
-        public mutating func when(_ predicate: Predicate, file: StaticString = #file, line: UInt = #line, _ using: (inout Context) -> Void) {
-            var ctx = Context(predicate: self.predicate && predicate, finalize: finalize)
-            using(&ctx)
-            finalize(ctx)
-            if constraints.isEmpty {
-                assertionFailure("Created a when clause and added no constraints to it", file: file, line: line)
-            }
-        }
-
-        public mutating func addConstraints(for item: ConstrainableItem, _ groups: ConstraintGroup...) {
-            constraints.formUnion(item.makeConstraints(groups: groups))
-        }
     }
 
+    private var predicatesAndConstraints: [(Predicate, Set<NSLayoutConstraint>)] = []
+
+    private var activeConstraints: Set<NSLayoutConstraint> = []
+
+    var activeConstraints_forTestingOnly: [NSLayoutConstraint] {
+        return .init(activeConstraints)
+    }
+
+    /// The entry point for adding constraints. The initial `Context` is always `true`.
+    /// Feel free to add constraints that are always active regardless of any other conditions to this context.
+    ///
+    /// - Parameter using: A closure that receives the initial `Context`.
     public func addLayouts(_ using: (inout Context) -> Void) {
         var ctx = Context(
             predicate: .always,
@@ -90,6 +83,9 @@ public class DynamicLayout<Environment> {
         predicatesAndConstraints.removeAll { $0.1.isEmpty }
     }
 
+    /// Activates the appropriate constraints after evaluating all `Predicate`s against the given `Environment`.
+    ///
+    /// - Parameter environment: The `Environment`.
     public func updateActiveConstraints(with environment: Environment) {
         let newConstraints: Set<NSLayoutConstraint> = predicatesAndConstraints.reduce(into: []) { result, tuple in
             let (predicate, constraints) = tuple
@@ -106,12 +102,5 @@ public class DynamicLayout<Environment> {
 
     private func finalize(_ ctx: Context) {
         predicatesAndConstraints.append((ctx.predicate, ctx.constraints))
-    }
-}
-
-extension DynamicLayout.Context where Environment: Equatable {
-
-    public mutating func when(_ value: Environment, file: StaticString = #file, line: UInt = #line, _ using: (inout DynamicLayout.Context) -> Void) {
-        when(.init({ $0 == value }), file: file, line: line, using)
     }
 }
