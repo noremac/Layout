@@ -47,16 +47,8 @@ class DynamicLayoutTests: XCTestCase {
         super.tearDown()
     }
 
-    func testGlobalConstraints() {
-        sut.addLayouts { ctx in
-            ctx.addConstraints(for: view, .setSize(.init(width: 1, height: 1)))
-        }
-        let globalConstraints = view.applyConstraints(.setSize(.init(width: 1, height: 1)))
-        XCTAssertEqualConstraints(globalConstraints, sut.activeConstraints_forTestingOnly)
-    }
-
     func testActivatesConstraintsAppropriately() {
-        sut.addLayouts { ctx in
+        sut.addConstraints { ctx in
             ctx.addConstraints(for: view, .setSize(.init(width: 1, height: 1)))
 
             ctx.when(true) { ctx in
@@ -67,15 +59,15 @@ class DynamicLayoutTests: XCTestCase {
                 ctx.addConstraints(for: view, .align(.leading), .align(.top))
             }
         }
-        let globalConstraints = view.applyConstraints(.setSize(.init(width: 1, height: 1)))
-        XCTAssertEqualConstraints(globalConstraints, sut.activeConstraints_forTestingOnly)
 
+        let globalConstraints = view.applyConstraints(.setSize(.init(width: 1, height: 1)))
         let trueConstraints = view.applyConstraints(.center()) + globalConstraints
         let falseConstraints = view.applyConstraints(.align(.leading), .align(.top)) + globalConstraints
 
+        XCTAssertTrue(sut.activeConstraints.isEmpty)
         sut.updateActiveConstraints(with: true)
-        XCTAssertEqualConstraints(trueConstraints, sut.activeConstraints_forTestingOnly)
+        XCTAssertEqualConstraints(trueConstraints, sut.activeConstraints)
         sut.updateActiveConstraints(with: false)
-        XCTAssertEqualConstraints(falseConstraints, sut.activeConstraints_forTestingOnly)
+        XCTAssertEqualConstraints(falseConstraints, sut.activeConstraints)
     }
 }

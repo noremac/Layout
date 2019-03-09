@@ -26,35 +26,23 @@ import UIKit
 
 extension DynamicLayout.Context {
 
-    func activeConstraints(for environment: Environment) -> Set<NSLayoutConstraint> {
+    func activeConstraints(for environment: Environment) -> [NSLayoutConstraint] {
         if predicate.evaluate(with: environment) {
-            return constraints.union(
-                children.reduce(into: Set<NSLayoutConstraint>()) { set, child in
-                    set.formUnion(child.activeConstraints(for: environment))
-                }
-            )
+            return children.reduce(into: constraints, { $0 += $1.activeConstraints(for: environment) })
         } else {
             return []
         }
     }
 
-    /// Creates a new context in which to add constraints when the given `Predicate` is `true`.
-    /// The `Predicate` is implicitly `&&`d with all parent contexts.
+    /// Creates a new child `Context` in which to add constraints when the given `Predicate` is `true`.
+    /// The `Predicate` will only be evaluated if all parent `Predicate`s are also `true`.
     ///
     /// - Parameters:
-    ///   - predicate: The Predicate`.
+    ///   - predicate: The `Predicate`.
     ///   - using: A closure that receives the new `Context` to add constraints to.
-    public mutating func when(
-        _ predicate: DynamicLayout.Predicate,
-        file: StaticString = #file,
-        line: UInt = #line,
-        _ using: (inout DynamicLayout.Context) -> Void
-        ) {
+    public mutating func when(_ predicate: DynamicLayout.Predicate, _ using: (inout DynamicLayout.Context) -> Void) {
         var ctx = DynamicLayout.Context(predicate: predicate)
         using(&ctx)
-        if constraints.isEmpty {
-            assertionFailure("Created a when clause and added no constraints to it", file: file, line: line)
-        }
         children.append(ctx)
     }
 
@@ -63,8 +51,11 @@ extension DynamicLayout.Context {
     /// - Parameters:
     ///   - item: The `ConstrainableItem`.
     ///   - groups: The `ConstraintGroup`s to create.
-    public mutating func addConstraints(for item: ConstrainableItem, _ groups: ConstraintGroup...) {
-        constraints.formUnion(item.makeConstraints(groups: groups))
+    @discardableResult
+    public mutating func addConstraints(for item: ConstrainableItem, _ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
+        let constraints = item.makeConstraints(groups: groups)
+        self.constraints += constraints
+        return constraints
     }
 }
 
@@ -76,12 +67,7 @@ extension DynamicLayout.Context where Environment: Equatable {
     /// - Parameters:
     ///   - predicate: The Predicate`.
     ///   - using: A closure that receives the new `Context` to add constraints to.
-    public mutating func when(
-        _ value: Environment,
-        file: StaticString = #file,
-        line: UInt = #line,
-        _ using: (inout DynamicLayout.Context) -> Void
-        ) {
-        when(.init({ $0 == value }), file: file, line: line, using)
+    public mutating func when(_ value: Environment, _ using: (inout DynamicLayout.Context) -> Void) {
+        when(.init({ $0 == value }), using)
     }
 }
