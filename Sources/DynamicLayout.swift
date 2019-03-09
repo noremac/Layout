@@ -47,13 +47,14 @@ public class DynamicLayout<Environment> {
 
         var constraints: Set<NSLayoutConstraint> = []
 
-        var finalize: (Context) -> Void
+        var children: [Context] = []
 
-        init(predicate: Predicate, finalize: @escaping (Context) -> Void) {
+        init(predicate: Predicate) {
             self.predicate = predicate
-            self.finalize = finalize
         }
     }
+
+    private var mainContext: Context = .init(predicate: .always)
 
     private var predicatesAndConstraints: [(Predicate, Set<NSLayoutConstraint>)] = []
 
@@ -68,39 +69,20 @@ public class DynamicLayout<Environment> {
     ///
     /// - Parameter using: A closure that receives the initial `Context`.
     public func addLayouts(_ using: (inout Context) -> Void) {
-        var ctx = Context(
-            predicate: .always,
-            finalize: finalize
-        )
-        using(&ctx)
-        finalize(ctx)
-        // Activate the "global/always" constraints immediately,
-        let alwaysConstraints = predicatesAndConstraints.last!.1
-        Array(alwaysConstraints).activate()
-        activeConstraints = alwaysConstraints
-        // Remove any empty sets of constraints. No need to evaluate the predicates
-        // if they have no constraints to activate.
-        predicatesAndConstraints.removeAll { $0.1.isEmpty }
+        using(&mainContext)
+        Array(mainContext.constraints).activate()
+        activeConstraints = mainContext.constraints
     }
 
     /// Activates the appropriate constraints after evaluating all `Predicate`s against the given `Environment`.
     ///
     /// - Parameter environment: The `Environment`.
     public func updateActiveConstraints(with environment: Environment) {
-        let newConstraints: Set<NSLayoutConstraint> = predicatesAndConstraints.reduce(into: []) { result, tuple in
-            let (predicate, constraints) = tuple
-            if predicate.evaluate(with: environment) {
-                result.formUnion(constraints)
-            }
-        }
+        let newConstraints = mainContext.activeConstraints(for: environment)
         let constraintsToDeactivate = activeConstraints.subtracting(newConstraints)
         let constraintsToActivate = newConstraints.subtracting(activeConstraints)
         Array(constraintsToDeactivate).deactivate()
         Array(constraintsToActivate).activate()
         activeConstraints = newConstraints
-    }
-
-    private func finalize(_ ctx: Context) {
-        predicatesAndConstraints.append((ctx.predicate, ctx.constraints))
     }
 }

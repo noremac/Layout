@@ -26,6 +26,18 @@ import UIKit
 
 extension DynamicLayout.Context {
 
+    func activeConstraints(for environment: Environment) -> Set<NSLayoutConstraint> {
+        if predicate.evaluate(with: environment) {
+            return constraints.union(
+                children.reduce(into: Set<NSLayoutConstraint>()) { set, child in
+                    set.formUnion(child.activeConstraints(for: environment))
+                }
+            )
+        } else {
+            return []
+        }
+    }
+
     /// Creates a new context in which to add constraints when the given `Predicate` is `true`.
     /// The `Predicate` is implicitly `&&`d with all parent contexts.
     ///
@@ -38,12 +50,12 @@ extension DynamicLayout.Context {
         line: UInt = #line,
         _ using: (inout DynamicLayout.Context) -> Void
         ) {
-        var ctx = DynamicLayout.Context(predicate: self.predicate && predicate, finalize: finalize)
+        var ctx = DynamicLayout.Context(predicate: predicate)
         using(&ctx)
-        finalize(ctx)
         if constraints.isEmpty {
             assertionFailure("Created a when clause and added no constraints to it", file: file, line: line)
         }
+        children.append(ctx)
     }
 
     /// Adds constraints for an item in the receiver.
