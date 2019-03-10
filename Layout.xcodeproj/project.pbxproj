@@ -26,6 +26,7 @@
 		1EE9620F2230B79B009D1426 /* DynamicLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9620D2230B797009D1426 /* DynamicLayoutTests.swift */; };
 		1EE962112231DD40009D1426 /* TestConstraintAutoIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE962102231DD40009D1426 /* TestConstraintAutoIdentifiers.swift */; };
 		1EE9621322340ED1009D1426 /* DynamicLayoutContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE9621222340ED1009D1426 /* DynamicLayoutContext.swift */; };
+		1EE96215223481ED009D1426 /* PredicateExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE96214223481ED009D1426 /* PredicateExtensionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		1EE9620D2230B797009D1426 /* DynamicLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLayoutTests.swift; sourceTree = "<group>"; };
 		1EE962102231DD40009D1426 /* TestConstraintAutoIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstraintAutoIdentifiers.swift; sourceTree = "<group>"; };
 		1EE9621222340ED1009D1426 /* DynamicLayoutContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicLayoutContext.swift; sourceTree = "<group>"; };
+		1EE96214223481ED009D1426 /* PredicateExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateExtensionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				1E934F5E2218C7190068F832 /* ConstraintGroupTests.swift */,
 				1EE9620D2230B797009D1426 /* DynamicLayoutTests.swift */,
+				1EE96214223481ED009D1426 /* PredicateExtensionTests.swift */,
 				1EE962102231DD40009D1426 /* TestConstraintAutoIdentifiers.swift */,
 				1EE96205222F2684009D1426 /* TypeSafeAttributeAnchorTests.swift */,
 				1E934F602218C9E50068F832 /* Utilities.swift */,
@@ -313,6 +316,7 @@
 				1EE962112231DD40009D1426 /* TestConstraintAutoIdentifiers.swift in Sources */,
 				1E934F5F2218C7190068F832 /* ConstraintGroupTests.swift in Sources */,
 				1E934F612218C9E50068F832 /* Utilities.swift in Sources */,
+				1EE96215223481ED009D1426 /* PredicateExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

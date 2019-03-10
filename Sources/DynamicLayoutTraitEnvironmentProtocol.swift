@@ -24,22 +24,25 @@
 
 import UIKit
 
-/// A protocol for declaring that a `DynamicLayout`'s `Environment` has a trait collection property.
+/// A protocol for declaring that a `DynamicLayout`'s `Environment` has a trait
+/// collection property.
 public protocol DynamicLayoutTraitEnvironmentProtocol {
 
     /// The current `UITraitCollection`.
     var traitCollection: UITraitCollection { get }
 }
 
-/// A protocol for declaring that a `DynamicLayout`'s `Environment` has a size property.
+/// A protocol for declaring that a `DynamicLayout`'s `Environment` has a size
+/// property.
 public protocol DynamicLayoutSizeEnvironmentProtocol {
 
     ///  The current `CGSize`.
     var size: CGSize { get }
 }
 
-/// A struct that implements both `DynamicLayoutTraitEnvironmentProtocol` and `DynamicLayoutSizeEnvironmentProtocol`.
-/// It is useful for a `UIViewController`'s `DynamicLayout.Environment`.
+/// A struct that implements both `DynamicLayoutTraitEnvironmentProtocol` and
+/// `DynamicLayoutSizeEnvironmentProtocol`. It is useful for a
+/// `UIViewController`'s `DynamicLayout.Environment`.
 public struct DynamicLayoutTraitAndSizeEnvironment: DynamicLayoutTraitEnvironmentProtocol, DynamicLayoutSizeEnvironmentProtocol {
 
     public var traitCollection: UITraitCollection
