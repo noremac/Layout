@@ -82,6 +82,10 @@ public class DynamicLayout<Environment> {
 
     var activeConstraints: [NSLayoutConstraint] = []
 
+    public init() {
+        
+    }
+
     /// Add constraints here. The closure receives the main `Context` whose
     /// `Predicate` will always evaluate to `true`. From here, create as many
     /// `Context`s as needed and nest them as desired.
