@@ -27,12 +27,13 @@ import UIKit
 /// A class for creating, storing, and activating `NSLayoutConstraint`s based on
 /// arbitrary predicates.
 ///
-/// `Context`'s are stored as a tree and may be nested. A child `Context`'s
-/// `Predicate` is only evaluated if it's parent's `Predicate` evaluates to
+/// `Context`'s are stored as a tree and thus may be nested. A child `Context`'s
+/// `Predicate` is only evaluated if its parent's `Predicate` evaluates to
 /// `true`.
 ///
 /// The initial `Context` received in the `addConstraints` block is always
-/// `true`. Constraints that should always be active may be added there.
+/// `true`. Constraints that should always be active regardless of any state may
+/// be added there.
 public class DynamicLayout<Environment> {
 
     /// A struct for defining a condition to be met for constraints to be
