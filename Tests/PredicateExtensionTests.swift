@@ -27,8 +27,6 @@ import XCTest
 
 @testable import Layout
 
-// swiftlint:disable multiline_arguments_brackets
-
 class PredicateExtensionTests: XCTestCase {
 
     func testOr() {
@@ -59,33 +57,39 @@ class PredicateExtensionTests: XCTestCase {
     }
 
     func testSizeClasses() {
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .verticallyUnspecified
             .evaluate(with: .init(traitCollection: UITraitCollection(verticalSizeClass: .unspecified), size: .zero))
         )
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .verticallyRegular
             .evaluate(with: .init(traitCollection: UITraitCollection(verticalSizeClass: .regular), size: .zero))
         )
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .verticallyCompact
             .evaluate(with: .init(traitCollection: UITraitCollection(verticalSizeClass: .compact), size: .zero))
         )
 
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .horizontallyUnspecified
             .evaluate(with: .init(traitCollection: UITraitCollection(horizontalSizeClass: .unspecified), size: .zero))
         )
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .horizontallyRegular
             .evaluate(with: .init(traitCollection: UITraitCollection(horizontalSizeClass: .regular), size: .zero))
         )
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .horizontallyCompact
             .evaluate(with: .init(traitCollection: UITraitCollection(horizontalSizeClass: .compact), size: .zero))
@@ -93,12 +97,14 @@ class PredicateExtensionTests: XCTestCase {
     }
 
     func testSize() {
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .width(is: >, 10)
             .evaluate(with: .init(traitCollection: UITraitCollection(), size: .init(width: 11, height: 10)))
         )
-        XCTAssertTrue(DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
+        XCTAssertTrue(
+            DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>
             .Predicate
             .height(is: >, 10)
             .evaluate(with: .init(traitCollection: UITraitCollection(), size: .init(width: 10, height: 11)))
