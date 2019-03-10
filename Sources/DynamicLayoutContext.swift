@@ -34,19 +34,17 @@ extension DynamicLayout.Context {
         }
     }
 
-    /// Creates a new child `Context` in which to add constraints when the given `Predicate` is `true`.
-    /// The `Predicate` will only be evaluated if all parent `Predicate`s are also `true`.
-    ///
-    /// - Parameters:
-    ///   - predicate: The `Predicate`.
-    ///   - using: A closure that receives the new `Context` to add constraints to.
     public mutating func when(_ predicate: DynamicLayout.Predicate, _ using: (inout DynamicLayout.Context) -> Void) {
         var ctx = DynamicLayout.Context(predicate: predicate)
         using(&ctx)
         children.append(ctx)
     }
 
-    /// Adds constraints for an item in the receiver.
+    public mutating func when(_ predicate: @escaping (Environment) -> Bool, _ using: (inout DynamicLayout.Context) -> Void) {
+        when(.init(predicate), using)
+    }
+
+    /// Adds constraints for an item in the receiving `Context`.
     ///
     /// - Parameters:
     ///   - item: The `ConstrainableItem`.
@@ -61,13 +59,7 @@ extension DynamicLayout.Context {
 
 extension DynamicLayout.Context where Environment: Equatable {
 
-    /// Creates a new context in which to add constraints when the `Environment` is equal to the given value.
-    /// The `Predicate` is implicitly `&&`d with all parent contexts.
-    ///
-    /// - Parameters:
-    ///   - predicate: The Predicate`.
-    ///   - using: A closure that receives the new `Context` to add constraints to.
     public mutating func when(_ value: Environment, _ using: (inout DynamicLayout.Context) -> Void) {
-        when(.init({ $0 == value }), using)
+        when({ $0 == value }, using)
     }
 }
