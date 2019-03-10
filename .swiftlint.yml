@@ -31,8 +31,6 @@ opt_in_rules:
   - lower_acl_than_parent
   - missing_docs
   - modifier_order
-  - multiline_arguments
-  - multiline_arguments_brackets
   - multiline_literal_brackets
   - multiline_parameters
   - multiline_parameters_brackets

@@ -60,6 +60,19 @@ public class DynamicLayout<Environment> {
 
         var children: [Context] = []
 
+        private var _otherwise: [Context] = []
+
+        /// This is a hack because we the compiler won't just let us write
+        /// `var otherwise: Context?` as a regular stored property.
+        var otherwise: Context? {
+            get {
+                return _otherwise.first
+            }
+            set {
+                _otherwise = newValue.map({ [$0] }) ?? []
+            }
+        }
+
         init(predicate: Predicate) {
             self.predicate = predicate
         }

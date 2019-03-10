@@ -30,30 +30,67 @@ extension DynamicLayout.Context {
         if predicate.evaluate(with: environment) {
             return children.reduce(into: constraints, { $0 += $1.activeConstraints(for: environment) })
         } else {
-            return []
+            return otherwise?.activeConstraints(for: environment) ?? []
         }
     }
 
     /// Adds a new nested `Context` to the receiver with the given `Predicate`.
     ///
     /// - Parameters:
-    ///   - predicate: The `Predicate` that must be `true` for the constraints to be applied.
-    ///   - using: The closure where constraints are configured.
-    ///   - ctx: The newly created `Context`.
-    public mutating func when(_ predicate: DynamicLayout.Predicate, _ using: (_ ctx: inout DynamicLayout.Context) -> Void) {
+    ///   - predicate: The `Predicate` that must be `true` for the constraints
+    ///                to be applied.
+    ///   - when: The closure where constraints are configured.
+    ///   - otherwise: The closure where constraints are configured when the
+    ///                given `Predicate` is `false`; defaults to a noop closure.
+    ///   - whenCtx: The newly created `Context`.
+    ///   - otherwiseCtx: The newly created "otherwise" `Context`.
+    public mutating func when(_ predicate: DynamicLayout.Predicate, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void = { _ in }) {
         var ctx = DynamicLayout.Context(predicate: predicate)
-        using(&ctx)
+        var otherCtx = DynamicLayout.Context(predicate: !predicate)
+        when(&ctx)
+        otherwise(&otherCtx)
+        ctx.otherwise = otherCtx
         children.append(ctx)
     }
 
-    /// Adds a new nested `Context` to the receiver with the given predicate closure.
+    /// Adds a new nested `Context` to the receiver with the given `Predicate`.
     ///
     /// - Parameters:
-    ///   - predicate: The `Predicate` that must be `true` for the constraints to be applied.
-    ///   - using: The closure where constraints are configured.
-    ///   - ctx: The newly created `Context`.
-    public mutating func when(_ predicate: @escaping (Environment) -> Bool, _ using: (_ ctx: inout DynamicLayout.Context) -> Void) {
-        when(.init(predicate), using)
+    ///   - predicate: The `Predicate` that must be `true` for the constraints
+    ///                to be applied.
+    ///   - when: The closure where constraints are configured.
+    ///   - whenCtx: The newly created `Context`.
+    public mutating func when(_ predicate: DynamicLayout.Predicate, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void) {
+        self.when(predicate, when, otherwise: { _ in })
+    }
+
+    /// Adds a new nested `Context` to the receiver with the given predicate
+    /// closure.
+    ///
+    /// - Parameters:
+    ///   - predicate: The closure that must be `true` for the constraints to be
+    ///                applied.
+    ///   - env: The `Environment` supplied to the predicate closure.
+    ///   - when: The closure where constraints are configured.
+    ///   - otherwise: The closure where constraints are configured when the
+    ///                given `Predicate` is `false`; defaults to a noop closure.
+    ///   - whenCtx: The newly created `Context`.
+    ///   - otherwiseCtx: The newly created "otherwise" `Context`.
+    public mutating func when(_ predicate: @escaping (_ env: Environment) -> Bool, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void = { _ in }) {
+        self.when(.init(predicate), when, otherwise: otherwise)
+    }
+
+    /// Adds a new nested `Context` to the receiver with the given predicate
+    /// closure.
+    ///
+    /// - Parameters:
+    ///   - predicate: The closure that must be `true` for the constraints to be
+    ///                applied.
+    ///   - env: The `Environment` supplied to the predicate closure.
+    ///   - when: The closure where constraints are configured.
+    ///   - whenCtx: The newly created `Context`.
+    public mutating func when(_ predicate: @escaping (_ env: Environment) -> Bool, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void) {
+        self.when(predicate, when, otherwise: { _ in })
     }
 
     /// Adds constraints for an item in the receiving `Context`.
@@ -75,7 +112,7 @@ extension DynamicLayout.Context where Environment: Equatable {
     /// implicitly created that will evaluate to `true` when the current
     /// `Environment` is equal to the given value.
     ///
-    /// You may want to use this if your environment was an `enum`:
+    /// For example, you might use this if your environment was an `enum`:
     ///
     ///     ctx.when(.someState) { newCtx in ... }
     ///
@@ -85,9 +122,32 @@ extension DynamicLayout.Context where Environment: Equatable {
     ///
     /// - Parameters:
     ///   - value: The desired value of the current `Environment`.
-    ///   - using: The closure where constraints are configured.
-    ///   - ctx: The newly created `Context`.
-    public mutating func when(_ value: Environment, _ using: (_ ctx: inout DynamicLayout.Context) -> Void) {
-        when({ $0 == value }, using)
+    ///   - when: The closure where constraints are configured.
+    ///   - otherwise: The closure where constraints are configured when the
+    ///                given `Predicate` is `false`; defaults to a noop closure.
+    ///   - whenCtx: The newly created `Context`.
+    ///   - otherwiseCtx: The newly created "otherwise" `Context`.
+    public mutating func when(_ value: Environment, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void) {
+        self.when({ $0 == value }, when, otherwise: otherwise)
+    }
+
+    /// Adds a new nested `Context` to the receiver. A predicate will be
+    /// implicitly created that will evaluate to `true` when the current
+    /// `Environment` is equal to the given value.
+    ///
+    /// For example, you might use this if your environment was an `enum`:
+    ///
+    ///     ctx.when(.someState) { newCtx in ... }
+    ///
+    /// rather than:
+    ///
+    ///     ctx.when(.init({ $0 == .someState })) { newCtx in ... }
+    ///
+    /// - Parameters:
+    ///   - value: The desired value of the current `Environment`.
+    ///   - when: The closure where constraints are configured.
+    ///   - whenCtx: The newly created `Context`.
+    public mutating func when(_ value: Environment, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void) {
+        self.when(value, when, otherwise: { _ in })
     }
 }

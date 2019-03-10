@@ -51,13 +51,11 @@ class DynamicLayoutTests: XCTestCase {
         sut.addConstraints { ctx in
             ctx.addConstraints(for: view, .setSize(.init(width: 1, height: 1)))
 
-            ctx.when(true) { ctx in
+            ctx.when(true, { ctx in
                 ctx.addConstraints(for: view, .center())
-            }
-
-            ctx.when(false) { ctx in
+            }, otherwise: { ctx in
                 ctx.addConstraints(for: view, .align(.leading), .align(.top))
-            }
+            })
         }
 
         let globalConstraints = view.applyConstraints(.setSize(.init(width: 1, height: 1)))
