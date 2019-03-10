@@ -72,8 +72,9 @@ public class DynamicLayout<Environment> {
     /// `Predicate` will always evaluate to `true`. From here, create as many
     /// `Context`s as needed and nest them as desired.
     ///
-    /// - Parameter main: The closure where constraints are configured.
-    /// - Parameter ctx: The main `Context` whose `Predicate` is always `true`.
+    /// - Parameters:
+    ///   - main: The closure where constraints are configured.
+    ///   - ctx: The main `Context` whose `Predicate` is always `true`.
     ///
     /// - Note: You may add constraints that should always be active regardless
     /// of any other condition to the main `Context`. These constraints will not

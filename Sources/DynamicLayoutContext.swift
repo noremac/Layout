@@ -34,13 +34,25 @@ extension DynamicLayout.Context {
         }
     }
 
-    public mutating func when(_ predicate: DynamicLayout.Predicate, _ using: (inout DynamicLayout.Context) -> Void) {
+    /// Adds a new nested `Context` to the receiver with the given `Predicate`.
+    ///
+    /// - Parameters:
+    ///   - predicate: The `Predicate` that must be `true` for the constraints to be applied.
+    ///   - using: The closure where constraints are configured.
+    ///   - ctx: The newly created `Context`.
+    public mutating func when(_ predicate: DynamicLayout.Predicate, _ using: (_ ctx: inout DynamicLayout.Context) -> Void) {
         var ctx = DynamicLayout.Context(predicate: predicate)
         using(&ctx)
         children.append(ctx)
     }
 
-    public mutating func when(_ predicate: @escaping (Environment) -> Bool, _ using: (inout DynamicLayout.Context) -> Void) {
+    /// Adds a new nested `Context` to the receiver with the given predicate closure.
+    ///
+    /// - Parameters:
+    ///   - predicate: The `Predicate` that must be `true` for the constraints to be applied.
+    ///   - using: The closure where constraints are configured.
+    ///   - ctx: The newly created `Context`.
+    public mutating func when(_ predicate: @escaping (Environment) -> Bool, _ using: (_ ctx: inout DynamicLayout.Context) -> Void) {
         when(.init(predicate), using)
     }
 
@@ -59,7 +71,23 @@ extension DynamicLayout.Context {
 
 extension DynamicLayout.Context where Environment: Equatable {
 
-    public mutating func when(_ value: Environment, _ using: (inout DynamicLayout.Context) -> Void) {
+    /// Adds a new nested `Context` to the receiver. A predicate will be
+    /// implicitly created that will evaluate to `true` when the current
+    /// `Environment` is equal to the given value.
+    ///
+    /// You may want to use this if your environment was an `enum`:
+    ///
+    ///     ctx.when(.someState) { newCtx in ... }
+    ///
+    /// rather than:
+    ///
+    ///     ctx.when(.init({ $0 == .someState })) { newCtx in ... }
+    ///
+    /// - Parameters:
+    ///   - value: The desired value of the current `Environment`.
+    ///   - using: The closure where constraints are configured.
+    ///   - ctx: The newly created `Context`.
+    public mutating func when(_ value: Environment, _ using: (_ ctx: inout DynamicLayout.Context) -> Void) {
         when({ $0 == value }, using)
     }
 }
