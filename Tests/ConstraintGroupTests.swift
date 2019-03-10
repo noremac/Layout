@@ -313,4 +313,88 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertNoThrow(try view.parentView())
         XCTAssertNoThrow(try layoutGuide.parentView())
     }
+
+    func testSystemSpacingAfter() {
+        let desiredConstraints = [
+            view2.leadingAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: view1.trailingAnchor, multiplier: 2),
+            view2.leadingAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: view1.trailingAnchor, multiplier: 2)
+        ]
+        let constraints = view2.makeConstraints(
+            .align(.leading, .lessThanOrEqual, toSystemSpacingAfter: view1.trailingAnchor, multiplier: 2),
+            .align(.leading, .greaterThanOrEqual, toSystemSpacingAfter: view1.trailingAnchor, multiplier: 2)
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testSystemSpacingAfterDefaults() {
+        let desiredConstraints = [
+            view2.leadingAnchor.constraint(equalToSystemSpacingAfter: view1.trailingAnchor, multiplier: 1)
+        ]
+        let constraints = view2.makeConstraints(.align(.leading, toSystemSpacingAfter: view1.trailingAnchor))
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testSystemSpacingBelow() {
+        let desiredConstraints = [
+            view2.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: view1.bottomAnchor, multiplier: 2),
+            view2.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: view1.bottomAnchor, multiplier: 2)
+        ]
+        let constraints = view2.makeConstraints(
+            .align(.top, .lessThanOrEqual, toSystemSpacingBelow: view1.bottomAnchor, multiplier: 2),
+            .align(.top, .greaterThanOrEqual, toSystemSpacingBelow: view1.bottomAnchor, multiplier: 2)
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testSystemSpacingBelowDefaults() {
+        let desiredConstraints = [
+            view2.topAnchor.constraint(equalToSystemSpacingBelow: view1.bottomAnchor, multiplier: 1)
+        ]
+        let constraints = view2.makeConstraints(.align(.top, toSystemSpacingBelow: view1.bottomAnchor))
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testMatchDimensionX() {
+        let desiredConstraints = [
+            view1.heightAnchor.constraint(greaterThanOrEqualTo: view2.leadingAnchor.anchorWithOffset(to: parentView.leadingAnchor), multiplier: 2, constant: 1),
+            view1.widthAnchor.constraint(lessThanOrEqualTo: view2.leadingAnchor.anchorWithOffset(to: parentView.leadingAnchor), multiplier: 2, constant: 1)
+        ]
+        let constraints = view1.makeConstraints(
+            .match(.height, .greaterThanOrEqual, toSpaceBetween: view2.leadingAnchor, and: parentView.leadingAnchor, multiplier: 2, constant: 1),
+            .match(.width, .lessThanOrEqual, toSpaceBetween: view2.leadingAnchor, and: parentView.leadingAnchor, multiplier: 2, constant: 1)
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testMatchDimensionXDefaults() {
+        let desiredConstraints = [
+            view1.heightAnchor.constraint(equalTo: view2.topAnchor.anchorWithOffset(to: parentView.topAnchor))
+        ]
+        let constraints = view1.makeConstraints(
+            .match(.height, toSpaceBetween: view2.topAnchor, and: parentView.topAnchor)
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testMatchDimensionY() {
+        let desiredConstraints = [
+            view1.heightAnchor.constraint(greaterThanOrEqualTo: view2.topAnchor.anchorWithOffset(to: parentView.topAnchor), multiplier: 2, constant: 1),
+            view1.widthAnchor.constraint(lessThanOrEqualTo: view2.topAnchor.anchorWithOffset(to: parentView.topAnchor), multiplier: 2, constant: 1)
+        ]
+        let constraints = view1.makeConstraints(
+            .match(.height, .greaterThanOrEqual, toSpaceBetween: view2.topAnchor, and: parentView.topAnchor, multiplier: 2, constant: 1),
+            .match(.width, .lessThanOrEqual, toSpaceBetween: view2.topAnchor, and: parentView.topAnchor, multiplier: 2, constant: 1)
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testMatchDimensionYDefaults() {
+        let desiredConstraints = [
+            view1.heightAnchor.constraint(equalTo: view2.topAnchor.anchorWithOffset(to: parentView.topAnchor))
+        ]
+        let constraints = view1.makeConstraints(
+            .match(.height, toSpaceBetween: view2.topAnchor, and: parentView.topAnchor)
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
 }
