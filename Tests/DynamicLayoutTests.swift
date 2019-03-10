@@ -31,7 +31,6 @@ class DynamicLayoutTests: XCTestCase {
 
     var parentView: UIView!
     var view: UIView!
-    var sut: DynamicLayout<Bool>!
 
     override func setUp() {
         super.setUp()
@@ -39,7 +38,6 @@ class DynamicLayoutTests: XCTestCase {
         parentView = .init()
         view = .init()
         parentView.addSubview(view)
-        sut = .init()
     }
 
     override func tearDown() {
@@ -47,14 +45,22 @@ class DynamicLayoutTests: XCTestCase {
         super.tearDown()
     }
 
-    func testActivatesConstraintsAppropriately() {
+    func testActivatesConstraintsAppropriatelyAndCallsActions() {
+        let sut = DynamicLayout<Bool>()
+        var x = 0
         sut.addConstraints { ctx in
             ctx.addConstraints(for: view, .setSize(.init(width: 1, height: 1)))
 
             ctx.when(true, { ctx in
                 ctx.addConstraints(for: view, .center())
+                ctx.addAction { _ in
+                    x = 1
+                }
             }, otherwise: { ctx in
                 ctx.addConstraints(for: view, .align(.leading), .align(.top))
+                ctx.addAction { _ in
+                    x = 2
+                }
             })
         }
 
@@ -62,10 +68,13 @@ class DynamicLayoutTests: XCTestCase {
         let trueConstraints = view.applyConstraints(.center()) + globalConstraints
         let falseConstraints = view.applyConstraints(.align(.leading), .align(.top)) + globalConstraints
 
+        XCTAssertEqual(0, x)
         XCTAssertTrue(sut.activeConstraints.isEmpty)
-        sut.updateActiveConstraints(with: true)
+        sut.update(environment: true)
+        XCTAssertEqual(1, x)
         XCTAssertEqualConstraints(trueConstraints, sut.activeConstraints)
-        sut.updateActiveConstraints(with: false)
+        sut.update(environment: false)
+        XCTAssertEqual(2, x)
         XCTAssertEqualConstraints(falseConstraints, sut.activeConstraints)
     }
 }

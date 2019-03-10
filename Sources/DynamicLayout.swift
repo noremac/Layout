@@ -58,6 +58,8 @@ public class DynamicLayout<Environment> {
 
         var constraints: [NSLayoutConstraint] = []
 
+        var actions: [(Environment) -> Void] = []
+
         var children: [Context] = []
 
         private var _otherwise: [Context] = []
@@ -111,8 +113,10 @@ public class DynamicLayout<Environment> {
     /// `Predicate`s are `true` in the given `Environment`.
     ///
     /// - Parameter environment: The `Environment` to use for evaluation.
-    public func updateActiveConstraints(with environment: Environment) {
-        let newConstraints = mainContext.activeConstraints(for: environment)
+    public func update(environment: Environment) {
+        let contexts = mainContext.activeContexts(for: environment)
+        let newConstraints = contexts.flatMap({ $0.constraints })
+        let actions = contexts.flatMap({ $0.actions })
         let newSet = Set(newConstraints)
         let activeSet = Set(activeConstraints)
         let constraintsToDeactivate = Array(activeSet.subtracting(newSet))
@@ -120,5 +124,6 @@ public class DynamicLayout<Environment> {
         constraintsToDeactivate.deactivate()
         constraintsToActivate.activate()
         activeConstraints = newConstraints
+        actions.forEach { $0(environment) }
     }
 }

@@ -26,11 +26,11 @@ import UIKit
 
 extension DynamicLayout.Context {
 
-    func activeConstraints(for environment: Environment) -> [NSLayoutConstraint] {
+    func activeContexts(for environment: Environment) -> [DynamicLayout.Context] {
         if predicate.evaluate(with: environment) {
-            return children.reduce(into: constraints, { $0 += $1.activeConstraints(for: environment) })
+            return children.reduce(into: [self], { $0 += $1.activeContexts(for: environment) })
         } else {
-            return otherwise?.activeConstraints(for: environment) ?? []
+            return otherwise?.activeContexts(for: environment) ?? []
         }
     }
 
@@ -103,6 +103,10 @@ extension DynamicLayout.Context {
         let constraints = item.makeConstraints(groups: groups)
         self.constraints += constraints
         return constraints
+    }
+
+    public mutating func addAction(_ action: @escaping (Environment) -> Void) {
+        self.actions.append(action)
     }
 }
 
