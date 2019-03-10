@@ -4,66 +4,66 @@ import UIKit
 
 class Example: UIViewController {
 
-    let loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        let image = UIGraphicsImageRenderer(bounds: rect).image { _ in
-            let path = UIBezierPath(rect: rect)
-            UIColor.blue.setFill()
-            path.fill()
-        }
-
-        button.setBackgroundImage(image, for: .normal)
-        button.setTitle("Log In", for: .normal)
-        button.tintColor = .white
-        return button
-    }()
-
-    let center: UIView = {
+    let expandingView: UIView = {
         let view = UIView()
         view.backgroundColor = .green
         return view
     }()
 
-    let red: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        return view
+    let slider: UISlider = {
+        let slider = UISlider()
+        slider.maximumValue = 3
+        return slider
     }()
+
+    let layout = DynamicLayout<Float>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .white
 
-        view.addSubview(loginButton)
-        loginButton.applyConstraints(
-            .setFixed(.width, to: 400) ~ .defaultHigh,
-            .setFixed(.height, to: 44),
-            .align(.bottom, of: view.safeAreaLayoutGuide, offsetBy: -20),
-            .align(.centerX),
-            .align(.leading, .greaterThanOrEqual, to: .leadingMargin),
-            .align(.trailing, .lessThanOrEqual, to: .trailingMargin)
+        view.addSubview(expandingView)
+        view.addSubview(slider)
+
+        slider.addTarget(
+            self,
+            action: #selector(Example.updateEnvironment),
+            for: .valueChanged
         )
 
-        view.addSubview(center)
-        center.applyConstraints(
-            .centerWithinMargins(),
-            .setSize(CGSize(width: 100, height: 100))
-        )
+        layout.addConstraints { ctx in
+            ctx.addConstraints(
+                for: slider,
+                .align(.leading, of: view.layoutMarginsGuide),
+                .align(.trailing, of: view.layoutMarginsGuide),
+                .align(.bottom)
+            )
 
-        let guide = UILayoutGuide()
-        view.addLayoutGuide(guide)
-        guide.applyConstraints(
-            .align(.top, to: .bottom, of: center),
-            .align(.bottom, to: .top, of: loginButton),
-            .align(.centerX)
-        )
+            ctx.addConstraints(for: expandingView,
+                .center(),
+                .align(.leading, .greaterThanOrEqual, of: view.layoutMarginsGuide),
+                .align(.trailing, .lessThanOrEqual, of: view.layoutMarginsGuide),
+                .setRelative(.height, of: expandingView, attribute: .width)
+            )
 
-        view.addSubview(red)
-        red.applyConstraints(
-            .center(in: guide),
-            .matchSize(of: center, ratio: 0.5)
-        )
+            let width: CGFloat = 100
+
+            let sizeConstraints = ctx.addConstraints(
+                for: expandingView,
+                .setFixed(.width, to: width) ~ .defaultHigh
+            )
+
+            ctx.addAction {
+                sizeConstraints.setConstant(width * (1 + CGFloat($0)))
+            }
+        }
+
+        layout.update(environment: slider.value)
+    }
+
+    @objc
+    private func updateEnvironment() {
+        layout.update(environment: slider.value)
     }
 }
 
