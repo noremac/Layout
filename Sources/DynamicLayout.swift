@@ -82,7 +82,7 @@ public class DynamicLayout<Environment> {
 
     var mainContext: Context = .init(predicate: .always)
 
-    var activeConstraints: [NSLayoutConstraint] = []
+    var activeConstraints: Set<NSLayoutConstraint> = []
 
     /// Initializes a DynamicLayout.
     public init() {
@@ -116,15 +116,26 @@ public class DynamicLayout<Environment> {
     /// - Parameter environment: The `Environment` to use for evaluation.
     public func update(environment: Environment) {
         let contexts = mainContext.activeContexts(for: environment)
-        let newConstraints = contexts.flatMap({ $0.constraints })
-        let actions = contexts.flatMap({ $0.actions })
+        let (newConstraints, actions) = contexts.reduce(into: ([NSLayoutConstraint](), [(Environment) -> Void]())) { result, context in
+            result.0.append(contentsOf: context.constraints)
+            result.1.append(contentsOf: context.actions)
+        }
         let newSet = Set(newConstraints)
-        let activeSet = Set(activeConstraints)
-        let constraintsToDeactivate = Array(activeSet.subtracting(newSet))
-        let constraintsToActivate = Array(newSet.subtracting(activeSet))
+        var constraintsToDeactivate = [NSLayoutConstraint]()
+        var constraintsToActivate = [NSLayoutConstraint]()
+        for newConstraint in newSet {
+            if !activeConstraints.contains(newConstraint) {
+                constraintsToActivate.append(newConstraint)
+            }
+        }
+        for oldConstraint in activeConstraints {
+            if !newSet.contains(oldConstraint) {
+                constraintsToDeactivate.append(oldConstraint)
+            }
+        }
         constraintsToDeactivate.deactivate()
         constraintsToActivate.activate()
-        activeConstraints = newConstraints
+        activeConstraints = newSet
         actions.forEach { $0(environment) }
     }
 }
