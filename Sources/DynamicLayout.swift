@@ -64,7 +64,7 @@ public class DynamicLayout<Environment> {
 
         private var _otherwise: [Context] = []
 
-        /// This is a hack because we the compiler won't just let us write
+        /// This is a hack because the compiler won't let us write
         /// `var otherwise: Context?` as a regular stored property.
         var otherwise: Context? {
             get {
