@@ -303,17 +303,6 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
-    func testThrowsErrors() {
-        let view = UIView()
-        let layoutGuide = UILayoutGuide()
-        XCTAssertThrowsError(try view.parentView())
-        XCTAssertThrowsError(try layoutGuide.parentView())
-        parentView.addSubview(view)
-        parentView.addLayoutGuide(layoutGuide)
-        XCTAssertNoThrow(try view.parentView())
-        XCTAssertNoThrow(try layoutGuide.parentView())
-    }
-
     func testSystemSpacingAfter() {
         let desiredConstraints = [
             view2.leadingAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: view1.trailingAnchor, multiplier: 2),

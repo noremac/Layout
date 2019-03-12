@@ -24,20 +24,10 @@
 
 import UIKit
 
-public struct NoParentViewError: Error {
-
-    public init() {
-
-    }
-}
-
 extension UIView: ConstrainableItem {
 
-    public func parentView() throws -> UIView {
-        guard let view = superview else {
-            throw NoParentViewError()
-        }
-        return view
+    public var parentView: UIView? {
+        return superview
     }
 
     public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
@@ -47,11 +37,8 @@ extension UIView: ConstrainableItem {
 
 extension UILayoutGuide: ConstrainableItem {
 
-    public func parentView() throws -> UIView {
-        guard let view = owningView else {
-            throw NoParentViewError()
-        }
-        return view
+    public var parentView: UIView? {
+        return owningView
     }
 
     public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {

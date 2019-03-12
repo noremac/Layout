@@ -46,12 +46,11 @@ func constraintGenerator(
         let otherItem: ConstrainableItem? = {
             switch item2 {
             case .parent?:
-                do {
-                    return try item.parentView()
-                } catch {
-                    assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy \(error)", file: file, line: line)
+                guard let view = item.parentView else {
+                    assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line)
                     return nil
                 }
+                return view
             case .other(let other)?:
                 return other
             case nil:
