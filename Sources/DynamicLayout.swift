@@ -31,8 +31,8 @@ import UIKit
 /// `Predicate` is only evaluated if its parent's `Predicate` evaluates to
 /// `true`.
 ///
-/// The initial `Context` received in the `addConstraints` block is always
-/// `true`. Constraints that should always be active regardless of any state may
+/// The initial `Context` received in the `configure` block is always `true`.
+/// Constraints that should always be active regardless of any state may
 /// be added there.
 public class DynamicLayout<Environment> {
 
@@ -84,8 +84,9 @@ public class DynamicLayout<Environment> {
 
     var activeConstraints: [NSLayoutConstraint] = []
 
+    /// Initializes a DynamicLayout.
     public init() {
-        
+
     }
 
     /// Add constraints here. The closure receives the main `Context` whose
@@ -102,7 +103,7 @@ public class DynamicLayout<Environment> {
     ///
     /// - Attention: An `assertionFailure` will be hit if this method is called
     /// more than once.
-    public func addConstraints(_ main: (_ ctx: inout Context) -> Void) {
+    public func configure(_ main: (_ ctx: inout Context) -> Void) {
         if !mainContext.constraints.isEmpty || !mainContext.children.isEmpty {
             assertionFailure("\(#function) should only be called once")
         }

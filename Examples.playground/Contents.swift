@@ -31,26 +31,30 @@ class Example: UIViewController {
             for: .valueChanged
         )
 
-        layout.addConstraints { ctx in
+        layout.configure { ctx in
             ctx.addConstraints(
-                for: slider,
-                .align(.leading, of: view.layoutMarginsGuide),
-                .align(.trailing, of: view.layoutMarginsGuide),
-                .align(.bottom)
+                slider.makeConstraints(
+                    .align(.leading, of: view.layoutMarginsGuide),
+                    .align(.trailing, of: view.layoutMarginsGuide),
+                    .align(.bottom)
+                )
             )
 
-            ctx.addConstraints(for: expandingView,
-                .center(),
-                .align(.leading, .greaterThanOrEqual, of: view.layoutMarginsGuide),
-                .align(.trailing, .lessThanOrEqual, of: view.layoutMarginsGuide),
-                .setRelative(.height, of: expandingView, attribute: .width)
+            ctx.addConstraints(
+                expandingView.makeConstraints(
+                    .center(),
+                    .align(.leading, .greaterThanOrEqual, of: view.layoutMarginsGuide),
+                    .align(.trailing, .lessThanOrEqual, of: view.layoutMarginsGuide),
+                    .setRelative(.height, of: expandingView, attribute: .width)
+                )
             )
 
             let width: CGFloat = 100
 
             let sizeConstraints = ctx.addConstraints(
-                for: expandingView,
-                .setFixed(.width, to: width) ~ .defaultHigh
+                expandingView.makeConstraints(
+                    .setFixed(.width, to: width) ~ .defaultHigh
+                )
             )
 
             ctx.addAction {

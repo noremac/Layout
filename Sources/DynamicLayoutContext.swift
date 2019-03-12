@@ -93,20 +93,18 @@ extension DynamicLayout.Context {
         self.when(predicate, when, otherwise: { _ in })
     }
 
-    /// Adds constraints for an item in the receiving `Context`.
-    ///
-    /// - Parameters:
-    ///   - item: The `ConstrainableItem`.
-    ///   - groups: The `ConstraintGroup`s to create.
-    @discardableResult
-    public mutating func addConstraints(for item: ConstrainableItem, _ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
-        let constraints = item.makeConstraints(groups: groups)
-        self.constraints += constraints
-        return constraints
-    }
-
     public mutating func addAction(_ action: @escaping (Environment) -> Void) {
         self.actions.append(action)
+    }
+
+    /// Adds constraints to the receiving context.
+    @discardableResult
+    public mutating func addConstraints(_ constraints: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
+        self.constraints += constraints
+        if constraints.contains(where: { $0.isActive }) {
+            assertionFailure("Constraints added to contexts should not already be active")
+        }
+        return constraints
     }
 }
 
