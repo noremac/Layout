@@ -32,12 +32,30 @@ public protocol DynamicLayoutTraitEnvironmentProtocol {
     var traitCollection: UITraitCollection { get }
 }
 
+extension UITraitCollection: DynamicLayoutTraitEnvironmentProtocol {
+
+    /// Returns the receiver. This exists to satisfy
+    /// `DynamicLayoutTraitEnvironmentProtocol`.
+    public var traitCollection: UITraitCollection {
+        return self
+    }
+}
+
 /// A protocol for declaring that a `DynamicLayout`'s `Environment` has a size
 /// property.
 public protocol DynamicLayoutSizeEnvironmentProtocol {
 
     ///  The current `CGSize`.
     var size: CGSize { get }
+}
+
+extension CGSize: DynamicLayoutSizeEnvironmentProtocol {
+
+    /// Returns the receiver. This exists to satisfy
+    /// `DynamicLayoutSizeEnvironmentProtocol`.
+    public var size: CGSize {
+        return self
+    }
 }
 
 /// A struct that implements both `DynamicLayoutTraitEnvironmentProtocol` and
