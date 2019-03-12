@@ -34,6 +34,26 @@ extension DynamicLayout.Context {
         }
     }
 
+    /// Adds an action to be run when this `Context`'s `Predicate` is `true`.
+    ///
+    /// - Parameter action: The action to be run.
+    public mutating func addAction(_ action: @escaping (Environment) -> Void) {
+        self.actions.append(action)
+    }
+
+    /// Adds constraints to the receiving context.
+    @discardableResult
+    public mutating func addConstraints(_ constraints: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
+        self.constraints += constraints
+        if constraints.contains(where: { $0.isActive }) {
+            assertionFailure("Constraints added to contexts should not already be active")
+        }
+        return constraints
+    }
+}
+
+extension DynamicLayout.Context {
+
     /// Adds a new nested `Context` to the receiver with the given `Predicate`.
     ///
     /// - Parameters:
@@ -91,20 +111,6 @@ extension DynamicLayout.Context {
     ///   - whenCtx: The newly created `Context`.
     public mutating func when(_ predicate: @escaping (_ env: Environment) -> Bool, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void) {
         self.when(predicate, when, otherwise: { _ in })
-    }
-
-    public mutating func addAction(_ action: @escaping (Environment) -> Void) {
-        self.actions.append(action)
-    }
-
-    /// Adds constraints to the receiving context.
-    @discardableResult
-    public mutating func addConstraints(_ constraints: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
-        self.constraints += constraints
-        if constraints.contains(where: { $0.isActive }) {
-            assertionFailure("Constraints added to contexts should not already be active")
-        }
-        return constraints
     }
 }
 
