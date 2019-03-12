@@ -25,7 +25,7 @@
 import UIKit
 import XCTest
 
-func XCTAssertEqualConstraints(_ desired: [NSLayoutConstraint], _ sut: [NSLayoutConstraint], file: StaticString = #file, line: UInt = #line) {
+func XCTAssertEqualConstraints<S>(_ desired: [NSLayoutConstraint], _ sut: S, file: StaticString = #file, line: UInt = #line) where S: Collection, S.Element == NSLayoutConstraint {
     guard desired.count == sut.count else {
         return XCTFail("Constraint counts do not match.\nDesired: \(desired)\nReceived: \(sut)", file: file, line: line)
     }
