@@ -104,4 +104,40 @@ class DynamicLayoutTests: XCTestCase {
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_023, height: 1_024)))
         XCTAssertEqualConstraints(regular + lessThan1024, sut.activeConstraints)
     }
+
+    func testUpdatePerformance() {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
+            let sut = DynamicLayout<Bool>()
+            let parentView = UIView()
+            let views = (0...10_000).map({ _ in UIView() })
+            views.forEach({ parentView.addSubview($0) })
+            sut.configure { ctx in
+                for view in views {
+                    ctx.addConstraints(
+                        view.makeConstraints(
+                            .setSize(.init(width: 100, height: 100))
+                        )
+                    )
+                }
+
+                ctx.when(true, { ctx in
+                    for view in views {
+                        ctx.addConstraints(view.makeConstraints(.center()))
+                    }
+                }, otherwise: { ctx in
+                    ctx.addConstraints(
+                        view.makeConstraints(
+                            .align(.leading),
+                            .align(.top)
+                        )
+                    )
+                })
+            }
+
+            startMeasuring()
+            sut.update(environment: true)
+            sut.update(environment: false)
+            stopMeasuring()
+        })
+    }
 }
