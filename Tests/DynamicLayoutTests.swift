@@ -109,7 +109,7 @@ class DynamicLayoutTests: XCTestCase {
         measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
             let sut = DynamicLayout<Bool>()
             let parentView = UIView()
-            let views = (0...10_000).map({ _ in UIView() })
+            let views = (1...10_000).map({ _ in UIView() })
             views.forEach({ parentView.addSubview($0) })
             sut.configure { ctx in
                 for view in views {
