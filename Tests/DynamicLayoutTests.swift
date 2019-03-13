@@ -122,15 +122,21 @@ class DynamicLayoutTests: XCTestCase {
 
                 ctx.when(true, { ctx in
                     for view in views {
-                        ctx.addConstraints(view.makeConstraints(.center()))
+                        ctx.addConstraints(
+                            view.makeConstraints(
+                                .center()
+                            )
+                        )
                     }
                 }, otherwise: { ctx in
-                    ctx.addConstraints(
-                        view.makeConstraints(
-                            .align(.leading),
-                            .align(.top)
+                    for view in views {
+                        ctx.addConstraints(
+                            view.makeConstraints(
+                                .align(.leading),
+                                .align(.top)
+                            )
                         )
-                    )
+                    }
                 })
             }
 
