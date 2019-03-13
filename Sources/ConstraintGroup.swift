@@ -111,7 +111,7 @@ public struct ConstraintGroup {
             constraintGenerator(
                 attribute1: firstAttr.attribute,
                 relation: relation,
-                item2: item.map { .other($0) } ?? .parent,
+                item2: item,
                 attribute2: (secondAttr ?? firstAttr).attribute,
                 multiplier: multiplier,
                 constant: offset,
@@ -149,7 +149,7 @@ public struct ConstraintGroup {
             constraintGenerator(
                 attribute1: firstAttr.attribute,
                 relation: relation,
-                item2: item.map { .other($0) } ?? .parent,
+                item2: item,
                 attribute2: (secondAttr ?? firstAttr).attribute,
                 multiplier: multiplier,
                 constant: offset,
@@ -223,7 +223,7 @@ public struct ConstraintGroup {
                 constraintGenerator(
                     attribute1: firstAttr.attribute,
                     relation: relation,
-                    item2: item.map { .other($0) } ?? .parent,
+                    item2: item,
                     attribute2: (secondAttr ?? firstAttr).attribute,
                     multiplier: multiplier,
                     constant: constant,

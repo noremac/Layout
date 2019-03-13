@@ -27,15 +27,10 @@ import UIKit
 /// A closure that takes a `ConstrainableItem` and returns an `NSLayoutConstraint`.
 public typealias ConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
 
-enum SecondItem {
-    case parent
-    case other(ConstrainableItem)
-}
-
 func constraintGenerator(
     attribute1: NSLayoutConstraint.Attribute,
     relation: NSLayoutConstraint.Relation,
-    item2: SecondItem?,
+    item2: ConstrainableItem?,
     attribute2: NSLayoutConstraint.Attribute,
     multiplier: CGFloat,
     constant: CGFloat,
@@ -43,25 +38,13 @@ func constraintGenerator(
     line: UInt = #line
     ) -> ConstraintSpec {
     return { item in
-        let otherItem: ConstrainableItem? = {
-            switch item2 {
-            case .parent?:
-                guard let view = item.parentView else {
-                    assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line)
-                    return nil
-                }
-                return view
-            case .other(let other)?:
-                return other
-            case nil:
-                return nil
-            }
-        }()
         return NSLayoutConstraint(
             item: item,
             attribute: attribute1,
             relatedBy: relation,
-            toItem: otherItem,
+            toItem: attribute2 == .notAnAttribute
+                ? nil
+                : (item2 ?? item.parentView) ?? { assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line); return nil }(),
             attribute: attribute2,
             multiplier: multiplier,
             constant: constant
