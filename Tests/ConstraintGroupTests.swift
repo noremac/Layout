@@ -392,13 +392,13 @@ class ConstraintGroupTests: XCTestCase {
             let parentView = UIView()
             let views = (1...10_000).map({ _ in UIView() })
             views.forEach({ parentView.addSubview($0) })
-            var constraints = [NSLayoutConstraint]()
+            var constraintCounts = 0
             startMeasuring()
             for view in views {
-                constraints += view.makeConstraints(.align(.leading))
+                constraintCounts += view.makeConstraints(.align(.leading)).count
             }
             stopMeasuring()
-            print(constraints.count)
+            print(constraintCounts)
         })
     }
 }
