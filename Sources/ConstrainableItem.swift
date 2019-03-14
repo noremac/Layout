@@ -76,9 +76,24 @@ public protocol ConstrainableItem {
 
 extension ConstrainableItem {
 
-    func makeConstraints(groups: [ConstraintGroup]) -> [NSLayoutConstraint] {
+    func makeConstraints<S>(groups: S) -> [NSLayoutConstraint] where S: Sequence, S.Element == ConstraintGroup {
         setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
-        return groups.flatMap { $0.constraints(withItem: self) }
+        return groups.reduce(into: .init()) { result, group in
+            switch group.specs {
+            case .single(let spec):
+                let constraint = spec(self)
+                constraint.priority = group.priority
+                constraint.identifier = group.identifier
+                result.append(constraint)
+            case .multiple(let specs):
+                result += specs.map { spec in
+                    let constraint = spec(self)
+                    constraint.priority = group.priority
+                    constraint.identifier = group.identifier
+                    return constraint
+                }
+            }
+        }
     }
 
     /// Creates and returns an array of `NSLayoutConstraint`s corresponding to the given groups.

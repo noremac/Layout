@@ -27,11 +27,16 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
+    enum Specs {
+        case single(ConstraintSpec)
+        case multiple([ConstraintSpec])
+    }
+
     /// When this is `true` a string with this format: `"\(file)::\(function)::\(line)"` is automatically added as each constraint's `identifier`.
     public static var debugConstraints = true
 
     /// The `ConstraintSpec`s.
-    public var specs: [ConstraintSpec]
+    var specs: Specs
 
     /// The priority of this group of constraints.
     public var priority: UILayoutPriority = .required
@@ -44,27 +49,21 @@ public struct ConstraintGroup {
     ///
     /// - Parameter spec: A `ConstraintSpec` for creating a single constraint.
     public init(spec: @escaping ConstraintSpec) {
-        self.specs = [spec]
+        self.specs = .single(spec)
     }
 
     /// Creates a `ConstraintGroup` composed of other `ConstraintGroup`s.
     ///
     /// - Parameter groups: An array of `ConstraintGroup`s to concatenate together.
     public init(composedOf groups: [ConstraintGroup]) {
-        self.specs = groups.flatMap { $0.specs }
-    }
-
-    /// Creates an array of `NSLayoutConstraint`s from the current group using the given item as each `NSLayoutConstraint`'s `firstItem`.
-    ///
-    /// - Parameter item: The `NSLayoutConstraint`'s
-    /// - Returns: An array of `NSLayoutConstraint`s.
-    public func constraints(withItem item: ConstrainableItem) -> [NSLayoutConstraint] {
-        return specs.map { spec in
-            let constraint = spec(item)
-            constraint.priority = priority
-            constraint.identifier = identifier
-            return constraint
-        }
+        self.specs = .multiple(groups.flatMap({ group -> [ConstraintSpec] in
+            switch group.specs {
+            case .single(let spec):
+                return [spec]
+            case .multiple(let specs):
+                return specs
+            }
+        }))
     }
 
     /// This is the base method for `ConstraintGroup` creation; all other methods funnel through here.
