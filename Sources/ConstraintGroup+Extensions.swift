@@ -39,12 +39,18 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .align(.top, of: item, offsetBy: insets.top, file: file, function: function, line: line),
-            .align(.leading, of: item, offsetBy: insets.leading, file: file, function: function, line: line),
-            .align(.bottom, of: item, offsetBy: -insets.bottom, file: file, function: function, line: line),
-            .align(.trailing, of: item, offsetBy: -insets.trailing, file: file, function: function, line: line)
-            ])
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            multiple: { item1 in
+                [
+                    constraintGenerator(item1: item1, attribute1: .top, item2: item, constant: insets.top),
+                    constraintGenerator(item1: item1, attribute1: .leading, item2: item, constant: insets.leading),
+                    constraintGenerator(item1: item1, attribute1: .bottom, item2: item, constant: -insets.bottom),
+                    constraintGenerator(item1: item1, attribute1: .trailing, item2: item, constant: -insets.trailing)
+                ]
+        })
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's vertical edges to another item.
@@ -62,10 +68,16 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .align(.top, of: item, offsetBy: topInset, file: file, function: function, line: line),
-            .align(.bottom, of: item, offsetBy: -bottomInset, file: file, function: function, line: line)
-            ])
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            multiple: { item1 in
+                [
+                    constraintGenerator(item1: item1, attribute1: .top, item2: item, constant: topInset),
+                    constraintGenerator(item1: item1, attribute1: .bottom, item2: item, constant: -bottomInset)
+                ]
+        })
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to another item.
@@ -83,10 +95,16 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .align(.leading, of: item, offsetBy: leadingInset, file: file, function: function, line: line),
-            .align(.trailing, of: item, offsetBy: -trailingInset, file: file, function: function, line: line)
-            ])
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            multiple: { item1 in
+                [
+                    constraintGenerator(item1: item1, attribute1: .leading, item2: item, constant: leadingInset),
+                    constraintGenerator(item1: item1, attribute1: .trailing, item2: item, constant: -trailingInset)
+                ]
+        })
     }
 
     /// Returns a `ConstraintGroup` for centering an item inside another item.
@@ -100,10 +118,16 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .align(.centerX, of: item, file: file, function: function, line: line),
-            .align(.centerY, of: item, file: file, function: function, line: line)
-            ])
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            multiple: { item1 in
+                [
+                    constraintGenerator(item1: item1, attribute1: .centerX, item2: item),
+                    constraintGenerator(item1: item1, attribute1: .centerY, item2: item)
+                ]
+        })
     }
 
     /// Returns a `ConstraintGroup` for setting the size of an item.
@@ -119,10 +143,16 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .setFixed(.width, relation, to: size.width, file: file, function: function, line: line),
-            .setFixed(.height, relation, to: size.height, file: file, function: function, line: line)
-            ])
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            multiple: { item1 in
+                [
+                    constraintGenerator(item1: item1, attribute1: .width, relation: relation, attribute2: .notAnAttribute, constant: size.width),
+                    constraintGenerator(item1: item1, attribute1: .height, relation: relation, attribute2: .notAnAttribute, constant: size.height)
+                ]
+        })
     }
 
     /// Returns a `ConstraintGroup` for matching the size of one item to another item.
@@ -142,9 +172,15 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return .init(composedOf: [
-            .setRelative(.width, relation, to: ratio, of: item, constant: constant, file: file, function: function, line: line),
-            .setRelative(.height, relation, to: ratio, of: item, constant: constant, file: file, function: function, line: line)
-            ])
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            multiple: { item1 in
+                [
+                    constraintGenerator(item1: item1, attribute1: .width, relation: relation, item2: item, multiplier: ratio, constant: constant),
+                    constraintGenerator(item1: item1, attribute1: .height, relation: relation, item2: item, multiplier: ratio, constant: constant)
+                ]
+        })
     }
 }

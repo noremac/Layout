@@ -43,23 +43,21 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        let spec: ConstraintSpec = { item in
-            let firstAnchor = firstAttr.anchor(item)
-            switch relation {
-            case .lessThanOrEqual:
-                return firstAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
-            case .equal:
-                return firstAnchor.constraint(equalToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
-            case .greaterThanOrEqual:
-                return firstAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
-            }
-        }
-        return ConstraintGroup.with(
-            spec,
+        return ConstraintGroup(
             file: file,
             function: function,
-            line: line
-        )
+            line: line,
+            single: { item in
+                let firstAnchor = firstAttr.anchor(item)
+                switch relation {
+                case .lessThanOrEqual:
+                    return firstAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
+                case .equal:
+                    return firstAnchor.constraint(equalToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
+                case .greaterThanOrEqual:
+                    return firstAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
+                }
+            })
     }
 
     /// Returns a `ConstraintGroup` for aligning an item below another item plus system spacing.
@@ -79,23 +77,21 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        let spec: ConstraintSpec = { item in
-            let firstAnchor = firstAttr.anchor(item)
-            switch relation {
-            case .lessThanOrEqual:
-                return firstAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
-            case .equal:
-                return firstAnchor.constraint(equalToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
-            case .greaterThanOrEqual:
-                return firstAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
-            }
-        }
-        return ConstraintGroup.with(
-            spec,
+        return ConstraintGroup(
             file: file,
             function: function,
-            line: line
-        )
+            line: line,
+            single: { item in
+                let firstAnchor = firstAttr.anchor(item)
+                switch relation {
+                case .lessThanOrEqual:
+                    return firstAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
+                case .equal:
+                    return firstAnchor.constraint(equalToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
+                case .greaterThanOrEqual:
+                    return firstAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: secondAnchor, multiplier: multiplier)
+                }
+            })
     }
 
     /// Returns a `ConstraintGroup` for matching an item's dimension to the space between the x positioning of two items.
@@ -119,24 +115,22 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        let spec: ConstraintSpec = { item in
-            let anchor = dimension.anchor(item)
-            let space: NSLayoutDimension = firstAnchor.anchorWithOffset(to: secondAnchor)
-            switch relation {
-            case .lessThanOrEqual:
-                return anchor.constraint(lessThanOrEqualTo: space, multiplier: multiplier, constant: constant)
-            case .equal:
-                return anchor.constraint(equalTo: space, multiplier: multiplier, constant: constant)
-            case .greaterThanOrEqual:
-                return anchor.constraint(greaterThanOrEqualTo: space, multiplier: multiplier, constant: constant)
-            }
-        }
-        return ConstraintGroup.with(
-            spec,
+        return ConstraintGroup(
             file: file,
             function: function,
-            line: line
-        )
+            line: line,
+            single: { item in
+                let anchor = dimension.anchor(item)
+                let space: NSLayoutDimension = firstAnchor.anchorWithOffset(to: secondAnchor)
+                switch relation {
+                case .lessThanOrEqual:
+                    return anchor.constraint(lessThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+                case .equal:
+                    return anchor.constraint(equalTo: space, multiplier: multiplier, constant: constant)
+                case .greaterThanOrEqual:
+                    return anchor.constraint(greaterThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+                }
+            })
     }
 
     /// Returns a `ConstraintGroup` for matching an item's dimension to the space between the y positioning of two items.
@@ -160,23 +154,21 @@ extension ConstraintGroup {
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        let spec: ConstraintSpec = { item in
-            let anchor = dimension.anchor(item)
-            let space: NSLayoutDimension = firstAnchor.anchorWithOffset(to: secondAnchor)
-            switch relation {
-            case .lessThanOrEqual:
-                return anchor.constraint(lessThanOrEqualTo: space, multiplier: multiplier, constant: constant)
-            case .equal:
-                return anchor.constraint(equalTo: space, multiplier: multiplier, constant: constant)
-            case .greaterThanOrEqual:
-                return anchor.constraint(greaterThanOrEqualTo: space, multiplier: multiplier, constant: constant)
-            }
-        }
-        return ConstraintGroup.with(
-            spec,
+        return ConstraintGroup(
             file: file,
             function: function,
-            line: line
-        )
+            line: line,
+            single: { item in
+                let anchor = dimension.anchor(item)
+                let space: NSLayoutDimension = firstAnchor.anchorWithOffset(to: secondAnchor)
+                switch relation {
+                case .lessThanOrEqual:
+                    return anchor.constraint(lessThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+                case .equal:
+                    return anchor.constraint(equalTo: space, multiplier: multiplier, constant: constant)
+                case .greaterThanOrEqual:
+                    return anchor.constraint(greaterThanOrEqualTo: space, multiplier: multiplier, constant: constant)
+                }
+            })
     }
 }

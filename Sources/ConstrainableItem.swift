@@ -86,12 +86,12 @@ extension ConstrainableItem {
                 constraint.identifier = group.identifier
                 result.append(constraint)
             case .multiple(let specs):
-                result += specs.map { spec in
-                    let constraint = spec(self)
+                let constraints = specs(self)
+                constraints.forEach { constraint in
                     constraint.priority = group.priority
                     constraint.identifier = group.identifier
-                    return constraint
                 }
+                result += constraints
             }
         }
     }

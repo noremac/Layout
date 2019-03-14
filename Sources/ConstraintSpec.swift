@@ -27,27 +27,29 @@ import UIKit
 /// A closure that takes a `ConstrainableItem` and returns an `NSLayoutConstraint`.
 public typealias ConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
 
+/// A closure that takes a `ConstrainableItem` and returns an `[NSLayoutConstraint]`.
+public typealias ConstraintsSpec = (ConstrainableItem) -> [NSLayoutConstraint]
+
 func constraintGenerator(
+    item1: ConstrainableItem,
     attribute1: NSLayoutConstraint.Attribute,
-    relation: NSLayoutConstraint.Relation,
-    item2: ConstrainableItem?,
-    attribute2: NSLayoutConstraint.Attribute,
-    multiplier: CGFloat,
-    constant: CGFloat,
+    relation: NSLayoutConstraint.Relation = .equal,
+    item2: ConstrainableItem? = nil,
+    attribute2: NSLayoutConstraint.Attribute? = nil,
+    multiplier: CGFloat = 1,
+    constant: CGFloat = 0,
     file: StaticString = #file,
     line: UInt = #line
-    ) -> ConstraintSpec {
-    return { item in
-        return NSLayoutConstraint(
-            item: item,
-            attribute: attribute1,
-            relatedBy: relation,
-            toItem: attribute2 == .notAnAttribute
-                ? nil
-                : (item2 ?? item.parentView) ?? { assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line); return nil }(),
-            attribute: attribute2,
-            multiplier: multiplier,
-            constant: constant
-        )
-    }
+    ) -> NSLayoutConstraint {
+    return NSLayoutConstraint(
+        item: item1,
+        attribute: attribute1,
+        relatedBy: relation,
+        toItem: attribute2 == .notAnAttribute
+            ? nil
+            : (item2 ?? item1.parentView) ?? { assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line); return nil }(),
+        attribute: attribute2 ?? attribute1,
+        multiplier: multiplier,
+        constant: constant
+    )
 }

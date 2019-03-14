@@ -27,16 +27,16 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
-    enum Specs {
+    public enum Specs {
         case single(ConstraintSpec)
-        case multiple([ConstraintSpec])
+        case multiple(ConstraintsSpec)
     }
 
     /// When this is `true` a string with this format: `"\(file)::\(function)::\(line)"` is automatically added as each constraint's `identifier`.
     public static var debugConstraints = true
 
-    /// The `ConstraintSpec`s.
-    var specs: Specs
+    /// The `ConstraintsSpec`s.
+    public var specs: Specs
 
     /// The priority of this group of constraints.
     public var priority: UILayoutPriority = .required
@@ -45,44 +45,19 @@ public struct ConstraintGroup {
     /// - SeeAlso: `ConstraintGroup.debugConstraints`.
     public var identifier: String?
 
-    /// Creates a `ConstraintGroup` with a single spec.
-    ///
-    /// - Parameter spec: A `ConstraintSpec` for creating a single constraint.
-    public init(spec: @escaping ConstraintSpec) {
-        self.specs = .single(spec)
-    }
-
-    /// Creates a `ConstraintGroup` composed of other `ConstraintGroup`s.
-    ///
-    /// - Parameter groups: An array of `ConstraintGroup`s to concatenate together.
-    public init(composedOf groups: [ConstraintGroup]) {
-        self.specs = .multiple(groups.flatMap({ group -> [ConstraintSpec] in
-            switch group.specs {
-            case .single(let spec):
-                return [spec]
-            case .multiple(let specs):
-                return specs
-            }
-        }))
-    }
-
-    /// This is the base method for `ConstraintGroup` creation; all other methods funnel through here.
-    /// The initializers should not be used manually.
-    ///
-    /// - Parameters:
-    ///   - spec: A close that takes a `ConstrainableItem` and returns an `NSLayoutConstraint`.
-    /// - Returns: A `ConstraintGroup` wrapping the given spec.
-    public static func with(
-        _ spec: @escaping ConstraintSpec,
-        file: StaticString = #file,
-        function: StaticString = #function,
-        line: UInt = #line
-        ) -> ConstraintGroup {
-        var group = ConstraintGroup(spec: spec)
-        if debugConstraints {
-            group.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(function)::\(line)"
+    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, specs: Specs) {
+        self.specs = specs
+        if ConstraintGroup.debugConstraints {
+            identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(function)::\(line)"
         }
-        return group
+    }
+
+    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, single: @escaping ConstraintSpec) {
+        self.init(file: file, function: function, line: line, specs: .single(single))
+    }
+
+    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, multiple: @escaping ConstraintsSpec) {
+        self.init(file: file, function: function, line: line, specs: .multiple(multiple))
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's x anchor to another item's x anchor.
@@ -91,7 +66,7 @@ public struct ConstraintGroup {
     ///   - firstAttr: The desired `XAttribute`.
     ///   - relation: A layout relation; defaults to `.equal`.
     ///   - secondAttr: The second `XAttribute`; defaults to `firstAttr` if left as `nil`.
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - secondItem: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     ///   - multiplier: The multiplier; defaults to 1.
     ///   - offset: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's x anchor to another item's x anchor.
@@ -99,28 +74,28 @@ public struct ConstraintGroup {
         _ firstAttr: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         to secondAttr: XAttribute? = nil,
-        of item: ConstrainableItem? = nil,
+        of secondItem: ConstrainableItem? = nil,
         multiplier: CGFloat = 1,
         offsetBy offset: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return with(
-            constraintGenerator(
-                attribute1: firstAttr.attribute,
-                relation: relation,
-                item2: item,
-                attribute2: (secondAttr ?? firstAttr).attribute,
-                multiplier: multiplier,
-                constant: offset,
-                file: file,
-                line: line
-            ),
+        return .init(
             file: file,
             function: function,
-            line: line
-        )
+            line: line,
+            single: { item1 in
+                constraintGenerator(
+                    item1: item1,
+                    attribute1: firstAttr.attribute,
+                    relation: relation,
+                    item2: secondItem,
+                    attribute2: secondAttr?.attribute,
+                    multiplier: multiplier,
+                    constant: offset
+                )
+        })
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's y anchor to another item's y anchor.
@@ -129,7 +104,7 @@ public struct ConstraintGroup {
     ///   - firstAttr: The desired `YAttribute`.
     ///   - relation: A layout relation; defaults to `.equal`.
     ///   - secondAttr: The second `YAttribute`; defaults to `firstAttr` if left as `nil`.
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - secondItem: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     ///   - multiplier: The multiplier; defaults to 1.
     ///   - offset: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's y anchor to another item's y anchor.
@@ -137,28 +112,28 @@ public struct ConstraintGroup {
         _ firstAttr: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         to secondAttr: YAttribute? = nil,
-        of item: ConstrainableItem? = nil,
+        of secondItem: ConstrainableItem? = nil,
         multiplier: CGFloat = 1,
         offsetBy offset: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
-        return with(
-            constraintGenerator(
-                attribute1: firstAttr.attribute,
-                relation: relation,
-                item2: item,
-                attribute2: (secondAttr ?? firstAttr).attribute,
-                multiplier: multiplier,
-                constant: offset,
-                file: file,
-                line: line
-            ),
+        return .init(
             file: file,
             function: function,
-            line: line
-        )
+            line: line,
+            single: { item1 in
+                constraintGenerator(
+                    item1: item1,
+                    attribute1: firstAttr.attribute,
+                    relation: relation,
+                    item2: secondItem,
+                    attribute2: secondAttr?.attribute,
+                    multiplier: multiplier,
+                    constant: offset
+                )
+        })
     }
 
     /// Returns a `ConstraintGroup` for applying a fixed dimension to an item.
@@ -178,21 +153,13 @@ public struct ConstraintGroup {
         line: UInt = #line
         )
         -> ConstraintGroup {
-            return with(
-                constraintGenerator(
-                    attribute1: firstAttr.attribute,
-                    relation: relation,
-                    item2: nil,
-                    attribute2: .notAnAttribute,
-                    multiplier: 1,
-                    constant: constant,
-                    file: file,
-                    line: line
-                ),
+            return .init(
                 file: file,
                 function: function,
-                line: line
-            )
+                line: line,
+                single: { item1 in
+                    constraintGenerator(item1: item1, attribute1: firstAttr.attribute, relation: relation, attribute2: .notAnAttribute, constant: constant)
+            })
     }
 
     /// Returns a `ConstraintGroup` for applying a relative dimension in relation to another item.
@@ -218,20 +185,12 @@ public struct ConstraintGroup {
         line: UInt = #line
         )
         -> ConstraintGroup {
-            return with(
-                constraintGenerator(
-                    attribute1: firstAttr.attribute,
-                    relation: relation,
-                    item2: item,
-                    attribute2: (secondAttr ?? firstAttr).attribute,
-                    multiplier: multiplier,
-                    constant: constant,
-                    file: file,
-                    line: line
-                ),
+            return .init(
                 file: file,
                 function: function,
-                line: line
-            )
+                line: line,
+                single: { item1 in
+                    constraintGenerator(item1: item1, attribute1: firstAttr.attribute, relation: relation, item2: item, attribute2: (secondAttr ?? firstAttr).attribute, multiplier: multiplier, constant: constant)
+            })
     }
 }
