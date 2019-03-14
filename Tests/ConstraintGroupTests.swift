@@ -387,7 +387,7 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
-    func testCreationPerformance() {
+    func testSingleCreationPerformance() {
         measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
             let parentView = UIView()
             let views = (1...10_000).map({ _ in UIView() })
@@ -396,6 +396,21 @@ class ConstraintGroupTests: XCTestCase {
             startMeasuring()
             for view in views {
                 constraintCounts += view.makeConstraints(.align(.leading)).count
+            }
+            stopMeasuring()
+            print(constraintCounts)
+        })
+    }
+
+    func testMultiCreationPerformance() {
+        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
+            let parentView = UIView()
+            let views = (1...10_000).map({ _ in UIView() })
+            views.forEach({ parentView.addSubview($0) })
+            var constraintCounts = 0
+            startMeasuring()
+            for view in views {
+                constraintCounts += view.makeConstraints(.alignToEdges()).count
             }
             stopMeasuring()
             print(constraintCounts)
