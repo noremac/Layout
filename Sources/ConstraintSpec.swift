@@ -47,7 +47,7 @@ func constraintGenerator(
         relatedBy: relation,
         toItem: secondAttribute == .notAnAttribute
             ? nil
-            : (secondItem ?? firstItem.parentView) ?? { assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line); return nil }(),
+            : (secondItem ?? firstItem.parentView) ?? { fatalError("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line) }(),
         attribute: secondAttribute ?? firstAttribute,
         multiplier: multiplier,
         constant: constant
