@@ -27,16 +27,15 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
-    public enum Specs {
+    enum Specs {
         case single(SingleConstraintSpec)
         case multiple(MultipleConstraintSpec)
     }
 
+    let specs: Specs
+
     /// When this is `true` a string with this format: `"\(file)::\(function)::\(line)"` is automatically added as each constraint's `identifier`.
     public static var debugConstraints = true
-
-    /// The `MultipleConstraintSpec`s.
-    public var specs: Specs
 
     /// The priority of this group of constraints.
     public var priority: UILayoutPriority = .required
@@ -45,17 +44,25 @@ public struct ConstraintGroup {
     /// - SeeAlso: `ConstraintGroup.debugConstraints`.
     public var identifier: String?
 
-    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, specs: Specs) {
+    init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, specs: Specs) {
         self.specs = specs
         if ConstraintGroup.debugConstraints {
             identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(function)::\(line)"
         }
     }
 
+    /// Initializes a `ConstraintGroup`.
+    ///
+    /// - Parameters:
+    ///   - single: A closure that generates a single `NSLayoutConstraint`.
     public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, single: @escaping SingleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .single(single))
     }
 
+    /// Initializes a `ConstraintGroup`.
+    ///
+    /// - Parameters:
+    ///   - single: A closure that generates multiple `NSLayoutConstraint`s.
     public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, multiple: @escaping MultipleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .multiple(multiple))
     }
