@@ -28,14 +28,14 @@ import UIKit
 public struct ConstraintGroup {
 
     public enum Specs {
-        case single(ConstraintSpec)
-        case multiple(ConstraintsSpec)
+        case single(SingleConstraintSpec)
+        case multiple(MultipleConstraintSpec)
     }
 
     /// When this is `true` a string with this format: `"\(file)::\(function)::\(line)"` is automatically added as each constraint's `identifier`.
     public static var debugConstraints = true
 
-    /// The `ConstraintsSpec`s.
+    /// The `MultipleConstraintSpec`s.
     public var specs: Specs
 
     /// The priority of this group of constraints.
@@ -52,11 +52,11 @@ public struct ConstraintGroup {
         }
     }
 
-    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, single: @escaping ConstraintSpec) {
+    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, single: @escaping SingleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .single(single))
     }
 
-    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, multiple: @escaping ConstraintsSpec) {
+    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, multiple: @escaping MultipleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .multiple(multiple))
     }
 

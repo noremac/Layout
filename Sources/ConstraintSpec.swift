@@ -25,10 +25,10 @@
 import UIKit
 
 /// A closure that takes a `ConstrainableItem` and returns an `NSLayoutConstraint`.
-public typealias ConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
+public typealias SingleConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
 
 /// A closure that takes a `ConstrainableItem` and returns an `[NSLayoutConstraint]`.
-public typealias ConstraintsSpec = (ConstrainableItem) -> [NSLayoutConstraint]
+public typealias MultipleConstraintSpec = (ConstrainableItem) -> [NSLayoutConstraint]
 
 func constraintGenerator(
     item1: ConstrainableItem,
