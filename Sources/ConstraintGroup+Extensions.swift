@@ -33,7 +33,7 @@ extension ConstraintGroup {
     ///   - insets: The desired insets; defaults to `.zero`.
     /// - Returns: A `ConstraintGroup` for aligning an item's edges to another item.
     public static func alignToEdges(
-        of item: ConstrainableItem? = nil,
+        of secondItem: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
         file: StaticString = #file,
         function: StaticString = #function,
@@ -43,12 +43,32 @@ extension ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            multiple: { item1 in
+            multiple: { firstItem in
                 [
-                    constraintGenerator(item1: item1, attribute1: .top, item2: item, constant: insets.top),
-                    constraintGenerator(item1: item1, attribute1: .leading, item2: item, constant: insets.leading),
-                    constraintGenerator(item1: item1, attribute1: .bottom, item2: item, constant: -insets.bottom),
-                    constraintGenerator(item1: item1, attribute1: .trailing, item2: item, constant: -insets.trailing)
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .top,
+                        secondItem: secondItem,
+                        constant: insets.top
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .leading,
+                        secondItem: secondItem,
+                        constant: insets.leading
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .bottom,
+                        secondItem: secondItem,
+                        constant: -insets.bottom
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .trailing,
+                        secondItem: secondItem,
+                        constant: -insets.trailing
+                    )
                 ]
         })
     }
@@ -61,7 +81,7 @@ extension ConstraintGroup {
     ///   - bottomInset: The desired bottom inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to another item.
     public static func alignToVerticalEdges(
-        of item: ConstrainableItem? = nil,
+        of secondItem: ConstrainableItem? = nil,
         topInset: CGFloat = 0,
         bottomInset: CGFloat = 0,
         file: StaticString = #file,
@@ -72,10 +92,20 @@ extension ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            multiple: { item1 in
+            multiple: { firstItem in
                 [
-                    constraintGenerator(item1: item1, attribute1: .top, item2: item, constant: topInset),
-                    constraintGenerator(item1: item1, attribute1: .bottom, item2: item, constant: -bottomInset)
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .top,
+                        secondItem: secondItem,
+                        constant: topInset
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .bottom,
+                        secondItem: secondItem,
+                        constant: -bottomInset
+                    )
                 ]
         })
     }
@@ -88,7 +118,7 @@ extension ConstraintGroup {
     ///   - trailingInset: The desired trailing inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges to another item.
     public static func alignToHorizontalEdges(
-        of item: ConstrainableItem? = nil,
+        of secondItem: ConstrainableItem? = nil,
         leadingInset: CGFloat = 0,
         trailingInset: CGFloat = 0,
         file: StaticString = #file,
@@ -99,10 +129,20 @@ extension ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            multiple: { item1 in
+            multiple: { firstItem in
                 [
-                    constraintGenerator(item1: item1, attribute1: .leading, item2: item, constant: leadingInset),
-                    constraintGenerator(item1: item1, attribute1: .trailing, item2: item, constant: -trailingInset)
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .leading,
+                        secondItem: secondItem,
+                        constant: leadingInset
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .trailing,
+                        secondItem: secondItem,
+                        constant: -trailingInset
+                    )
                 ]
         })
     }
@@ -113,7 +153,7 @@ extension ConstraintGroup {
     ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     /// - Returns: A `ConstraintGroup` for centering an item inside another item.
     public static func center(
-        in item: ConstrainableItem? = nil,
+        in secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
@@ -122,10 +162,18 @@ extension ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            multiple: { item1 in
+            multiple: { firstItem in
                 [
-                    constraintGenerator(item1: item1, attribute1: .centerX, item2: item),
-                    constraintGenerator(item1: item1, attribute1: .centerY, item2: item)
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .centerX,
+                        secondItem: secondItem
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .centerY,
+                        secondItem: secondItem
+                    )
                 ]
         })
     }
@@ -147,10 +195,22 @@ extension ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            multiple: { item1 in
+            multiple: { firstItem in
                 [
-                    constraintGenerator(item1: item1, attribute1: .width, relation: relation, attribute2: .notAnAttribute, constant: size.width),
-                    constraintGenerator(item1: item1, attribute1: .height, relation: relation, attribute2: .notAnAttribute, constant: size.height)
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .width,
+                        relation: relation,
+                        secondAttribute: .notAnAttribute,
+                        constant: size.width
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .height,
+                        relation: relation,
+                        secondAttribute: .notAnAttribute,
+                        constant: size.height
+                    )
                 ]
         })
     }
@@ -164,7 +224,7 @@ extension ConstraintGroup {
     ///   - constant: The constant; defaults to `0`.
     /// - Returns: A `ConstraintGroup` for matching the size of one item to another item.
     public static func matchSize(
-        of item: ConstrainableItem? = nil,
+        of secondItem: ConstrainableItem? = nil,
         _ relation: NSLayoutConstraint.Relation = .equal,
         ratio: CGFloat = 1,
         constant: CGFloat = 0,
@@ -176,10 +236,24 @@ extension ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            multiple: { item1 in
+            multiple: { firstItem in
                 [
-                    constraintGenerator(item1: item1, attribute1: .width, relation: relation, item2: item, multiplier: ratio, constant: constant),
-                    constraintGenerator(item1: item1, attribute1: .height, relation: relation, item2: item, multiplier: ratio, constant: constant)
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .width,
+                        relation: relation,
+                        secondItem: secondItem,
+                        multiplier: ratio,
+                        constant: constant
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .height,
+                        relation: relation,
+                        secondItem: secondItem,
+                        multiplier: ratio,
+                        constant: constant
+                    )
                 ]
         })
     }

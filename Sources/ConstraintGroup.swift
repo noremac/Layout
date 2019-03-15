@@ -63,20 +63,20 @@ public struct ConstraintGroup {
     /// Returns a `ConstraintGroup` for aligning an item's x anchor to another item's x anchor.
     ///
     /// - Parameters:
-    ///   - firstAttr: The desired `XAttribute`.
+    ///   - firstAttribute: The desired `XAttribute`.
     ///   - relation: A layout relation; defaults to `.equal`.
-    ///   - secondAttr: The second `XAttribute`; defaults to `firstAttr` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to `firstAttribute` if left as `nil`.
     ///   - secondItem: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     ///   - multiplier: The multiplier; defaults to 1.
-    ///   - offset: The constant; defaults to 0.
+    ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's x anchor to another item's x anchor.
     public static func align(
-        _ firstAttr: XAttribute,
+        _ firstAttribute: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
-        to secondAttr: XAttribute? = nil,
+        to secondAttribute: XAttribute? = nil,
         of secondItem: ConstrainableItem? = nil,
         multiplier: CGFloat = 1,
-        offsetBy offset: CGFloat = 0,
+        offsetBy constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
@@ -85,15 +85,15 @@ public struct ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            single: { item1 in
+            single: { firstItem in
                 constraintGenerator(
-                    item1: item1,
-                    attribute1: firstAttr.attribute,
+                    firstItem: firstItem,
+                    firstAttribute: firstAttribute.attribute,
                     relation: relation,
-                    item2: secondItem,
-                    attribute2: secondAttr?.attribute,
+                    secondItem: secondItem,
+                    secondAttribute: secondAttribute?.attribute,
                     multiplier: multiplier,
-                    constant: offset
+                    constant: constant
                 )
         })
     }
@@ -101,20 +101,20 @@ public struct ConstraintGroup {
     /// Returns a `ConstraintGroup` for aligning an item's y anchor to another item's y anchor.
     ///
     /// - Parameters:
-    ///   - firstAttr: The desired `YAttribute`.
+    ///   - firstAttribute: The desired `YAttribute`.
     ///   - relation: A layout relation; defaults to `.equal`.
-    ///   - secondAttr: The second `YAttribute`; defaults to `firstAttr` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to `firstAttribute` if left as `nil`.
     ///   - secondItem: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
     ///   - multiplier: The multiplier; defaults to 1.
-    ///   - offset: The constant; defaults to 0.
+    ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's y anchor to another item's y anchor.
     public static func align(
-        _ firstAttr: YAttribute,
+        _ firstAttribute: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
-        to secondAttr: YAttribute? = nil,
+        to secondAttribute: YAttribute? = nil,
         of secondItem: ConstrainableItem? = nil,
         multiplier: CGFloat = 1,
-        offsetBy offset: CGFloat = 0,
+        offsetBy constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
@@ -123,15 +123,15 @@ public struct ConstraintGroup {
             file: file,
             function: function,
             line: line,
-            single: { item1 in
+            single: { firstItem in
                 constraintGenerator(
-                    item1: item1,
-                    attribute1: firstAttr.attribute,
+                    firstItem: firstItem,
+                    firstAttribute: firstAttribute.attribute,
                     relation: relation,
-                    item2: secondItem,
-                    attribute2: secondAttr?.attribute,
+                    secondItem: secondItem,
+                    secondAttribute: secondAttribute?.attribute,
                     multiplier: multiplier,
-                    constant: offset
+                    constant: constant
                 )
         })
     }
@@ -139,13 +139,13 @@ public struct ConstraintGroup {
     /// Returns a `ConstraintGroup` for applying a fixed dimension to an item.
     ///
     /// - Parameters:
-    ///   - firstAttr: The dimension, either `.width` or `.height`.
+    ///   - firstAttribute: The dimension, either `.width` or `.height`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - constant: The constant.
     /// - Returns: A `ConstraintGroup` for applying a fixed dimension to an item.
     public static func setFixed
         (
-        _ firstAttr: DimensionAttribute,
+        _ firstAttribute: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         to constant: CGFloat,
         file: StaticString = #file,
@@ -157,28 +157,34 @@ public struct ConstraintGroup {
                 file: file,
                 function: function,
                 line: line,
-                single: { item1 in
-                    constraintGenerator(item1: item1, attribute1: firstAttr.attribute, relation: relation, attribute2: .notAnAttribute, constant: constant)
+                single: { firstItem in
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: firstAttribute.attribute,
+                        relation: relation,
+                        secondAttribute: .notAnAttribute,
+                        constant: constant
+                    )
             })
     }
 
     /// Returns a `ConstraintGroup` for applying a relative dimension in relation to another item.
     ///
     /// - Parameters:
-    ///   - firstAttr: The dimension, either `.width` or `.height`.
+    ///   - firstAttribute: The dimension, either `.width` or `.height`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - multiplier: The multiplier; defaults to 1.
     ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
-    ///   - secondAttr: The dimension of the second item; defaults to `firstAttr` if left as `nil`.
+    ///   - secondAttribute: The dimension of the second item; defaults to `firstAttribute` if left as `nil`.
     ///   - constant: The constant.
     /// - Returns: A `ConstraintGroup` for applying a relative dimension in relation to another item.
     public static func setRelative
         (
-        _ firstAttr: DimensionAttribute,
+        _ firstAttribute: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         to multiplier: CGFloat = 1,
-        of item: ConstrainableItem? = nil,
-        attribute secondAttr: DimensionAttribute? = nil,
+        of secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: DimensionAttribute? = nil,
         constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
@@ -189,8 +195,16 @@ public struct ConstraintGroup {
                 file: file,
                 function: function,
                 line: line,
-                single: { item1 in
-                    constraintGenerator(item1: item1, attribute1: firstAttr.attribute, relation: relation, item2: item, attribute2: (secondAttr ?? firstAttr).attribute, multiplier: multiplier, constant: constant)
+                single: { firstItem in
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: firstAttribute.attribute,
+                        relation: relation,
+                        secondItem: secondItem,
+                        secondAttribute: (secondAttribute ?? firstAttribute).attribute,
+                        multiplier: multiplier,
+                        constant: constant
+                    )
             })
     }
 }

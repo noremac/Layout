@@ -29,13 +29,13 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for aligning an item after another item plus system spacing.
     ///
     /// - Parameters:
-    ///   - firstAttr: The first `XAttribute`.
+    ///   - firstAttribute: The first `XAttribute`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - secondAnchor: The second `XAttribute`.
     ///   - multiplier: The multiplier; defaults to 1.
     /// - Returns: A `ConstraintGroup` for aligning an item after another item plus system spacing.
     public static func align(
-        _ firstAttr: XAttribute,
+        _ firstAttribute: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         toSystemSpacingAfter secondAnchor: NSLayoutXAxisAnchor,
         multiplier: CGFloat = 1,
@@ -48,7 +48,7 @@ extension ConstraintGroup {
             function: function,
             line: line,
             single: { item in
-                let firstAnchor = firstAttr.anchor(item)
+                let firstAnchor = firstAttribute.anchor(item)
                 switch relation {
                 case .lessThanOrEqual:
                     return firstAnchor.constraint(lessThanOrEqualToSystemSpacingAfter: secondAnchor, multiplier: multiplier)
@@ -63,13 +63,13 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for aligning an item below another item plus system spacing.
     ///
     /// - Parameters:
-    ///   - firstAttr: The first `YAttribute`.
+    ///   - firstAttribute: The first `YAttribute`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - secondAnchor: The second `YAttribute`.
     ///   - multiplier: The multiplier; defaults to 1.
     /// - Returns: A `ConstraintGroup` for aligning an item below another item plus system spacing.
     public static func align(
-        _ firstAttr: YAttribute,
+        _ firstAttribute: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
         toSystemSpacingBelow secondAnchor: NSLayoutYAxisAnchor,
         multiplier: CGFloat = 1,
@@ -82,7 +82,7 @@ extension ConstraintGroup {
             function: function,
             line: line,
             single: { item in
-                let firstAnchor = firstAttr.anchor(item)
+                let firstAnchor = firstAttribute.anchor(item)
                 switch relation {
                 case .lessThanOrEqual:
                     return firstAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: secondAnchor, multiplier: multiplier)

@@ -31,24 +31,24 @@ public typealias SingleConstraintSpec = (ConstrainableItem) -> NSLayoutConstrain
 public typealias MultipleConstraintSpec = (ConstrainableItem) -> [NSLayoutConstraint]
 
 func constraintGenerator(
-    item1: ConstrainableItem,
-    attribute1: NSLayoutConstraint.Attribute,
+    firstItem: ConstrainableItem,
+    firstAttribute: NSLayoutConstraint.Attribute,
     relation: NSLayoutConstraint.Relation = .equal,
-    item2: ConstrainableItem? = nil,
-    attribute2: NSLayoutConstraint.Attribute? = nil,
+    secondItem: ConstrainableItem? = nil,
+    secondAttribute: NSLayoutConstraint.Attribute? = nil,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
     file: StaticString = #file,
     line: UInt = #line
     ) -> NSLayoutConstraint {
     return NSLayoutConstraint(
-        item: item1,
-        attribute: attribute1,
+        item: firstItem,
+        attribute: firstAttribute,
         relatedBy: relation,
-        toItem: attribute2 == .notAnAttribute
+        toItem: secondAttribute == .notAnAttribute
             ? nil
-            : (item2 ?? item1.parentView) ?? { assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line); return nil }(),
-        attribute: attribute2 ?? attribute1,
+            : (secondItem ?? firstItem.parentView) ?? { assertionFailure("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line); return nil }(),
+        attribute: secondAttribute ?? firstAttribute,
         multiplier: multiplier,
         constant: constant
     )
