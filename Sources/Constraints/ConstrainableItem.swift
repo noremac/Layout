@@ -117,3 +117,42 @@ extension ConstrainableItem {
         return constraints
     }
 }
+
+// MARK: - Implementations
+
+extension UIView: ConstrainableItem {
+
+    /// Returns the receiver's `superview`.
+    public var parentView: UIView? {
+        return superview
+    }
+
+    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` on the
+    /// receiver.
+    public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+extension UILayoutGuide: ConstrainableItem {
+
+    /// Returns the receiver's `owningView`.
+    public var parentView: UIView? {
+        return owningView
+    }
+
+    /// This does nothing on `UILayoutGuide`s.
+    public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
+
+    }
+
+    /// Returns the receiver's `topAnchor`.
+    public var firstBaselineAnchor: NSLayoutYAxisAnchor {
+        return topAnchor
+    }
+
+    /// Returns the receiver's `bottomAnchor`.
+    public var lastBaselineAnchor: NSLayoutYAxisAnchor {
+        return bottomAnchor
+    }
+}

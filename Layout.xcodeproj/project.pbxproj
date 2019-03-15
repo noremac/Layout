@@ -12,8 +12,7 @@
 		1E51D7F22218786E00C70B22 /* TypeSafeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E51D7F12218786E00C70B22 /* TypeSafeAttributes.swift */; };
 		1E7406D82218A7FC00B6B4AD /* ConstraintGroup+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7406D72218A7FC00B6B4AD /* ConstraintGroup+Operators.swift */; };
 		1E7406DA2218A8CB00B6B4AD /* ConstraintGroup+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7406D92218A8CB00B6B4AD /* ConstraintGroup+Extensions.swift */; };
-		1E7406DC2218BE9D00B6B4AD /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7406DB2218BE9D00B6B4AD /* NSLayoutConstraint+Extensions.swift */; };
-		1E7406DE2218C11200B6B4AD /* ConstrainableItem+Implementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7406DD2218C11200B6B4AD /* ConstrainableItem+Implementations.swift */; };
+		1E7406DC2218BE9D00B6B4AD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7406DB2218BE9D00B6B4AD /* Utils.swift */; };
 		1E76830722184B6A00A9CDDB /* Layout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7682FD22184B6A00A9CDDB /* Layout.framework */; };
 		1E76831D22184C2700A9CDDB /* ConstrainableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E76831C22184C2700A9CDDB /* ConstrainableItem.swift */; };
 		1E934F5F2218C7190068F832 /* ConstraintGroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E934F5E2218C7190068F832 /* ConstraintGroupTests.swift */; };
@@ -45,8 +44,7 @@
 		1E51D7F12218786E00C70B22 /* TypeSafeAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeSafeAttributes.swift; sourceTree = "<group>"; };
 		1E7406D72218A7FC00B6B4AD /* ConstraintGroup+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintGroup+Operators.swift"; sourceTree = "<group>"; };
 		1E7406D92218A8CB00B6B4AD /* ConstraintGroup+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstraintGroup+Extensions.swift"; sourceTree = "<group>"; };
-		1E7406DB2218BE9D00B6B4AD /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
-		1E7406DD2218C11200B6B4AD /* ConstrainableItem+Implementations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConstrainableItem+Implementations.swift"; sourceTree = "<group>"; };
+		1E7406DB2218BE9D00B6B4AD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1E7682FD22184B6A00A9CDDB /* Layout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Layout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E76830122184B6A00A9CDDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E76830622184B6A00A9CDDB /* LayoutTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LayoutTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +82,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E2684EF223C321F00856E6A /* Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				1E76831C22184C2700A9CDDB /* ConstrainableItem.swift */,
+				1E51D7ED2218724300C70B22 /* ConstraintGroup.swift */,
+				1EE96203222DE885009D1426 /* ConstraintGroup+Anchors.swift */,
+				1E7406D92218A8CB00B6B4AD /* ConstraintGroup+Extensions.swift */,
+				1E7406D72218A7FC00B6B4AD /* ConstraintGroup+Operators.swift */,
+				1E51D7EF221875CD00C70B22 /* ConstraintSpec.swift */,
+				1E51D7F12218786E00C70B22 /* TypeSafeAttributes.swift */,
+				1E7406DB2218BE9D00B6B4AD /* Utils.swift */,
+			);
+			path = Constraints;
+			sourceTree = "<group>";
+		};
+		1E2684F0223C322500856E6A /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				1EE9620722300DC6009D1426 /* DynamicLayout.swift */,
+				1EE9621222340ED1009D1426 /* DynamicLayoutContext.swift */,
+				1EE9620B2230338C009D1426 /* DynamicLayoutPredicate.swift */,
+				1EE962092230195A009D1426 /* DynamicLayoutTraitEnvironmentProtocol.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		1E7682F322184B6A00A9CDDB = {
 			isa = PBXGroup;
 			children = (
@@ -106,19 +130,8 @@
 		1E76831722184B7A00A9CDDB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1E76831C22184C2700A9CDDB /* ConstrainableItem.swift */,
-				1E7406DD2218C11200B6B4AD /* ConstrainableItem+Implementations.swift */,
-				1E51D7ED2218724300C70B22 /* ConstraintGroup.swift */,
-				1EE96203222DE885009D1426 /* ConstraintGroup+Anchors.swift */,
-				1E7406D92218A8CB00B6B4AD /* ConstraintGroup+Extensions.swift */,
-				1E7406D72218A7FC00B6B4AD /* ConstraintGroup+Operators.swift */,
-				1E51D7EF221875CD00C70B22 /* ConstraintSpec.swift */,
-				1EE9620722300DC6009D1426 /* DynamicLayout.swift */,
-				1EE9621222340ED1009D1426 /* DynamicLayoutContext.swift */,
-				1EE9620B2230338C009D1426 /* DynamicLayoutPredicate.swift */,
-				1EE962092230195A009D1426 /* DynamicLayoutTraitEnvironmentProtocol.swift */,
-				1E7406DB2218BE9D00B6B4AD /* NSLayoutConstraint+Extensions.swift */,
-				1E51D7F12218786E00C70B22 /* TypeSafeAttributes.swift */,
+				1E2684EF223C321F00856E6A /* Constraints */,
+				1E2684F0223C322500856E6A /* Layout */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -293,8 +306,7 @@
 			files = (
 				1E51D7EE2218724300C70B22 /* ConstraintGroup.swift in Sources */,
 				1EE9620822300DC6009D1426 /* DynamicLayout.swift in Sources */,
-				1E7406DC2218BE9D00B6B4AD /* NSLayoutConstraint+Extensions.swift in Sources */,
-				1E7406DE2218C11200B6B4AD /* ConstrainableItem+Implementations.swift in Sources */,
+				1E7406DC2218BE9D00B6B4AD /* Utils.swift in Sources */,
 				1EE96204222DE885009D1426 /* ConstraintGroup+Anchors.swift in Sources */,
 				1E76831D22184C2700A9CDDB /* ConstrainableItem.swift in Sources */,
 				1EE9620A2230195A009D1426 /* DynamicLayoutTraitEnvironmentProtocol.swift in Sources */,
