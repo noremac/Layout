@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ConstraintGroup Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Struct/ConstraintGroup" class="dashAnchor"></a>
+
+    <a title="ConstraintGroup Structure Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          Layout Docs
+        </a>
+         (99% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">Layout Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      ConstraintGroup Structure Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DynamicLayout.html">DynamicLayout</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DynamicLayout/Predicate.html">– Predicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DynamicLayout/Context.html">– Context</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/CGSize.html">CGSize</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UILayoutGuide.html">UILayoutGuide</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UITraitCollection.html">UITraitCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UIView.html">UIView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Functions.html#/s:6Layout2lsoiyAA15ConstraintGroupVAD_SSSgtF">&lt;-(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Functions.html#/s:6Layout1toiyAA15ConstraintGroupVAD_So16UILayoutPriorityatF">~(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/ConstrainableItem.html">ConstrainableItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DynamicLayoutSizeEnvironmentProtocol.html">DynamicLayoutSizeEnvironmentProtocol</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DynamicLayoutTraitEnvironmentProtocol.html">DynamicLayoutTraitEnvironmentProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ConstraintGroup.html">ConstraintGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DimensionAttribute.html">DimensionAttribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/DynamicLayoutTraitAndSizeEnvironment.html">DynamicLayoutTraitAndSizeEnvironment</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/XAttribute.html">XAttribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/YAttribute.html">YAttribute</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Layout22MultipleConstraintSpeca">MultipleConstraintSpec</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Typealiases.html#/s:6Layout20SingleConstraintSpeca">SingleConstraintSpec</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>ConstraintGroup</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                </div>
+              </div>
+            <p>A struct that helps create constraints.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV16debugConstraintsSbvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/debugConstraints" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV16debugConstraintsSbvpZ">debugConstraints</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When this is <code>true</code> a string with this format:
+<code>&quot;\(file)::\(function)::\(line)&quot;</code>is automatically added as each
+constraint&rsquo;s <code><a href="../Structs/ConstraintGroup.html#/s:6Layout15ConstraintGroupV10identifierSSSgvp">identifier</a></code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">debugConstraints</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV8prioritySo16UILayoutPriorityavp"></a>
+                    <a name="//apple_ref/swift/Property/priority" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV8prioritySo16UILayoutPriorityavp">priority</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The priority of this group of constraints.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">priority</span><span class="p">:</span> <span class="kt">UILayoutPriority</span> <span class="o">=</span> <span class="o">.</span><span class="kd">required</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV10identifierSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/identifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV10identifierSSSgvp">identifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The identifier of this group of constraints.</p>
+<div class="aside aside-see-also">
+    <p class="aside-title">See also</p>
+    <code><a href="../Structs/ConstraintGroup.html#/s:6Layout15ConstraintGroupV16debugConstraintsSbvpZ">ConstraintGroup.debugConstraints</a></code>.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV4file8function4line6singleACs12StaticStringV_AISuSo08NSLayoutB0CAA17ConstrainableItem_pctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(file:function:line:single:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV4file8function4line6singleACs12StaticStringV_AISuSo08NSLayoutB0CAA17ConstrainableItem_pctcfc">init(file:function:line:single:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a <code>ConstraintGroup</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">,</span> <span class="nv">single</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6Layout20SingleConstraintSpeca">SingleConstraintSpec</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>single</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that generates a single <code>NSLayoutConstraint</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV4file8function4line8multipleACs12StaticStringV_AISuSaySo08NSLayoutB0CGAA17ConstrainableItem_pctcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(file:function:line:multiple:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV4file8function4line8multipleACs12StaticStringV_AISuSaySo08NSLayoutB0CGAA17ConstrainableItem_pctcfc">init(file:function:line:multiple:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initializes a <code>ConstraintGroup</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span> <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span> <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span><span class="p">,</span> <span class="nv">multiple</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt"><a href="../Typealiases.html#/s:6Layout22MultipleConstraintSpeca">MultipleConstraintSpec</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>single</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that generates multiple <code>NSLayoutConstraint</code>s.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV5align__2to2of10multiplier8offsetBy4file8function4lineAcA10XAttributeV_So16NSLayoutRelationVAMSgAA17ConstrainableItem_pSg12CoreGraphics7CGFloatVAUs12StaticStringVAWSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/align(_:_:to:of:multiplier:offsetBy:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV5align__2to2of10multiplier8offsetBy4file8function4lineAcA10XAttributeV_So16NSLayoutRelationVAMSgAA17ConstrainableItem_pSg12CoreGraphics7CGFloatVAUs12StaticStringVAWSutFZ">align(_:_:to:of:multiplier:offsetBy:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item&rsquo;s x anchor to another
+item&rsquo;s x anchor.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">align</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">firstAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/XAttribute.html">XAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">secondAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/XAttribute.html">XAttribute</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">offsetBy</span> <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired <code><a href="../Structs/XAttribute.html">XAttribute</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A layout relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second <code><a href="../Structs/XAttribute.html">XAttribute</a></code>; defaults to
+<code>firstAttribute</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondItem</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults
+to the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant; defaults to 0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item&rsquo;s x anchor to
+another item&rsquo;s x anchor.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV5align__2to2of10multiplier8offsetBy4file8function4lineAcA10YAttributeV_So16NSLayoutRelationVAMSgAA17ConstrainableItem_pSg12CoreGraphics7CGFloatVAUs12StaticStringVAWSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/align(_:_:to:of:multiplier:offsetBy:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV5align__2to2of10multiplier8offsetBy4file8function4lineAcA10YAttributeV_So16NSLayoutRelationVAMSgAA17ConstrainableItem_pSg12CoreGraphics7CGFloatVAUs12StaticStringVAWSutFZ">align(_:_:to:of:multiplier:offsetBy:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item&rsquo;s y anchor to another
+item&rsquo;s y anchor.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">align</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">firstAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/YAttribute.html">YAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">secondAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/YAttribute.html">YAttribute</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">offsetBy</span> <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired <code><a href="../Structs/YAttribute.html">YAttribute</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A layout relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second <code><a href="../Structs/YAttribute.html">YAttribute</a></code>; defaults to
+<code>firstAttribute</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondItem</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults
+to the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant; defaults to 0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item&rsquo;s y anchor to
+another item&rsquo;s y anchor.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV8setFixed__2to4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationV12CoreGraphics7CGFloatVs12StaticStringVAQSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/setFixed(_:_:to:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV8setFixed__2to4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationV12CoreGraphics7CGFloatVs12StaticStringVAQSutFZ">setFixed(_:_:to:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for applying a fixed dimension to an item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">setFixed</span>
+    <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">firstAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/DimensionAttribute.html">DimensionAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dimension, either <code>.width</code> or <code>.height</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for applying a fixed dimension to an
+item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV11setRelative__2to2of9attribute8constant4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationV12CoreGraphics7CGFloatVAA17ConstrainableItem_pSgAMSgARs12StaticStringVAWSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/setRelative(_:_:to:of:attribute:constant:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV11setRelative__2to2of9attribute8constant4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationV12CoreGraphics7CGFloatVAA17ConstrainableItem_pSgAMSgARs12StaticStringVAWSutFZ">setRelative(_:_:to:of:attribute:constant:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for applying a relative dimension in
+relation to another item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">setRelative</span>
+    <span class="p">(</span>
+    <span class="n">_</span> <span class="nv">firstAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/DimensionAttribute.html">DimensionAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">to</span> <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">attribute</span> <span class="nv">secondAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/DimensionAttribute.html">DimensionAttribute</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dimension, either <code>.width</code> or <code>.height</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults to
+the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dimension of the second item; defaults to
+<code>firstAttribute</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for applying a relative dimension in
+relation to another item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV5align__20toSystemSpacingAfter10multiplier4file8function4lineAcA10XAttributeV_So16NSLayoutRelationVSo0N11XAxisAnchorC12CoreGraphics7CGFloatVs12StaticStringVATSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/align(_:_:toSystemSpacingAfter:multiplier:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV5align__20toSystemSpacingAfter10multiplier4file8function4lineAcA10XAttributeV_So16NSLayoutRelationVSo0N11XAxisAnchorC12CoreGraphics7CGFloatVs12StaticStringVATSutFZ">align(_:_:toSystemSpacingAfter:multiplier:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item after another item plus
+system spacing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">align</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">firstAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/XAttribute.html">XAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">toSystemSpacingAfter</span> <span class="nv">secondAnchor</span><span class="p">:</span> <span class="kt">NSLayoutXAxisAnchor</span><span class="p">,</span>
+    <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The first <code><a href="../Structs/XAttribute.html">XAttribute</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAnchor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second <code><a href="../Structs/XAttribute.html">XAttribute</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item after another item
+plus system spacing.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV5align__20toSystemSpacingBelow10multiplier4file8function4lineAcA10YAttributeV_So16NSLayoutRelationVSo0N11YAxisAnchorC12CoreGraphics7CGFloatVs12StaticStringVATSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/align(_:_:toSystemSpacingBelow:multiplier:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV5align__20toSystemSpacingBelow10multiplier4file8function4lineAcA10YAttributeV_So16NSLayoutRelationVSo0N11YAxisAnchorC12CoreGraphics7CGFloatVs12StaticStringVATSutFZ">align(_:_:toSystemSpacingBelow:multiplier:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item below another item plus
+system spacing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">align</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">firstAttribute</span><span class="p">:</span> <span class="kt"><a href="../Structs/YAttribute.html">YAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">toSystemSpacingBelow</span> <span class="nv">secondAnchor</span><span class="p">:</span> <span class="kt">NSLayoutYAxisAnchor</span><span class="p">,</span>
+    <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAttribute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The first <code><a href="../Structs/YAttribute.html">YAttribute</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAnchor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second <code><a href="../Structs/YAttribute.html">YAttribute</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item below another item
+plus system spacing.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV5match__14toSpaceBetween3and10multiplier8constant4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationVSo0P11XAxisAnchorCAQ12CoreGraphics7CGFloatVATs12StaticStringVAVSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/match(_:_:toSpaceBetween:and:multiplier:constant:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV5match__14toSpaceBetween3and10multiplier8constant4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationVSo0P11XAxisAnchorCAQ12CoreGraphics7CGFloatVATs12StaticStringVAVSutFZ">match(_:_:toSpaceBetween:and:multiplier:constant:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for matching an item&rsquo;s dimension to the
+space between the x positioning of two items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">match</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">dimension</span><span class="p">:</span> <span class="kt"><a href="../Structs/DimensionAttribute.html">DimensionAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">toSpaceBetween</span> <span class="nv">firstAnchor</span><span class="p">:</span> <span class="kt">NSLayoutXAxisAnchor</span><span class="p">,</span>
+    <span class="n">and</span> <span class="nv">secondAnchor</span><span class="p">:</span> <span class="kt">NSLayoutXAxisAnchor</span><span class="p">,</span>
+    <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dimension</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dimension, either <code>.width</code> or <code>.height</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAnchor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The first anchor.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAnchor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second anchor.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant; defaults to 0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for matching an item&rsquo;s dimension to the
+space between the x positioning of two items.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV5match__14toSpaceBetween3and10multiplier8constant4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationVSo0P11YAxisAnchorCAQ12CoreGraphics7CGFloatVATs12StaticStringVAVSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/match(_:_:toSpaceBetween:and:multiplier:constant:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV5match__14toSpaceBetween3and10multiplier8constant4file8function4lineAcA18DimensionAttributeV_So16NSLayoutRelationVSo0P11YAxisAnchorCAQ12CoreGraphics7CGFloatVATs12StaticStringVAVSutFZ">match(_:_:toSpaceBetween:and:multiplier:constant:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for matching an item&rsquo;s dimension to the
+space between the y positioning of two items.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">match</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">dimension</span><span class="p">:</span> <span class="kt"><a href="../Structs/DimensionAttribute.html">DimensionAttribute</a></span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="n">toSpaceBetween</span> <span class="nv">firstAnchor</span><span class="p">:</span> <span class="kt">NSLayoutYAxisAnchor</span><span class="p">,</span>
+    <span class="n">and</span> <span class="nv">secondAnchor</span><span class="p">:</span> <span class="kt">NSLayoutYAxisAnchor</span><span class="p">,</span>
+    <span class="nv">multiplier</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dimension</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dimension, either <code>.width</code> or <code>.height</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>firstAnchor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The first anchor.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>secondAnchor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The second anchor.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>multiplier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The multiplier; defaults to 1.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant; defaults to 0.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for matching an item&rsquo;s dimension to the
+space between the y positioning of two items.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV12alignToEdges2of6insets4file8function4lineAcA17ConstrainableItem_pSg_So23NSDirectionalEdgeInsetsVs12StaticStringVAOSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/alignToEdges(of:insets:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV12alignToEdges2of6insets4file8function4lineAcA17ConstrainableItem_pSg_So23NSDirectionalEdgeInsetsVs12StaticStringVAOSutFZ">alignToEdges(of:insets:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item&rsquo;s edges to another item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">alignToEdges</span><span class="p">(</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">insets</span><span class="p">:</span> <span class="kt">NSDirectionalEdgeInsets</span> <span class="o">=</span> <span class="o">.</span><span class="n">zero</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults to
+the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>insets</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired insets; defaults to <code>.zero</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item&rsquo;s edges to another
+item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV20alignToVerticalEdges2of8topInset06bottomJ04file8function4lineAcA17ConstrainableItem_pSg_12CoreGraphics7CGFloatVAOs12StaticStringVAQSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/alignToVerticalEdges(of:topInset:bottomInset:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV20alignToVerticalEdges2of8topInset06bottomJ04file8function4lineAcA17ConstrainableItem_pSg_12CoreGraphics7CGFloatVAOs12StaticStringVAQSutFZ">alignToVerticalEdges(of:topInset:bottomInset:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item&rsquo;s vertical edges to
+another item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">alignToVerticalEdges</span><span class="p">(</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">topInset</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">bottomInset</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults to
+the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>topInset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired top inset; defaults to zero.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>bottomInset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired bottom inset; defaults to zero.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item&rsquo;s vertical edges to
+another item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV22alignToHorizontalEdges2of12leadingInset08trailingJ04file8function4lineAcA17ConstrainableItem_pSg_12CoreGraphics7CGFloatVAOs12StaticStringVAQSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/alignToHorizontalEdges(of:leadingInset:trailingInset:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV22alignToHorizontalEdges2of12leadingInset08trailingJ04file8function4lineAcA17ConstrainableItem_pSg_12CoreGraphics7CGFloatVAOs12StaticStringVAQSutFZ">alignToHorizontalEdges(of:leadingInset:trailingInset:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for aligning an item&rsquo;s horizontal edges to
+another item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">alignToHorizontalEdges</span><span class="p">(</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">leadingInset</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">trailingInset</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults to
+the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>leadingInset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired leading inset; defaults to zero.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trailingInset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired trailing inset; defaults to zero.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for aligning an item&rsquo;s horizontal edges
+to another item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV6center2in4file8function4lineAcA17ConstrainableItem_pSg_s12StaticStringVALSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/center(in:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV6center2in4file8function4lineAcA17ConstrainableItem_pSg_s12StaticStringVALSutFZ">center(in:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for centering an item inside another item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">center</span><span class="p">(</span>
+    <span class="k">in</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults to
+the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for centering an item inside another
+item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV7setSize__4file8function4lineACSo6CGSizeV_So16NSLayoutRelationVs12StaticStringVAMSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/setSize(_:_:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV7setSize__4file8function4lineACSo6CGSizeV_So16NSLayoutRelationVs12StaticStringVAMSutFZ">setSize(_:_:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for setting the size of an item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">setSize</span><span class="p">(</span>
+    <span class="n">_</span> <span class="nv">size</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>size</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired size.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for setting the size of an item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:6Layout15ConstraintGroupV9matchSize2of_5ratio8constant4file8function4lineAcA17ConstrainableItem_pSg_So16NSLayoutRelationV12CoreGraphics7CGFloatVAQs12StaticStringVASSutFZ"></a>
+                    <a name="//apple_ref/swift/Method/matchSize(of:_:ratio:constant:file:function:line:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:6Layout15ConstraintGroupV9matchSize2of_5ratio8constant4file8function4lineAcA17ConstrainableItem_pSg_So16NSLayoutRelationV12CoreGraphics7CGFloatVAQs12StaticStringVASSutFZ">matchSize(of:_:ratio:constant:file:function:line:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a <code>ConstraintGroup</code> for matching the size of one item to another
+item.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">matchSize</span><span class="p">(</span>
+    <span class="n">of</span> <span class="nv">secondItem</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ConstrainableItem.html">ConstrainableItem</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="n">_</span> <span class="nv">relation</span><span class="p">:</span> <span class="kt">NSLayoutConstraint</span><span class="o">.</span><span class="kt">Relation</span> <span class="o">=</span> <span class="o">.</span><span class="n">equal</span><span class="p">,</span>
+    <span class="nv">ratio</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nv">constant</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">file</span><span class="p">,</span>
+    <span class="nv">function</span><span class="p">:</span> <span class="kt">StaticString</span> <span class="o">=</span> <span class="err">#</span><span class="n">function</span><span class="p">,</span>
+    <span class="nv">line</span><span class="p">:</span> <span class="kt">UInt</span> <span class="o">=</span> <span class="err">#</span><span class="n">line</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">ConstraintGroup</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>item</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The item you are making the constraint against; defaults to
+the <code>superview</code> if left as <code>nil</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The relation; defaults to <code>.equal</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ratio</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired ratio; defaults to <code>1</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>constant</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The constant; defaults to <code>0</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code>ConstraintGroup</code> for matching the size of one item to
+another item.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="git@github.com:noremac/Layout.git" target="_blank" rel="external">Cameron Pulsford</a>. All rights reserved. (Last updated: 2019-03-16)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

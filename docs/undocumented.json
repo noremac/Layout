@@ -1,0 +1,12 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/cbp/src/Layout/Sources/Layout/DynamicLayoutTraitEnvironmentProtocol.swift",
+      "line": 70,
+      "symbol": "DynamicLayoutTraitAndSizeEnvironment.init(traitCollection:size:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/cbp/src/Layout"
+}
