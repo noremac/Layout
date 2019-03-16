@@ -28,11 +28,12 @@ import UIKit
 /// - Note: Only `UIView` and `UILayoutGuide` should implement this protocol.
 public protocol ConstrainableItem {
 
-    /// - Returns: The `UIView`'s `superview` or the `UILayoutGuide`'s `owningView`.
+    /// - Returns: The `UIView`'s `superview` or the `UILayoutGuide`'s
+    /// `owningView`.
     var parentView: UIView? { get }
 
-    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` for `UIView`s.
-    /// It does nothing for `UILayoutGuide`s.
+    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` for
+    /// `UIView`s. It does nothing for `UILayoutGuide`s.
     func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
 
     /// The item's left anchor.
@@ -66,11 +67,15 @@ public protocol ConstrainableItem {
     var centerYAnchor: NSLayoutYAxisAnchor { get }
 
     /// The item's firstBaselineAnchor.
-    /// - Note: This will be the `topAnchor` for `UILayoutGuide`s which do not natively have this property.
+    ///
+    /// - Note: This will be the `topAnchor` for `UILayoutGuide`s which do not
+    ///   natively have this property.
     var firstBaselineAnchor: NSLayoutYAxisAnchor { get }
 
     /// The item's lastBaselineAnchor.
-    /// - Note: This will be the `bottom` for `UILayoutGuide`s which do not natively have this property.
+    ///
+    /// - Note: This will be the `bottom` for `UILayoutGuide`s which do not
+    ///   natively have this property.
     var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
 }
 
@@ -96,20 +101,30 @@ extension ConstrainableItem {
         }
     }
 
-    /// Creates and returns an array of `NSLayoutConstraint`s corresponding to the given groups.
+    /// Creates and returns an array of `NSLayoutConstraint`s corresponding to
+    /// the given groups.
     ///
     /// - Parameter groups: The groups of constraints you'd like.
-    /// - Returns: The `NSLayoutConstraint`s corresponding to the given `ConstraintGroup`s.
-    /// - Note: This method will call `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on the receiver automatically.
+    /// - Returns: The `NSLayoutConstraint`s corresponding to the given
+    ///   `ConstraintGroup`s.
+    ///
+    /// - Note: This method will call
+    ///   `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on
+    ///   the receiver automatically.
     public func makeConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         return makeConstraints(groups: groups)
     }
 
-    /// Creates, immediately activates, and returns an array of `NSLayoutConstraint`s corresponding to the given groups.
+    /// Creates, immediately activates, and returns an array of
+    /// `NSLayoutConstraint`s corresponding to the given groups.
     ///
     /// - Parameter groups: The groups of constraints you'd like.
-    /// - Returns: The `NSLayoutConstraint`s corresponding to the given `ConstraintGroup`s.
-    /// - Note: This method will call `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on the receiver automatically.
+    /// - Returns: The `NSLayoutConstraint`s corresponding to the given
+    ///   `ConstraintGroup`s.
+    ///
+    /// - Note: This method will call
+    ///   `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on
+    ///    the receiver automatically.
     @discardableResult
     public func applyConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         let constraints = makeConstraints(groups: groups)

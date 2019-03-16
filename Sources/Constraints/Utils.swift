@@ -26,7 +26,8 @@ import UIKit
 
 extension Array where Element == NSLayoutConstraint {
 
-    /// Sets the constant of each element of the receiver to the desired constant.
+    /// Sets the constant of each element of the receiver to the desired
+    /// constant.
     ///
     /// - Parameter constant: The new constant.
     public func setConstant(_ constant: CGFloat) {

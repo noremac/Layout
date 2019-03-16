@@ -29,9 +29,11 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for aligning an item's edges to another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - item: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
     ///   - insets: The desired insets; defaults to `.zero`.
-    /// - Returns: A `ConstraintGroup` for aligning an item's edges to another item.
+    /// - Returns: A `ConstraintGroup` for aligning an item's edges to another
+    ///   item.
     public static func alignToEdges(
         of secondItem: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
@@ -73,13 +75,16 @@ extension ConstraintGroup {
         })
     }
 
-    /// Returns a `ConstraintGroup` for aligning an item's vertical edges to another item.
+    /// Returns a `ConstraintGroup` for aligning an item's vertical edges to
+    /// another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - item: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
     ///   - topInset: The desired top inset; defaults to zero.
     ///   - bottomInset: The desired bottom inset; defaults to zero.
-    /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to another item.
+    /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to
+    ///   another item.
     public static func alignToVerticalEdges(
         of secondItem: ConstrainableItem? = nil,
         topInset: CGFloat = 0,
@@ -110,13 +115,16 @@ extension ConstraintGroup {
         })
     }
 
-    /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to another item.
+    /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to
+    /// another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - item: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
     ///   - leadingInset: The desired leading inset; defaults to zero.
     ///   - trailingInset: The desired trailing inset; defaults to zero.
-    /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges to another item.
+    /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges
+    ///   to another item.
     public static func alignToHorizontalEdges(
         of secondItem: ConstrainableItem? = nil,
         leadingInset: CGFloat = 0,
@@ -150,8 +158,10 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for centering an item inside another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
-    /// - Returns: A `ConstraintGroup` for centering an item inside another item.
+    ///   - item: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
+    /// - Returns: A `ConstraintGroup` for centering an item inside another
+    ///   item.
     public static func center(
         in secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
@@ -215,14 +225,17 @@ extension ConstraintGroup {
         })
     }
 
-    /// Returns a `ConstraintGroup` for matching the size of one item to another item.
+    /// Returns a `ConstraintGroup` for matching the size of one item to another
+    /// item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to the `superview` if left as `nil`.
+    ///   - item: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
     ///   - relation: The relation; defaults to `.equal`.
     ///   - ratio: The desired ratio; defaults to `1`.
     ///   - constant: The constant; defaults to `0`.
-    /// - Returns: A `ConstraintGroup` for matching the size of one item to another item.
+    /// - Returns: A `ConstraintGroup` for matching the size of one item to
+    ///   another item.
     public static func matchSize(
         of secondItem: ConstrainableItem? = nil,
         _ relation: NSLayoutConstraint.Relation = .equal,

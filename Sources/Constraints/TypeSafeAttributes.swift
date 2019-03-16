@@ -30,7 +30,8 @@ public struct XAttribute {
     /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
-    /// A closure that returns the anchor logically associated with this attribute.
+    /// A closure that returns the anchor logically associated with this
+    /// attribute.
     public let anchor: (ConstrainableItem) -> NSLayoutXAxisAnchor
 
     /// Initializes an `XAttribute`.
@@ -65,7 +66,8 @@ public struct YAttribute {
     /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
-    /// A closure that returns the anchor logically associated with this attribute.
+    /// A closure that returns the anchor logically associated with this
+    /// attribute.
     public let anchor: (ConstrainableItem) -> NSLayoutYAxisAnchor
 
     /// Initializes a `YAttribute`.
@@ -100,7 +102,8 @@ public struct DimensionAttribute {
     /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
-    /// A closure that returns the anchor logically associated with this attribute.
+    /// A closure that returns the anchor logically associated with this
+    /// attribute.
     public let anchor: (ConstrainableItem) -> NSLayoutDimension
 
     /// Initializes a `DimensionAttribute`.
