@@ -98,11 +98,11 @@ public class DynamicLayout<Environment> {
     ///   - ctx: The main `Context` whose `Predicate` is always `true`.
     ///
     /// - Note: You may add constraints that should always be active regardless
-    /// of any other condition to the main `Context`. These constraints will not
-    /// be activated until the first call to `updateActiveConstraints`.
+    ///   of any other condition to the main `Context`. These constraints will
+    ///   not be activated until the first call to `updateActiveConstraints`.
     ///
     /// - Attention: An `assertionFailure` will be hit if this method is called
-    /// more than once.
+    ///   more than once.
     public func configure(_ main: (_ ctx: inout Context) -> Void) {
         if !mainContext.constraints.isEmpty || !mainContext.children.isEmpty {
             assertionFailure("\(#function) should only be called once")

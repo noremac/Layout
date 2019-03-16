@@ -58,10 +58,10 @@ extension DynamicLayout.Context {
     ///
     /// - Parameters:
     ///   - predicate: The `Predicate` that must be `true` for the constraints
-    ///                to be applied.
+    ///     to be applied.
     ///   - when: The closure where constraints are configured.
     ///   - otherwise: The closure where constraints are configured when the
-    ///                given `Predicate` is `false`; defaults to a noop closure.
+    ///     given `Predicate` is `false`; defaults to a noop closure.
     ///   - whenCtx: The newly created `Context`.
     ///   - otherwiseCtx: The newly created "otherwise" `Context`.
     public mutating func when(_ predicate: DynamicLayout.Predicate, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void = { _ in }) {
@@ -77,7 +77,7 @@ extension DynamicLayout.Context {
     ///
     /// - Parameters:
     ///   - predicate: The `Predicate` that must be `true` for the constraints
-    ///                to be applied.
+    ///     to be applied.
     ///   - when: The closure where constraints are configured.
     ///   - whenCtx: The newly created `Context`.
     public mutating func when(_ predicate: DynamicLayout.Predicate, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void) {
@@ -89,11 +89,11 @@ extension DynamicLayout.Context {
     ///
     /// - Parameters:
     ///   - predicate: The closure that must be `true` for the constraints to be
-    ///                applied.
+    ///     applied.
     ///   - env: The `Environment` supplied to the predicate closure.
     ///   - when: The closure where constraints are configured.
     ///   - otherwise: The closure where constraints are configured when the
-    ///                given `Predicate` is `false`; defaults to a noop closure.
+    ///     given `Predicate` is `false`; defaults to a noop closure.
     ///   - whenCtx: The newly created `Context`.
     ///   - otherwiseCtx: The newly created "otherwise" `Context`.
     public mutating func when(_ predicate: @escaping (_ env: Environment) -> Bool, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void = { _ in }) {
@@ -105,7 +105,7 @@ extension DynamicLayout.Context {
     ///
     /// - Parameters:
     ///   - predicate: The closure that must be `true` for the constraints to be
-    ///                applied.
+    ///     applied.
     ///   - env: The `Environment` supplied to the predicate closure.
     ///   - when: The closure where constraints are configured.
     ///   - whenCtx: The newly created `Context`.
@@ -132,7 +132,7 @@ extension DynamicLayout.Context where Environment: Equatable {
     ///   - value: The desired value of the current `Environment`.
     ///   - when: The closure where constraints are configured.
     ///   - otherwise: The closure where constraints are configured when the
-    ///                given `Predicate` is `false`; defaults to a noop closure.
+    ///     given `Predicate` is `false`; defaults to a noop closure.
     ///   - whenCtx: The newly created `Context`.
     ///   - otherwiseCtx: The newly created "otherwise" `Context`.
     public mutating func when(_ value: Environment, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void) {

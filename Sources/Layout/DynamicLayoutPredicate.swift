@@ -139,7 +139,8 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmen
     ///   - f: The closure.
     ///   - width: The `Environment`'s width.
     ///   - other: The "other" value.
-    /// - Returns: A `Predicate` that is `true` when the given closure is `true`.
+    /// - Returns: A `Predicate` that is `true` when the given closure is
+    ///   `true`.
     public static func width(is f: @escaping (_ width: CGFloat, _ other: CGFloat) -> Bool, _ other: CGFloat) -> DynamicLayout.Predicate {
         return .init { env in
             f(env.size.width, other)
@@ -152,7 +153,8 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmen
     ///   - f: The closure.
     ///   - height: The `Environment`'s height.
     ///   - other: The "other" value.
-    /// - Returns: A `Predicate` that is `true` when the given closure is `true`.
+    /// - Returns: A `Predicate` that is `true` when the given closure is
+    ///   `true`.
     public static func height(is f: @escaping (_ height: CGFloat, _ other: CGFloat) -> Bool, _ other: CGFloat) -> DynamicLayout.Predicate {
         return .init { env in
             f(env.size.height, other)
