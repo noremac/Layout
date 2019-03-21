@@ -36,6 +36,7 @@ extension ConstraintGroup {
     ///   - multiplier: The multiplier; defaults to 1.
     /// - Returns: A `ConstraintGroup` for aligning an item after another item
     ///   plus system spacing.
+    @inlinable
     public static func align(
         _ firstAttribute: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -81,6 +82,7 @@ extension ConstraintGroup {
     ///   - multiplier: The multiplier; defaults to 1.
     /// - Returns: A `ConstraintGroup` for aligning an item below another item
     ///   plus system spacing.
+    @inlinable
     public static func align(
         _ firstAttribute: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -128,6 +130,7 @@ extension ConstraintGroup {
     ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for matching an item's dimension to the
     ///   space between the x positioning of two items.
+    @inlinable
     public static func match(
         _ dimension: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -183,6 +186,7 @@ extension ConstraintGroup {
     ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for matching an item's dimension to the
     ///   space between the y positioning of two items.
+    @inlinable
     public static func match(
         _ dimension: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,

@@ -81,6 +81,7 @@ public protocol ConstrainableItem {
 
 extension ConstrainableItem {
 
+    @usableFromInline
     func makeConstraints<S>(groups: S) -> [NSLayoutConstraint] where S: Sequence, S.Element == ConstraintGroup {
         setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
         return groups.reduce(into: .init()) { result, group in
@@ -111,6 +112,7 @@ extension ConstrainableItem {
     /// - Note: This method will call
     ///   `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on
     ///   the receiver automatically.
+    @inlinable
     public func makeConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         return makeConstraints(groups: groups)
     }
@@ -125,6 +127,7 @@ extension ConstrainableItem {
     /// - Note: This method will call
     ///   `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on
     ///    the receiver automatically.
+    @inlinable
     @discardableResult
     public func applyConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         let constraints = makeConstraints(groups: groups)

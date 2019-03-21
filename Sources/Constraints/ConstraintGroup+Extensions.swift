@@ -34,6 +34,7 @@ extension ConstraintGroup {
     ///   - insets: The desired insets; defaults to `.zero`.
     /// - Returns: A `ConstraintGroup` for aligning an item's edges to another
     ///   item.
+    @inlinable
     public static func alignToEdges(
         of secondItem: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
@@ -85,6 +86,7 @@ extension ConstraintGroup {
     ///   - bottomInset: The desired bottom inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to
     ///   another item.
+    @inlinable
     public static func alignToVerticalEdges(
         of secondItem: ConstrainableItem? = nil,
         topInset: CGFloat = 0,
@@ -125,6 +127,7 @@ extension ConstraintGroup {
     ///   - trailingInset: The desired trailing inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges
     ///   to another item.
+    @inlinable
     public static func alignToHorizontalEdges(
         of secondItem: ConstrainableItem? = nil,
         leadingInset: CGFloat = 0,
@@ -162,6 +165,7 @@ extension ConstraintGroup {
     ///     the `superview` if left as `nil`.
     /// - Returns: A `ConstraintGroup` for centering an item inside another
     ///   item.
+    @inlinable
     public static func center(
         in secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
@@ -194,6 +198,7 @@ extension ConstraintGroup {
     ///   - size: The desired size.
     ///   - relation: The relation; defaults to `.equal`.
     /// - Returns: A `ConstraintGroup` for setting the size of an item.
+    @inlinable
     public static func setSize(
         _ size: CGSize,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -236,6 +241,7 @@ extension ConstraintGroup {
     ///   - constant: The constant; defaults to `0`.
     /// - Returns: A `ConstraintGroup` for matching the size of one item to
     ///   another item.
+    @inlinable
     public static func matchSize(
         of secondItem: ConstrainableItem? = nil,
         _ relation: NSLayoutConstraint.Relation = .equal,

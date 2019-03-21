@@ -32,6 +32,7 @@ public typealias SingleConstraintSpec = (ConstrainableItem) -> NSLayoutConstrain
 /// `[NSLayoutConstraint]`.
 public typealias MultipleConstraintSpec = (ConstrainableItem) -> [NSLayoutConstraint]
 
+@usableFromInline
 func constraintGenerator(
     firstItem: ConstrainableItem,
     firstAttribute: NSLayoutConstraint.Attribute,

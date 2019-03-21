@@ -27,12 +27,13 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
+    @usableFromInline
     enum Specs {
         case single(SingleConstraintSpec)
         case multiple(MultipleConstraintSpec)
     }
 
-    let specs: Specs
+    @usableFromInline let specs: Specs
 
     /// When this is `true` a string with this format:
     /// `"\(file)::\(function)::\(line)"`is automatically added as each
@@ -46,6 +47,7 @@ public struct ConstraintGroup {
     /// - SeeAlso: `ConstraintGroup.debugConstraints`.
     public var identifier: String?
 
+    @inlinable
     init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, specs: Specs) {
         self.specs = specs
         if ConstraintGroup.debugConstraints {
@@ -57,6 +59,7 @@ public struct ConstraintGroup {
     ///
     /// - Parameters:
     ///   - single: A closure that generates a single `NSLayoutConstraint`.
+    @inlinable
     public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, single: @escaping SingleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .single(single))
     }
@@ -65,6 +68,7 @@ public struct ConstraintGroup {
     ///
     /// - Parameters:
     ///   - single: A closure that generates multiple `NSLayoutConstraint`s.
+    @inlinable
     public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, multiple: @escaping MultipleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .multiple(multiple))
     }
@@ -83,6 +87,7 @@ public struct ConstraintGroup {
     ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's x anchor to
     ///   another item's x anchor.
+    @inlinable
     public static func align(
         _ firstAttribute: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -125,6 +130,7 @@ public struct ConstraintGroup {
     ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's y anchor to
     ///   another item's y anchor.
+    @inlinable
     public static func align(
         _ firstAttribute: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
@@ -161,6 +167,7 @@ public struct ConstraintGroup {
     ///   - constant: The constant.
     /// - Returns: A `ConstraintGroup` for applying a fixed dimension to an
     ///   item.
+    @inlinable
     public static func setFixed
         (
         _ firstAttribute: DimensionAttribute,
@@ -200,6 +207,7 @@ public struct ConstraintGroup {
     ///   - constant: The constant.
     /// - Returns: A `ConstraintGroup` for applying a relative dimension in
     ///   relation to another item.
+    @inlinable
     public static func setRelative
         (
         _ firstAttribute: DimensionAttribute,
