@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license = { :type => "MIT", :file => "LICENSE" }
   s.author = { "Cameron Pulsford" => "cpulsfor@me.com" }
   s.ios.deployment_target = "11.0"
-  s.source = { :git => "git@github.com:noremac/Layout.git.git", :tag => s.version.to_s }
+  s.source = { :git => "https://github.com/noremac/Layout.git", :tag => s.version.to_s }
   s.source_files = "Sources/**/*"
   s.frameworks = "UIKit"
 end
