@@ -236,10 +236,11 @@
 				TargetAttributes = {
 					1E7682FC22184B6A00A9CDDB = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					1E76830522184B6A00A9CDDB = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -249,6 +250,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1E7682F322184B6A00A9CDDB;
 			productRefGroup = 1E7682FE22184B6A00A9CDDB /* Products */;
@@ -489,6 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wigglydog.Layout;
 				PRODUCT_NAME = Layout;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -515,6 +518,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wigglydog.Layout;
 				PRODUCT_NAME = Layout;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -533,6 +537,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wigglydog.LayoutTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -551,6 +556,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wigglydog.LayoutTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
