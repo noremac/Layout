@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "Layout"
-  s.version = "0.1"
+  s.version = "0.2"
   s.summary = "Readable layout constraints."
   s.description  = <<-DESC
     Readable layout constraints.
@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.source = { :git => "https://github.com/noremac/Layout.git", :tag => s.version.to_s }
   s.source_files = "Sources/**/*"
   s.frameworks = "UIKit"
+  s.swift_version = "5.0"
 end
