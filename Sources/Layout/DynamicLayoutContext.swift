@@ -46,7 +46,7 @@ extension DynamicLayout.Context {
     public mutating func addConstraints(_ constraints: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
         self.constraints += constraints
         if constraints.contains(where: { $0.isActive }) {
-            assertionFailure("Constraints added to contexts should not already be active")
+            assertionFailure("Constraints added to contexts should not already be active. If you are using `applyConstraints`, use `makeConstraints` instead.")
         }
         return constraints
     }
