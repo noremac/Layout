@@ -64,7 +64,7 @@ extension DynamicLayout.Context {
     ///     given `Predicate` is `false`; defaults to a noop closure.
     ///   - whenCtx: The newly created `Context`.
     ///   - otherwiseCtx: The newly created "otherwise" `Context`.
-    public mutating func when(_ predicate: DynamicLayout.Predicate, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void = { _ in }) {
+    public mutating func when(_ predicate: DynamicLayout.Predicate, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void) {
         var ctx = DynamicLayout.Context(predicate: predicate)
         var otherCtx = DynamicLayout.Context(predicate: !predicate)
         when(&ctx)
@@ -96,7 +96,7 @@ extension DynamicLayout.Context {
     ///     given `Predicate` is `false`; defaults to a noop closure.
     ///   - whenCtx: The newly created `Context`.
     ///   - otherwiseCtx: The newly created "otherwise" `Context`.
-    public mutating func when(_ predicate: @escaping (_ env: Environment) -> Bool, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void = { _ in }) {
+    public mutating func when(_ predicate: @escaping (_ env: Environment) -> Bool, _ when: (_ whenCtx: inout DynamicLayout.Context) -> Void, otherwise: (_ otherwiseCtx: inout DynamicLayout.Context) -> Void) {
         self.when(.init(predicate), when, otherwise: otherwise)
     }
 
