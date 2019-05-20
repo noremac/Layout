@@ -101,11 +101,11 @@ public class DynamicLayout<Environment> {
     ///   of any other condition to the main `Context`. These constraints will
     ///   not be activated until the first call to `updateActiveConstraints`.
     ///
-    /// - Attention: An `assertionFailure` will be hit if this method is called
-    ///   more than once.
+    /// - Attention: A `fatalError` will be hit if this method is called more
+    ///   than once.
     public func configure(_ main: (_ ctx: inout Context) -> Void) {
         if !mainContext.constraints.isEmpty || !mainContext.children.isEmpty {
-            assertionFailure("\(#function) should only be called once")
+            fatalError("\(#function) should only be called once")
         }
         main(&mainContext)
     }
