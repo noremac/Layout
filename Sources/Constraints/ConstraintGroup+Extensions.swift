@@ -29,7 +29,7 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for aligning an item's edges to another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to
+    ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
     ///   - insets: The desired insets; defaults to `.zero`.
     /// - Returns: A `ConstraintGroup` for aligning an item's edges to another
@@ -52,25 +52,33 @@ extension ConstraintGroup {
                         firstItem: firstItem,
                         firstAttribute: .top,
                         secondItem: secondItem,
-                        constant: insets.top
+                        constant: insets.top,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .leading,
                         secondItem: secondItem,
-                        constant: insets.leading
+                        constant: insets.leading,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .bottom,
                         secondItem: secondItem,
-                        constant: -insets.bottom
+                        constant: -insets.bottom,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .trailing,
                         secondItem: secondItem,
-                        constant: -insets.trailing
+                        constant: -insets.trailing,
+                        file: file,
+                        line: line
                     )
                 ]
         })
@@ -80,7 +88,7 @@ extension ConstraintGroup {
     /// another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to
+    ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
     ///   - topInset: The desired top inset; defaults to zero.
     ///   - bottomInset: The desired bottom inset; defaults to zero.
@@ -88,7 +96,7 @@ extension ConstraintGroup {
     ///   another item.
     @inlinable
     public static func alignToVerticalEdges(
-        of secondItem: ConstrainableItem? = nil,
+        to secondItem: ConstrainableItem? = nil,
         topInset: CGFloat = 0,
         bottomInset: CGFloat = 0,
         file: StaticString = #file,
@@ -105,13 +113,17 @@ extension ConstraintGroup {
                         firstItem: firstItem,
                         firstAttribute: .top,
                         secondItem: secondItem,
-                        constant: topInset
+                        constant: topInset,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .bottom,
                         secondItem: secondItem,
-                        constant: -bottomInset
+                        constant: -bottomInset,
+                        file: file,
+                        line: line
                     )
                 ]
         })
@@ -121,7 +133,7 @@ extension ConstraintGroup {
     /// another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to
+    ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
     ///   - leadingInset: The desired leading inset; defaults to zero.
     ///   - trailingInset: The desired trailing inset; defaults to zero.
@@ -129,7 +141,7 @@ extension ConstraintGroup {
     ///   to another item.
     @inlinable
     public static func alignToHorizontalEdges(
-        of secondItem: ConstrainableItem? = nil,
+        to secondItem: ConstrainableItem? = nil,
         leadingInset: CGFloat = 0,
         trailingInset: CGFloat = 0,
         file: StaticString = #file,
@@ -146,13 +158,17 @@ extension ConstraintGroup {
                         firstItem: firstItem,
                         firstAttribute: .leading,
                         secondItem: secondItem,
-                        constant: leadingInset
+                        constant: leadingInset,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .trailing,
                         secondItem: secondItem,
-                        constant: -trailingInset
+                        constant: -trailingInset,
+                        file: file,
+                        line: line
                     )
                 ]
         })
@@ -161,7 +177,7 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for centering an item inside another item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to
+    ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
     /// - Returns: A `ConstraintGroup` for centering an item inside another
     ///   item.
@@ -181,12 +197,16 @@ extension ConstraintGroup {
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .centerX,
-                        secondItem: secondItem
+                        secondItem: secondItem,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .centerY,
-                        secondItem: secondItem
+                        secondItem: secondItem,
+                        file: file,
+                        line: line
                     )
                 ]
         })
@@ -195,13 +215,13 @@ extension ConstraintGroup {
     /// Returns a `ConstraintGroup` for setting the size of an item.
     ///
     /// - Parameters:
-    ///   - size: The desired size.
     ///   - relation: The relation; defaults to `.equal`.
+    ///   - size: The desired size.
     /// - Returns: A `ConstraintGroup` for setting the size of an item.
     @inlinable
     public static func setSize(
-        _ size: CGSize,
         _ relation: NSLayoutConstraint.Relation = .equal,
+        to size: CGSize,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
@@ -217,14 +237,18 @@ extension ConstraintGroup {
                         firstAttribute: .width,
                         relation: relation,
                         secondAttribute: .notAnAttribute,
-                        constant: size.width
+                        constant: size.width,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
                         firstAttribute: .height,
                         relation: relation,
                         secondAttribute: .notAnAttribute,
-                        constant: size.height
+                        constant: size.height,
+                        file: file,
+                        line: line
                     )
                 ]
         })
@@ -234,17 +258,17 @@ extension ConstraintGroup {
     /// item.
     ///
     /// - Parameters:
-    ///   - item: The item you are making the constraint against; defaults to
-    ///     the `superview` if left as `nil`.
     ///   - relation: The relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
     ///   - ratio: The desired ratio; defaults to `1`.
     ///   - constant: The constant; defaults to `0`.
     /// - Returns: A `ConstraintGroup` for matching the size of one item to
     ///   another item.
     @inlinable
-    public static func matchSize(
-        of secondItem: ConstrainableItem? = nil,
+    public static func setRelativeSize(
         _ relation: NSLayoutConstraint.Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
         ratio: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
@@ -263,7 +287,9 @@ extension ConstraintGroup {
                         relation: relation,
                         secondItem: secondItem,
                         multiplier: ratio,
-                        constant: constant
+                        constant: constant,
+                        file: file,
+                        line: line
                     ),
                     constraintGenerator(
                         firstItem: firstItem,
@@ -271,7 +297,9 @@ extension ConstraintGroup {
                         relation: relation,
                         secondItem: secondItem,
                         multiplier: ratio,
-                        constant: constant
+                        constant: constant,
+                        file: file,
+                        line: line
                     )
                 ]
         })

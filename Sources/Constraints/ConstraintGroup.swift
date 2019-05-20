@@ -79,10 +79,10 @@ public struct ConstraintGroup {
     /// - Parameters:
     ///   - firstAttribute: The desired `XAttribute`.
     ///   - relation: A layout relation; defaults to `.equal`.
-    ///   - secondAttribute: The second `XAttribute`; defaults to
-    ///     `firstAttribute` if left as `nil`.
     ///   - secondItem: The item you are making the constraint against; defaults
     ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to
+    ///     `firstAttribute` if left as `nil`.
     ///   - multiplier: The multiplier; defaults to 1.
     ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's x anchor to
@@ -91,10 +91,10 @@ public struct ConstraintGroup {
     public static func align(
         _ firstAttribute: XAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
-        to secondAttribute: XAttribute? = nil,
-        of secondItem: ConstrainableItem? = nil,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: XAttribute? = nil,
         multiplier: CGFloat = 1,
-        offsetBy constant: CGFloat = 0,
+        constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
@@ -111,7 +111,9 @@ public struct ConstraintGroup {
                     secondItem: secondItem,
                     secondAttribute: secondAttribute?.attribute,
                     multiplier: multiplier,
-                    constant: constant
+                    constant: constant,
+                    file: file,
+                    line: line
                 )
         })
     }
@@ -122,10 +124,10 @@ public struct ConstraintGroup {
     /// - Parameters:
     ///   - firstAttribute: The desired `YAttribute`.
     ///   - relation: A layout relation; defaults to `.equal`.
-    ///   - secondAttribute: The second `YAttribute`; defaults to
-    ///     `firstAttribute` if left as `nil`.
     ///   - secondItem: The item you are making the constraint against; defaults
     ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to
+    ///     `firstAttribute` if left as `nil`.
     ///   - multiplier: The multiplier; defaults to 1.
     ///   - constant: The constant; defaults to 0.
     /// - Returns: A `ConstraintGroup` for aligning an item's y anchor to
@@ -134,10 +136,10 @@ public struct ConstraintGroup {
     public static func align(
         _ firstAttribute: YAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
-        to secondAttribute: YAttribute? = nil,
-        of secondItem: ConstrainableItem? = nil,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: YAttribute? = nil,
         multiplier: CGFloat = 1,
-        offsetBy constant: CGFloat = 0,
+        constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line
@@ -154,7 +156,9 @@ public struct ConstraintGroup {
                     secondItem: secondItem,
                     secondAttribute: secondAttribute?.attribute,
                     multiplier: multiplier,
-                    constant: constant
+                    constant: constant,
+                    file: file,
+                    line: line
                 )
         })
     }
@@ -188,7 +192,9 @@ public struct ConstraintGroup {
                         firstAttribute: firstAttribute.attribute,
                         relation: relation,
                         secondAttribute: .notAnAttribute,
-                        constant: constant
+                        constant: constant,
+                        file: file,
+                        line: line
                     )
             })
     }
@@ -199,11 +205,11 @@ public struct ConstraintGroup {
     /// - Parameters:
     ///   - firstAttribute: The dimension, either `.width` or `.height`.
     ///   - relation: The relation; defaults to `.equal`.
-    ///   - multiplier: The multiplier; defaults to 1.
-    ///   - item: The item you are making the constraint against; defaults to
+    ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
     ///   - secondAttribute: The dimension of the second item; defaults to
     ///     `firstAttribute` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
     ///   - constant: The constant.
     /// - Returns: A `ConstraintGroup` for applying a relative dimension in
     ///   relation to another item.
@@ -212,9 +218,9 @@ public struct ConstraintGroup {
         (
         _ firstAttribute: DimensionAttribute,
         _ relation: NSLayoutConstraint.Relation = .equal,
-        to multiplier: CGFloat = 1,
-        of secondItem: ConstrainableItem? = nil,
+        to secondItem: ConstrainableItem? = nil,
         attribute secondAttribute: DimensionAttribute? = nil,
+        ratio multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
         function: StaticString = #function,
@@ -233,7 +239,9 @@ public struct ConstraintGroup {
                         secondItem: secondItem,
                         secondAttribute: (secondAttribute ?? firstAttribute).attribute,
                         multiplier: multiplier,
-                        constant: constant
+                        constant: constant,
+                        file: file,
+                        line: line
                     )
             })
     }

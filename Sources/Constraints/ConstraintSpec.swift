@@ -41,8 +41,8 @@ func constraintGenerator(
     secondAttribute: NSLayoutConstraint.Attribute? = nil,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
-    file: StaticString = #file,
-    line: UInt = #line
+    file: StaticString,
+    line: UInt
     ) -> NSLayoutConstraint {
     return NSLayoutConstraint(
         item: firstItem,

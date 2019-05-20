@@ -115,7 +115,7 @@ class DynamicLayoutTests: XCTestCase {
                 for view in views {
                     ctx.addConstraints(
                         view.makeConstraints(
-                            .setSize(.init(width: 100, height: 100))
+                            .setSize(to: .init(width: 100, height: 100))
                         )
                     )
                 }
