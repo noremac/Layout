@@ -43,12 +43,10 @@ extension ConstraintGroup {
         toSystemSpacingAfter secondAnchor: NSLayoutXAxisAnchor,
         multiplier: CGFloat = 1,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return ConstraintGroup(
             file: file,
-            function: function,
             line: line,
             single: { item in
                 let firstAnchor = firstAttribute.anchor(item)
@@ -95,12 +93,10 @@ extension ConstraintGroup {
         toSystemSpacingBelow secondAnchor: NSLayoutYAxisAnchor,
         multiplier: CGFloat = 1,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return ConstraintGroup(
             file: file,
-            function: function,
             line: line,
             single: { item in
                 let firstAnchor = firstAttribute.anchor(item)
@@ -151,12 +147,10 @@ extension ConstraintGroup {
         multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return ConstraintGroup(
             file: file,
-            function: function,
             line: line,
             single: { item in
                 let anchor = dimension.anchor(item)
@@ -214,12 +208,10 @@ extension ConstraintGroup {
         multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return ConstraintGroup(
             file: file,
-            function: function,
             line: line,
             single: { item in
                 let anchor = dimension.anchor(item)

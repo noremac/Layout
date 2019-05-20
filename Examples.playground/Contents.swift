@@ -78,12 +78,10 @@ extension ConstraintGroup {
         preferred: CGFloat,
         withIn secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             composedOf:
             .setFixed(.width, to: preferred) ~ .defaultHigh,

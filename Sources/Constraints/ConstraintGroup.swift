@@ -36,7 +36,7 @@ public struct ConstraintGroup {
     @usableFromInline let specs: Specs
 
     /// When this is `true` a string with this format:
-    /// `"\(file)::\(function)::\(line)"`is automatically added as each
+    /// `"\(file)::\(line)"`is automatically added as each
     /// constraint's `identifier`.
     public static var debugConstraints = true
 
@@ -48,21 +48,21 @@ public struct ConstraintGroup {
     public var identifier: String?
 
     @inlinable
-    init(file: StaticString, function: StaticString, line: UInt, specs: Specs) {
+    init(file: StaticString, line: UInt, specs: Specs) {
         self.specs = specs
         if ConstraintGroup.debugConstraints {
-            identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(function)::\(line)"
+            identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(line)"
         }
     }
 
     @inlinable
-    init(file: StaticString, function: StaticString, line: UInt, single: @escaping SingleConstraintSpec) {
-        self.init(file: file, function: function, line: line, specs: .single(single))
+    init(file: StaticString, line: UInt, single: @escaping SingleConstraintSpec) {
+        self.init(file: file, line: line, specs: .single(single))
     }
 
     @inlinable
-    init(file: StaticString, function: StaticString, line: UInt, multiple: @escaping MultipleConstraintSpec) {
-        self.init(file: file, function: function, line: line, specs: .multiple(multiple))
+    init(file: StaticString, line: UInt, multiple: @escaping MultipleConstraintSpec) {
+        self.init(file: file, line: line, specs: .multiple(multiple))
     }
 
     /// Initializes a `ConstraintGroup` composed of other `ConstraintGroup`s.
@@ -72,7 +72,7 @@ public struct ConstraintGroup {
     /// - Parameters:
     ///   - groups: The groups to compose.
     @inlinable
-    public init(file: StaticString, function: StaticString, line: UInt, composedOf groups: ConstraintGroup...) {
+    public init(file: StaticString, line: UInt, composedOf groups: ConstraintGroup...) {
         let spec = Specs.multiple({ firstItem in
             groups.reduce(into: .init()) { constraints, group in
                 switch group.specs {
@@ -83,7 +83,7 @@ public struct ConstraintGroup {
                 }
             }
         })
-        self.init(file: file, function: function, line: line, specs: spec)
+        self.init(file: file, line: line, specs: spec)
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's x anchor to another
@@ -109,12 +109,10 @@ public struct ConstraintGroup {
         multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             single: { firstItem in
                 constraintGenerator(
@@ -154,12 +152,10 @@ public struct ConstraintGroup {
         multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             single: { firstItem in
                 constraintGenerator(
@@ -191,13 +187,11 @@ public struct ConstraintGroup {
         _ relation: NSLayoutConstraint.Relation = .equal,
         to constant: CGFloat,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         )
         -> ConstraintGroup {
             return .init(
                 file: file,
-                function: function,
                 line: line,
                 single: { firstItem in
                     constraintGenerator(
@@ -236,13 +230,11 @@ public struct ConstraintGroup {
         ratio multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         )
         -> ConstraintGroup {
             return .init(
                 file: file,
-                function: function,
                 line: line,
                 single: { firstItem in
                     constraintGenerator(

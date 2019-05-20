@@ -39,12 +39,10 @@ extension ConstraintGroup {
         of secondItem: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             multiple: { firstItem in
                 [
@@ -100,12 +98,10 @@ extension ConstraintGroup {
         topInset: CGFloat = 0,
         bottomInset: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             multiple: { firstItem in
                 [
@@ -145,12 +141,10 @@ extension ConstraintGroup {
         leadingInset: CGFloat = 0,
         trailingInset: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             multiple: { firstItem in
                 [
@@ -185,12 +179,10 @@ extension ConstraintGroup {
     public static func center(
         in secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             multiple: { firstItem in
                 [
@@ -228,7 +220,6 @@ extension ConstraintGroup {
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             multiple: { firstItem in
                 [
@@ -272,12 +263,10 @@ extension ConstraintGroup {
         ratio: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
-        function: StaticString = #function,
         line: UInt = #line
         ) -> ConstraintGroup {
         return .init(
             file: file,
-            function: function,
             line: line,
             multiple: { firstItem in
                 [
