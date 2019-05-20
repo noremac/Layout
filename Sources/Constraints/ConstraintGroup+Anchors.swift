@@ -68,6 +68,12 @@ extension ConstraintGroup {
                         greaterThanOrEqualToSystemSpacingAfter: secondAnchor,
                         multiplier: multiplier
                     )
+                @unknown default:
+                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
+                    return firstAnchor.constraint(
+                        equalToSystemSpacingAfter: secondAnchor,
+                        multiplier: multiplier
+                    )
                 }
             })
     }
@@ -112,6 +118,12 @@ extension ConstraintGroup {
                 case .greaterThanOrEqual:
                     return firstAnchor.constraint(
                         greaterThanOrEqualToSystemSpacingBelow: secondAnchor,
+                        multiplier: multiplier
+                    )
+                @unknown default:
+                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
+                    return firstAnchor.constraint(
+                        equalToSystemSpacingBelow: secondAnchor,
                         multiplier: multiplier
                     )
                 }
@@ -170,6 +182,13 @@ extension ConstraintGroup {
                         multiplier: multiplier,
                         constant: constant
                     )
+                @unknown default:
+                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
+                    return anchor.constraint(
+                        equalTo: space,
+                        multiplier: multiplier,
+                        constant: constant
+                    )
                 }
             })
     }
@@ -223,6 +242,13 @@ extension ConstraintGroup {
                 case .greaterThanOrEqual:
                     return anchor.constraint(
                         greaterThanOrEqualTo: space,
+                        multiplier: multiplier,
+                        constant: constant
+                    )
+                @unknown default:
+                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
+                    return anchor.constraint(
+                        equalTo: space,
                         multiplier: multiplier,
                         constant: constant
                     )
