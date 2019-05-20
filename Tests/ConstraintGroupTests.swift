@@ -288,7 +288,7 @@ class ConstraintGroupTests: XCTestCase {
             .setFixed(.height, to: 100)
         )
         let c2 = view1.makeConstraints(
-            .init(multiple: {
+            .init(file: #file, line: #line, multiple: {
                 [
                     $0.widthAnchor.constraint(equalToConstant: 100),
                     $0.heightAnchor.constraint(equalToConstant: 100)

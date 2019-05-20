@@ -48,29 +48,42 @@ public struct ConstraintGroup {
     public var identifier: String?
 
     @inlinable
-    init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, specs: Specs) {
+    init(file: StaticString, function: StaticString, line: UInt, specs: Specs) {
         self.specs = specs
         if ConstraintGroup.debugConstraints {
             identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(function)::\(line)"
         }
     }
 
-    /// Initializes a `ConstraintGroup`.
-    ///
-    /// - Parameters:
-    ///   - single: A closure that generates a single `NSLayoutConstraint`.
     @inlinable
-    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, single: @escaping SingleConstraintSpec) {
+    init(file: StaticString, function: StaticString, line: UInt, single: @escaping SingleConstraintSpec) {
         self.init(file: file, function: function, line: line, specs: .single(single))
     }
 
-    /// Initializes a `ConstraintGroup`.
+    @inlinable
+    init(file: StaticString, function: StaticString, line: UInt, multiple: @escaping MultipleConstraintSpec) {
+        self.init(file: file, function: function, line: line, specs: .multiple(multiple))
+    }
+
+    /// Initializes a `ConstraintGroup` composed of other `ConstraintGroup`s.
+    /// Use this to build your own convenience extensions using the existing
+    /// functions as building blocks.
     ///
     /// - Parameters:
-    ///   - single: A closure that generates multiple `NSLayoutConstraint`s.
+    ///   - groups: The groups to compose.
     @inlinable
-    public init(file: StaticString = #file, function: StaticString = #function, line: UInt = #line, multiple: @escaping MultipleConstraintSpec) {
-        self.init(file: file, function: function, line: line, specs: .multiple(multiple))
+    public init(file: StaticString, function: StaticString, line: UInt, composedOf groups: ConstraintGroup...) {
+        let spec = Specs.multiple({ firstItem in
+            groups.reduce(into: .init()) { constraints, group in
+                switch group.specs {
+                case .single(let spec):
+                    constraints.append(spec(firstItem))
+                case .multiple(let specs):
+                    constraints.append(contentsOf: specs(firstItem))
+                }
+            }
+        })
+        self.init(file: file, function: function, line: line, specs: spec)
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's x anchor to another

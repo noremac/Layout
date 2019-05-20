@@ -71,6 +71,33 @@ button.makeConstraints(
     .align(.trailing, .lessThanOrEqual, to: view.readableContentGuide)
 )
 
+// Easily write extensions for common cases...
+extension ConstraintGroup {
+
+    static func setButtonWidth(
+        preferred: CGFloat,
+        withIn secondItem: ConstrainableItem? = nil,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            function: function,
+            line: line,
+            composedOf:
+            .setFixed(.width, to: preferred) ~ .defaultHigh,
+            .align(.leading, .greaterThanOrEqual, to: secondItem),
+            .align(.trailing, .lessThanOrEqual, to: secondItem)
+        )
+    }
+}
+
+// ...and use them as if they were part of the library.
+button.makeConstraints(
+    .setButtonWidth(preferred: 320, withIn: view.readableContentGuide)
+)
+
 class SliderExample: UIViewController {
 
     let expandingView: UIView = {
