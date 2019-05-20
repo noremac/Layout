@@ -391,6 +391,23 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
+    func testCompsedOf() {
+        let desiredConstraints = view1.makeConstraints(
+            .align(.leading),
+            .center()
+        )
+        let constraints = view1.makeConstraints(
+            .init(
+                file: "",
+                line: 0,
+                composedOf:
+                .align(.leading),
+                .center()
+            )
+        )
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
     func testSingleCreationPerformance() {
         measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
             let parentView = UIView()
