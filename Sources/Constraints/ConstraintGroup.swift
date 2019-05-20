@@ -27,6 +27,30 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
+    /// This shadows Relation, but is closed instead of open.
+    public enum Relation {
+        /// The constraint requires the first attribute to be less than or equal
+        /// to the modified second attribute.
+        case lessThanOrEqual
+        /// The constraint requires the first attribute to be exactly equal to
+        /// the modified second attribute.
+        case equal
+        /// The constraint requires the first attribute to be greater than or
+        /// equal to the modified second attribute.
+        case greaterThanOrEqual
+
+        internal var constraintRelation: NSLayoutConstraint.Relation {
+            switch self {
+            case .lessThanOrEqual:
+                return .lessThanOrEqual
+            case .equal:
+                return .equal
+            case .greaterThanOrEqual:
+                return .greaterThanOrEqual
+            }
+        }
+    }
+
     @usableFromInline
     enum Specs {
         case single(SingleConstraintSpec)
@@ -103,7 +127,7 @@ public struct ConstraintGroup {
     @inlinable
     public static func align(
         _ firstAttribute: XAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
         attribute secondAttribute: XAttribute? = nil,
         multiplier: CGFloat = 1,
@@ -146,7 +170,7 @@ public struct ConstraintGroup {
     @inlinable
     public static func align(
         _ firstAttribute: YAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
         attribute secondAttribute: YAttribute? = nil,
         multiplier: CGFloat = 1,
@@ -184,7 +208,7 @@ public struct ConstraintGroup {
     public static func setFixed
         (
         _ firstAttribute: DimensionAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         to constant: CGFloat,
         file: StaticString = #file,
         line: UInt = #line
@@ -224,7 +248,7 @@ public struct ConstraintGroup {
     public static func setRelative
         (
         _ firstAttribute: DimensionAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
         attribute secondAttribute: DimensionAttribute? = nil,
         ratio multiplier: CGFloat = 1,

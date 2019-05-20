@@ -39,7 +39,7 @@ extension ConstraintGroup {
     @inlinable
     public static func align(
         _ firstAttribute: XAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         toSystemSpacingAfter secondAnchor: NSLayoutXAxisAnchor,
         multiplier: CGFloat = 1,
         file: StaticString = #file,
@@ -66,12 +66,6 @@ extension ConstraintGroup {
                         greaterThanOrEqualToSystemSpacingAfter: secondAnchor,
                         multiplier: multiplier
                     )
-                @unknown default:
-                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
-                    return firstAnchor.constraint(
-                        equalToSystemSpacingAfter: secondAnchor,
-                        multiplier: multiplier
-                    )
                 }
             })
     }
@@ -89,7 +83,7 @@ extension ConstraintGroup {
     @inlinable
     public static func align(
         _ firstAttribute: YAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         toSystemSpacingBelow secondAnchor: NSLayoutYAxisAnchor,
         multiplier: CGFloat = 1,
         file: StaticString = #file,
@@ -116,12 +110,6 @@ extension ConstraintGroup {
                         greaterThanOrEqualToSystemSpacingBelow: secondAnchor,
                         multiplier: multiplier
                     )
-                @unknown default:
-                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
-                    return firstAnchor.constraint(
-                        equalToSystemSpacingBelow: secondAnchor,
-                        multiplier: multiplier
-                    )
                 }
             })
     }
@@ -141,7 +129,7 @@ extension ConstraintGroup {
     @inlinable
     public static func match(
         _ dimension: DimensionAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         toSpaceBetween firstAnchor: NSLayoutXAxisAnchor,
         and secondAnchor: NSLayoutXAxisAnchor,
         multiplier: CGFloat = 1,
@@ -176,13 +164,6 @@ extension ConstraintGroup {
                         multiplier: multiplier,
                         constant: constant
                     )
-                @unknown default:
-                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
-                    return anchor.constraint(
-                        equalTo: space,
-                        multiplier: multiplier,
-                        constant: constant
-                    )
                 }
             })
     }
@@ -202,7 +183,7 @@ extension ConstraintGroup {
     @inlinable
     public static func match(
         _ dimension: DimensionAttribute,
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         toSpaceBetween firstAnchor: NSLayoutYAxisAnchor,
         and secondAnchor: NSLayoutYAxisAnchor,
         multiplier: CGFloat = 1,
@@ -234,13 +215,6 @@ extension ConstraintGroup {
                 case .greaterThanOrEqual:
                     return anchor.constraint(
                         greaterThanOrEqualTo: space,
-                        multiplier: multiplier,
-                        constant: constant
-                    )
-                @unknown default:
-                    assertionFailure("Unknown relation '\(relation)', falling back to `.equal`.", file: file, line: line)
-                    return anchor.constraint(
-                        equalTo: space,
                         multiplier: multiplier,
                         constant: constant
                     )

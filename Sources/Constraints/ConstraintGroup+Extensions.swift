@@ -212,7 +212,7 @@ extension ConstraintGroup {
     /// - Returns: A `ConstraintGroup` for setting the size of an item.
     @inlinable
     public static func setSize(
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         to size: CGSize,
         file: StaticString = #file,
         function: StaticString = #function,
@@ -258,7 +258,7 @@ extension ConstraintGroup {
     ///   another item.
     @inlinable
     public static func setRelativeSize(
-        _ relation: NSLayoutConstraint.Relation = .equal,
+        _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
         ratio: CGFloat = 1,
         constant: CGFloat = 0,
