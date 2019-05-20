@@ -50,16 +50,16 @@ button.makeConstraints(
 button.makeConstraints(
     .setRelative(.height),
     .setRelative(.height, to: otherButton),
-    .setRelative(.height, to: otherButton, ratio: 0.5),
+    .setRelative(.height, to: otherButton, mutliplier: 0.5),
     .setRelative(.height, .lessThanOrEqual, to: otherButton),
-    .setRelative(.height, .equal, to: otherButton, attribute: .width, ratio: 0.5, constant: 10)
+    .setRelative(.height, .equal, to: otherButton, attribute: .width, mutliplier: 0.5, constant: 10)
 )
 
 // Matching size
 button.makeConstraints(
     .setRelativeSize(),
     .setRelativeSize(to: otherButton),
-    .setRelativeSize(to: otherButton, ratio: 0.5),
+    .setRelativeSize(to: otherButton, mutliplier: 0.5),
     .setRelativeSize(.lessThanOrEqual, to: otherButton)
 )
 

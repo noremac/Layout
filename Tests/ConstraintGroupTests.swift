@@ -119,7 +119,7 @@ class ConstraintGroupTests: XCTestCase {
         let desiredConstraints = [
             view1.widthAnchor.constraint(greaterThanOrEqualTo: view2.heightAnchor, multiplier: 0.5, constant: 2)
         ]
-        let constraints = view1.makeConstraints(.setRelative(.width, .greaterThanOrEqual, to: view2, attribute: .height, ratio: 0.5, constant: 2))
+        let constraints = view1.makeConstraints(.setRelative(.width, .greaterThanOrEqual, to: view2, attribute: .height, mutliplier: 0.5, constant: 2))
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
@@ -223,7 +223,7 @@ class ConstraintGroupTests: XCTestCase {
             view1.widthAnchor.constraint(greaterThanOrEqualTo: view2.widthAnchor, multiplier: 0.5, constant: 2),
             view1.heightAnchor.constraint(greaterThanOrEqualTo: view2.heightAnchor, multiplier: 0.5, constant: 2)
         ]
-        let constraints = view1.makeConstraints(.setRelativeSize(.greaterThanOrEqual, to: view2, ratio: 0.5, constant: 2))
+        let constraints = view1.makeConstraints(.setRelativeSize(.greaterThanOrEqual, to: view2, mutliplier: 0.5, constant: 2))
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 

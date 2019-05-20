@@ -251,7 +251,7 @@ public struct ConstraintGroup {
         _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
         attribute secondAttribute: DimensionAttribute? = nil,
-        ratio multiplier: CGFloat = 1,
+        multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
