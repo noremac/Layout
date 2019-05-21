@@ -105,6 +105,78 @@ class DynamicLayoutTests: XCTestCase {
         XCTAssertEqualConstraints(regular + lessThan1024, sut.activeConstraints)
     }
 
+    func testMultipleTopLevelConditions() {
+        let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
+        let compact = view.makeConstraints(.align(.top))
+        let regular = view.makeConstraints(.align(.bottom))
+        let greaterThan1024 = view.makeConstraints(.align(.leading))
+        let lessThan1024 = view.makeConstraints(.align(.trailing))
+
+        sut.configure { ctx in
+            ctx.when(.horizontallyRegular, { ctx in
+                ctx.addConstraints(regular)
+            }, otherwise: { ctx in
+                ctx.addConstraints(compact)
+            })
+
+            ctx.when(.width(is: >=, 1_024), { ctx in
+                ctx.addConstraints(greaterThan1024)
+            }, otherwise: { ctx in
+                ctx.addConstraints(lessThan1024)
+            })
+        }
+
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_024, height: 1_024)))
+        XCTAssertEqualConstraints(regular + greaterThan1024, sut.activeConstraints)
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1_024, height: 1_024)))
+        XCTAssertEqualConstraints(compact + greaterThan1024, sut.activeConstraints)
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 10, height: 10)))
+        XCTAssertEqualConstraints(regular + lessThan1024, sut.activeConstraints)
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 10, height: 10)))
+        XCTAssertEqualConstraints(compact + lessThan1024, sut.activeConstraints)
+    }
+
+    func testMultipleTopLevelConditionsActions() {
+        let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
+        var sizeClass = UIUserInterfaceSizeClass.unspecified
+        var biggerThan1024 = false
+
+        sut.configure { ctx in
+            ctx.when(.horizontallyRegular, { ctx in
+                ctx.addAction { _ in
+                    sizeClass = .regular
+                }
+            }, otherwise: { ctx in
+                ctx.addAction { _ in
+                    sizeClass = .compact
+                }
+            })
+
+            ctx.when(.width(is: >=, 1_024), { ctx in
+                ctx.addAction { _ in
+                    biggerThan1024 = true
+                }
+            }, otherwise: { ctx in
+                ctx.addAction { _ in
+                    biggerThan1024 = false
+                }
+            })
+        }
+
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_024, height: 1_024)))
+        XCTAssertEqual(sizeClass, .regular)
+        XCTAssertEqual(biggerThan1024, true)
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1_024, height: 1_024)))
+        XCTAssertEqual(sizeClass, .compact)
+        XCTAssertEqual(biggerThan1024, true)
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 10, height: 10)))
+        XCTAssertEqual(sizeClass, .regular)
+        XCTAssertEqual(biggerThan1024, false)
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 10, height: 10)))
+        XCTAssertEqual(sizeClass, .compact)
+        XCTAssertEqual(biggerThan1024, false)
+    }
+
     func testUpdatePerformance() {
         measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
             let sut = DynamicLayout<Bool>()
