@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "Layout"
-  s.version = "0.1"
+  s.version = "0.2"
   s.summary = "Readable layout constraints."
   s.description  = <<-DESC
     Readable layout constraints.
