@@ -1,5 +1,4 @@
 import Layout
-import PlaygroundSupport
 import UIKit
 
 let view = UIView()
@@ -73,6 +72,7 @@ ConstraintGroup.debugConstraints = true
 let constraints = button.makeConstraints(
     .align(.leading)
 )
+
 constraints.first?.identifier
 
 // Using priority to give a button a nice chunky width, but not go outside the
@@ -107,77 +107,3 @@ extension ConstraintGroup {
 button.makeConstraints(
     .setButtonWidth(preferred: 320, withIn: view.readableContentGuide)
 )
-
-class SliderExample: UIViewController {
-
-    let expandingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .green
-        return view
-    }()
-
-    let slider: UISlider = {
-        let slider = UISlider()
-        slider.maximumValue = 3
-        return slider
-    }()
-
-    let layout = DynamicLayout<Float>()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-
-        view.addSubview(expandingView)
-        view.addSubview(slider)
-
-        slider.addTarget(
-            self,
-            action: #selector(SliderExample.updateEnvironment),
-            for: .valueChanged
-        )
-
-        layout.configure { ctx in
-            ctx.addConstraints(
-                slider.makeConstraints(
-                    .align(.leading, to: view.layoutMarginsGuide),
-                    .align(.trailing, to: view.layoutMarginsGuide),
-                    .align(.bottom)
-                )
-            )
-
-            ctx.addConstraints(
-                expandingView.makeConstraints(
-                    .center(),
-                    .align(.leading, .greaterThanOrEqual, to: view.layoutMarginsGuide),
-                    .align(.trailing, .lessThanOrEqual, to: view.layoutMarginsGuide),
-                    .setRelative(.height, to: expandingView, attribute: .width)
-                )
-            )
-
-            let width: CGFloat = 100
-
-            let sizeConstraints = ctx.addConstraints(
-                expandingView.makeConstraints(
-                    .setFixed(.width, to: width) ~ .defaultHigh
-                )
-            )
-
-            ctx.addAction {
-                sizeConstraints.setConstant(width * (1 + CGFloat($0)))
-            }
-        }
-
-        layout.update(environment: slider.value)
-    }
-
-    @objc
-    private func updateEnvironment() {
-        layout.update(environment: slider.value)
-    }
-}
-
-let viewController = SliderExample()
-
-PlaygroundPage.current.liveView = viewController
-PlaygroundPage.current.needsIndefiniteExecution = true
