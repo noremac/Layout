@@ -252,7 +252,7 @@ extension ConstraintGroup {
     ///   - relation: The relation; defaults to `.equal`.
     ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
-    ///   - multiplier: The desired mutliplier; defaults to `1`.
+    ///   - multiplier: The desired multiplier; defaults to `1`.
     ///   - constant: The constant; defaults to `0`.
     /// - Returns: A `ConstraintGroup` for matching the size of one item to
     ///   another item.
@@ -260,7 +260,7 @@ extension ConstraintGroup {
     public static func setRelativeSize(
         _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
-        mutliplier: CGFloat = 1,
+        multiplier: CGFloat = 1,
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
@@ -275,7 +275,7 @@ extension ConstraintGroup {
                         firstAttribute: .width,
                         relation: relation,
                         secondItem: secondItem,
-                        multiplier: mutliplier,
+                        multiplier: multiplier,
                         constant: constant,
                         file: file,
                         line: line
@@ -285,7 +285,7 @@ extension ConstraintGroup {
                         firstAttribute: .height,
                         relation: relation,
                         secondItem: secondItem,
-                        multiplier: mutliplier,
+                        multiplier: multiplier,
                         constant: constant,
                         file: file,
                         line: line
