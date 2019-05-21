@@ -65,13 +65,13 @@ class ViewController: UIViewController {
                 ctx.when(.width(is: >=, 1_024), { ctx in
                     ctx.addConstraints(
                         greenSquare.makeConstraints(
-                            .setSize(to: .init(width: 400, height: 400))
+                            .setSize(to: CGSize(width: 400, height: 400))
                         )
                     )
                 }, otherwise: { ctx in
                     ctx.addConstraints(
                         greenSquare.makeConstraints(
-                            .setSize(to: .init(width: 150, height: 150))
+                            .setSize(to: CGSize(width: 150, height: 150))
                         )
                     )
                 })
@@ -80,7 +80,7 @@ class ViewController: UIViewController {
                     greenSquare.makeConstraints(
                         .align(.centerX),
                         .align(.centerY, attribute: .bottom, multiplier: 1 / 3),
-                        .setSize(to: .init(width: 100, height: 100))
+                        .setSize(to: CGSize(width: 100, height: 100))
                     ),
                     redSquare.makeConstraints(
                         .align(.leading, to: greenSquare),
