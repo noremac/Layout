@@ -46,6 +46,18 @@ public func ~ (lhs: ConstraintGroup, rhs: UILayoutPriority) -> ConstraintGroup {
     return new
 }
 
+/// Sets the priority of a `ConstraintGroup`.
+///
+/// - Parameters:
+///   - lhs: The constraint group.
+///   - rhs: The priority.
+/// - Returns: A new constraint group whose priority has been modified.
+public func ~ (lhs: ConstraintGroup, rhs: Float) -> ConstraintGroup {
+    var new = lhs
+    new.priority = .init(rawValue: rhs)
+    return new
+}
+
 precedencegroup ConstraintGroupIdentifierAssignment {
     associativity: left
     lowerThan: ComparisonPrecedence
