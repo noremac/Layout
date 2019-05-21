@@ -27,7 +27,7 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
-    /// This shadows Relation, but is closed instead of open.
+    /// Shadows NSLayoutConstraint.Relation, but is closed instead of open.
     public enum Relation {
         /// The constraint requires the first attribute to be less than or equal
         /// to the modified second attribute.
