@@ -35,8 +35,8 @@ extension ConstraintGroup {
     /// - Returns: A `ConstraintGroup` for aligning an item's edges to another
     ///   item.
     @inlinable
-    public static func alignToEdges(
-        of secondItem: ConstrainableItem? = nil,
+    public static func alignEdges(
+        to secondItem: ConstrainableItem? = nil,
         insets: NSDirectionalEdgeInsets = .zero,
         file: StaticString = #file,
         line: UInt = #line

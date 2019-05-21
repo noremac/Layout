@@ -23,9 +23,9 @@ button.makeConstraints(
 
 // Align to all edges
 container.makeConstraints(
-    .alignToEdges(),
-    .alignToEdges(of: view.safeAreaLayoutGuide),
-    .alignToEdges(insets: .init(top: 10, leading: 20, bottom: 10, trailing: 20))
+    .alignEdges(),
+    .alignEdges(to: view.safeAreaLayoutGuide),
+    .alignEdges(insets: .init(top: 10, leading: 20, bottom: 10, trailing: 20))
 )
 
 // Fixed dimensions
@@ -40,12 +40,6 @@ button.makeConstraints(
     .center(in: container)
 )
 
-// Setting size
-button.makeConstraints(
-    .setSize(.greaterThanOrEqual, to: CGSize(width: 100, height: 100)),
-    .setSize(to: CGSize(width: 100, height: 100))
-)
-
 // Relative dimensions
 button.makeConstraints(
     .setRelative(.height),
@@ -53,6 +47,12 @@ button.makeConstraints(
     .setRelative(.height, to: otherButton, multiplier: 0.5),
     .setRelative(.height, .lessThanOrEqual, to: otherButton),
     .setRelative(.height, .equal, to: otherButton, attribute: .width, multiplier: 0.5, constant: 10)
+)
+
+// Setting size
+button.makeConstraints(
+    .setSize(.greaterThanOrEqual, to: CGSize(width: 100, height: 100)),
+    .setSize(to: CGSize(width: 100, height: 100))
 )
 
 // Matching size

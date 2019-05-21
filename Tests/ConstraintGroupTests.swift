@@ -131,25 +131,25 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
-    func testAlignToEdges() {
+    func testAlignEdges() {
         let desiredConstraints = [
             view1.topAnchor.constraint(equalTo: view2.topAnchor, constant: 1),
             view1.leadingAnchor.constraint(equalTo: view2.leadingAnchor, constant: 2),
             view1.bottomAnchor.constraint(equalTo: view2.bottomAnchor, constant: -3),
             view1.trailingAnchor.constraint(equalTo: view2.trailingAnchor, constant: -4)
         ]
-        let constraints = view1.makeConstraints(.alignToEdges(of: view2, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
+        let constraints = view1.makeConstraints(.alignEdges(to: view2, insets: .init(top: 1, leading: 2, bottom: 3, trailing: 4)))
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
-    func testAlignToEdgesDefaults() {
+    func testAlignEdgesDefaults() {
         let desiredConstraints = [
             view1.topAnchor.constraint(equalTo: parentView.topAnchor),
             view1.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
             view1.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
             view1.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ]
-        let constraints = view1.makeConstraints(.alignToEdges())
+        let constraints = view1.makeConstraints(.alignEdges())
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
@@ -431,7 +431,7 @@ class ConstraintGroupTests: XCTestCase {
             var constraintCounts = 0
             startMeasuring()
             for view in views {
-                constraintCounts += view.makeConstraints(.alignToEdges()).count
+                constraintCounts += view.makeConstraints(.alignEdges()).count
             }
             stopMeasuring()
             print(constraintCounts)
