@@ -63,6 +63,18 @@ button.makeConstraints(
     .setRelativeSize(.lessThanOrEqual, to: otherButton)
 )
 
+// Adding custom debug identifiers
+button.makeConstraints(
+    .align(.leading) <- "yay"
+)
+
+// Auto debug identifiers
+ConstraintGroup.debugConstraints = true
+let constraints = button.makeConstraints(
+    .align(.leading)
+)
+constraints.first?.identifier
+
 // Using priority to give a button a nice chunky width, but not go outside the
 // edges of the screen on narrower devices.
 button.makeConstraints(
