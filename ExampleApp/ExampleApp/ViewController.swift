@@ -19,11 +19,17 @@ class ViewController: UIViewController {
         return view
     }()
 
+    let redSquare: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
+    }()
+
     let button: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .blue
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("Yay", for: .normal)
+        button.setTitle("BUTTON", for: .normal)
         return button
     }()
 
@@ -32,6 +38,7 @@ class ViewController: UIViewController {
 
         view.backgroundColor = .white
         view.addSubview(greenSquare)
+        view.addSubview(redSquare)
         view.addSubview(button)
 
         layout.configure { ctx in
@@ -39,6 +46,9 @@ class ViewController: UIViewController {
                 button.makeConstraints(
                     .align(.bottom),
                     .alignToHorizontalEdges()
+                ),
+                redSquare.makeConstraints(
+                    .setRelativeSize(to: greenSquare, multiplier: 0.5)
                 )
             )
 
@@ -46,13 +56,16 @@ class ViewController: UIViewController {
                 ctx.addConstraints(
                     greenSquare.makeConstraints(
                         .center()
+                    ),
+                    redSquare.makeConstraints(
+                        .center(in: greenSquare)
                     )
                 )
 
                 ctx.when(.width(is: >=, 1_024), { ctx in
                     ctx.addConstraints(
                         greenSquare.makeConstraints(
-                            .setSize(to: .init(width: 200, height: 200))
+                            .setSize(to: .init(width: 400, height: 400))
                         )
                     )
                 }, otherwise: { ctx in
@@ -68,6 +81,10 @@ class ViewController: UIViewController {
                         .align(.centerX),
                         .align(.centerY, attribute: .bottom, multiplier: 1 / 3),
                         .setSize(to: .init(width: 100, height: 100))
+                    ),
+                    redSquare.makeConstraints(
+                        .align(.leading, to: greenSquare),
+                        .align(.top, to: greenSquare)
                     )
                 )
             })
