@@ -22,20 +22,47 @@
  SOFTWARE.
  */
 
+import Layout
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class BaseViewController: UIViewController {
 
-    var window: UIWindow?
+    let greenSquare: UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let window = UIWindow(frame: UIScreen.main.bounds)
-//        let vc = LayoutViewController()
-        let vc = NonLayoutViewController()
-        window.rootViewController = UINavigationController(rootViewController: vc)
-        window.makeKeyAndVisible()
-        self.window = window
-        return true
+    let redSquare: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        return view
+    }()
+
+    let button: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .blue
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("BUTTON", for: .normal)
+        return button
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .white
+        view.addSubview(greenSquare)
+        view.addSubview(redSquare)
+        view.addSubview(button)
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        button.contentEdgeInsets = .init(
+            top: 10,
+            left: 0,
+            bottom: view?.safeAreaInsets.bottom ?? 0,
+            right: 0
+        )
     }
 }
