@@ -62,8 +62,8 @@
 			children = (
 				1E044AC2229384430089E8F9 /* AppDelegate.swift */,
 				1E044AC4229384430089E8F9 /* BaseViewController.swift */,
-				1E044AD92294CB730089E8F9 /* NonLayoutViewController.swift */,
 				1E044AD72294CAFC0089E8F9 /* LayoutViewController.swift */,
+				1E044AD92294CB730089E8F9 /* NonLayoutViewController.swift */,
 				1E044AC9229384450089E8F9 /* Assets.xcassets */,
 				1E044ACB229384450089E8F9 /* LaunchScreen.storyboard */,
 				1E044ACE229384450089E8F9 /* Info.plist */,

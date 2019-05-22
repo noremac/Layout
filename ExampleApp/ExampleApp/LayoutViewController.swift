@@ -33,50 +33,40 @@ final class LayoutViewController: BaseViewController {
         super.viewDidLoad()
 
         layout.configure { ctx in
-            ctx.addConstraints(
-                button.makeConstraints(
-                    .align(.bottom),
-                    .alignVerticalEdges()
-                ),
-                redSquare.makeConstraints(
-                    .setRelativeSize(to: greenSquare, multiplier: 0.5)
-                )
+            ctx += button.makeConstraints(
+                .align(.bottom),
+                .alignVerticalEdges()
+            )
+            ctx += redSquare.makeConstraints(
+                .setRelativeSize(to: greenSquare, multiplier: 0.5)
             )
 
             ctx.when(.horizontallyRegular, { ctx in
-                ctx.addConstraints(
-                    greenSquare.makeConstraints(
-                        .center()
-                    ),
-                    redSquare.makeConstraints(
-                        .center(in: greenSquare)
-                    )
+                ctx += greenSquare.makeConstraints(
+                    .center()
+                )
+                ctx += redSquare.makeConstraints(
+                    .center(in: greenSquare)
                 )
 
                 ctx.when(.width(is: >=, 1_024), { ctx in
-                    ctx.addConstraints(
-                        greenSquare.makeConstraints(
-                            .setSize(to: CGSize(width: 400, height: 400))
-                        )
+                    ctx += greenSquare.makeConstraints(
+                        .setSize(to: CGSize(width: 400, height: 400))
                     )
                 }, otherwise: { ctx in
-                    ctx.addConstraints(
-                        greenSquare.makeConstraints(
-                            .setSize(to: CGSize(width: 150, height: 150))
-                        )
+                    ctx += greenSquare.makeConstraints(
+                        .setSize(to: CGSize(width: 150, height: 150))
                     )
                 })
             }, otherwise: { ctx in
-                ctx.addConstraints(
-                    greenSquare.makeConstraints(
-                        .align(.centerX),
-                        .align(.centerY, attribute: .bottom, multiplier: 1 / 3),
-                        .setSize(to: CGSize(width: 100, height: 100))
-                    ),
-                    redSquare.makeConstraints(
-                        .align(.leading, to: greenSquare),
-                        .align(.top, to: greenSquare)
-                    )
+                ctx += greenSquare.makeConstraints(
+                    .align(.centerX),
+                    .align(.centerY, attribute: .bottom, multiplier: 1 / 3),
+                    .setSize(to: CGSize(width: 100, height: 100))
+                )
+                ctx += redSquare.makeConstraints(
+                    .align(.leading, to: greenSquare),
+                    .align(.top, to: greenSquare)
                 )
             })
         }

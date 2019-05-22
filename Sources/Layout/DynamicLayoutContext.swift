@@ -51,6 +51,12 @@ extension DynamicLayout.Context {
         }
         return flattened
     }
+
+    /// Adds constraints to the receiving context.
+    @discardableResult
+    public static func += (lhs: inout DynamicLayout.Context, rhs: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
+        return lhs.addConstraints(rhs)
+    }
 }
 
 extension DynamicLayout.Context {
