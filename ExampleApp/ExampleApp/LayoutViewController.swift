@@ -36,7 +36,7 @@ final class LayoutViewController: BaseViewController {
             ctx.addConstraints(
                 button.makeConstraints(
                     .align(.bottom),
-                    .alignToHorizontalEdges()
+                    .alignHorizontalEdges()
                 ),
                 redSquare.makeConstraints(
                     .setRelativeSize(to: greenSquare, multiplier: 0.5)

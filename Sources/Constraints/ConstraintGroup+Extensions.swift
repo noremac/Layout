@@ -88,55 +88,12 @@ extension ConstraintGroup {
     /// - Parameters:
     ///   - secondItem: The item you are making the constraint against; defaults to
     ///     the `superview` if left as `nil`.
-    ///   - topInset: The desired top inset; defaults to zero.
-    ///   - bottomInset: The desired bottom inset; defaults to zero.
+    ///   - leadingInset: The desired leading inset; defaults to zero.
+    ///   - trailingInset: The desired trailing inset; defaults to zero.
     /// - Returns: A `ConstraintGroup` for aligning an item's vertical edges to
     ///   another item.
     @inlinable
-    public static func alignToVerticalEdges(
-        to secondItem: ConstrainableItem? = nil,
-        topInset: CGFloat = 0,
-        bottomInset: CGFloat = 0,
-        file: StaticString = #file,
-        line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
-            file: file,
-            line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .top,
-                        secondItem: secondItem,
-                        constant: topInset,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .bottom,
-                        secondItem: secondItem,
-                        constant: -bottomInset,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
-    }
-
-    /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to
-    /// another item.
-    ///
-    /// - Parameters:
-    ///   - secondItem: The item you are making the constraint against; defaults to
-    ///     the `superview` if left as `nil`.
-    ///   - leadingInset: The desired leading inset; defaults to zero.
-    ///   - trailingInset: The desired trailing inset; defaults to zero.
-    /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges
-    ///   to another item.
-    @inlinable
-    public static func alignToHorizontalEdges(
+    public static func alignVerticalEdges(
         to secondItem: ConstrainableItem? = nil,
         leadingInset: CGFloat = 0,
         trailingInset: CGFloat = 0,
@@ -161,6 +118,49 @@ extension ConstraintGroup {
                         firstAttribute: .trailing,
                         secondItem: secondItem,
                         constant: -trailingInset,
+                        file: file,
+                        line: line
+                    )
+                ]
+        })
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to
+    /// another item.
+    ///
+    /// - Parameters:
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///   to the `superview` if left as `nil`.
+    ///   - topInset: The desired top inset; defaults to zero.
+    ///   - bottomInset: The desired bottom inset; defaults to zero.
+    /// - Returns: A `ConstraintGroup` for aligning an item's horizontal edges
+    ///   to another item.
+    @inlinable
+    public static func alignHorizontalEdges(
+        to secondItem: ConstrainableItem? = nil,
+        topInset: CGFloat = 0,
+        bottomInset: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            multiple: { firstItem in
+                [
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .top,
+                        secondItem: secondItem,
+                        constant: topInset,
+                        file: file,
+                        line: line
+                    ),
+                    constraintGenerator(
+                        firstItem: firstItem,
+                        firstAttribute: .bottom,
+                        secondItem: secondItem,
+                        constant: -bottomInset,
                         file: file,
                         line: line
                     )

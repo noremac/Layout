@@ -153,39 +153,39 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
-    func testAlignToVerticalEdges() {
+    func testAlignVerticalEdges() {
         let desiredConstraints = [
-            view1.topAnchor.constraint(equalTo: view2.topAnchor, constant: 1),
-            view1.bottomAnchor.constraint(equalTo: view2.bottomAnchor, constant: -3)
+            view1.leadingAnchor.constraint(equalTo: view2.leadingAnchor, constant: 1),
+            view1.trailingAnchor.constraint(equalTo: view2.trailingAnchor, constant: -3)
         ]
-        let constraints = view1.makeConstraints(.alignToVerticalEdges(to: view2, topInset: 1, bottomInset: 3))
+        let constraints = view1.makeConstraints(.alignVerticalEdges(to: view2, leadingInset: 1, trailingInset: 3))
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
-    func testAlignToVerticalEdgesDefaults() {
+    func testAlignVerticalEdgesDefaults() {
         let desiredConstraints = [
-            view1.topAnchor.constraint(equalTo: parentView.topAnchor),
-            view1.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
+            view1.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            view1.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ]
-        let constraints = view1.makeConstraints(.alignToVerticalEdges())
+        let constraints = view1.makeConstraints(.alignVerticalEdges())
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToHorizontalEdges() {
         let desiredConstraints = [
-            view1.leadingAnchor.constraint(equalTo: view2.leadingAnchor, constant: 2),
-            view1.trailingAnchor.constraint(equalTo: view2.trailingAnchor, constant: -4)
+            view1.topAnchor.constraint(equalTo: view2.topAnchor, constant: 2),
+            view1.bottomAnchor.constraint(equalTo: view2.bottomAnchor, constant: -4)
         ]
-        let constraints = view1.makeConstraints(.alignToHorizontalEdges(to: view2, leadingInset: 2, trailingInset: 4))
+        let constraints = view1.makeConstraints(.alignHorizontalEdges(to: view2, topInset: 2, bottomInset: 4))
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
     func testAlignToHorizontalEdgesDefaults() {
         let desiredConstraints = [
-            view1.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
-            view1.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
+            view1.topAnchor.constraint(equalTo: parentView.topAnchor),
+            view1.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
         ]
-        let constraints = view1.makeConstraints(.alignToHorizontalEdges())
+        let constraints = view1.makeConstraints(.alignHorizontalEdges())
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
