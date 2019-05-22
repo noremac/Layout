@@ -12,10 +12,10 @@ view.addSubview(otherButton)
 
 // Aligning
 button.makeConstraints(
-    .align(.leading, .equal, to: otherButton, attribute: .leading, multiplier: 1, constant: 0),
-    .align(.leading, .equal, to: otherButton, attribute: .leading, multiplier: 1),
-    .align(.leading, .equal, to: otherButton, attribute: .leading),
-    .align(.leading, .equal, to: otherButton),
+    .align(.leading, .equal, to: button.superview, attribute: .leading, multiplier: 1, constant: 0),
+    .align(.leading, .equal, to: button.superview, attribute: .leading, multiplier: 1),
+    .align(.leading, .equal, to: button.superview, attribute: .leading),
+    .align(.leading, .equal, to: button.superview),
     .align(.leading, .equal),
     .align(.leading)
 )
