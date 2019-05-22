@@ -31,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
-//        let vc = LayoutViewController()
-        let vc = NonLayoutViewController()
+        let vc = LayoutViewController()
+//        let vc = NonLayoutViewController()
         window.rootViewController = UINavigationController(rootViewController: vc)
         window.makeKeyAndVisible()
         self.window = window

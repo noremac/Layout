@@ -36,7 +36,7 @@ final class LayoutViewController: BaseViewController {
             ctx.addConstraints(
                 button.makeConstraints(
                     .align(.bottom),
-                    .alignHorizontalEdges()
+                    .alignVerticalEdges()
                 ),
                 redSquare.makeConstraints(
                     .setRelativeSize(to: greenSquare, multiplier: 0.5)
@@ -80,17 +80,10 @@ final class LayoutViewController: BaseViewController {
                 )
             })
         }
-
-        layout.update(environment: .init(traitCollection: view.traitCollection, size: view.bounds.size))
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: { _ in
-            self.layout.update(environment: .init(traitCollection: self.view.traitCollection, size: size))
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-        }, completion: nil)
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        layout.update(environment: .init(traitCollection: view.traitCollection, size: view.bounds.size))
     }
 }

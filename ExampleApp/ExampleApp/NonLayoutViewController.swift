@@ -26,15 +26,15 @@ import UIKit
 
 final class NonLayoutViewController: BaseViewController {
 
-    var activeConstraints = [NSLayoutConstraint]()
+    private var activeConstraints = [NSLayoutConstraint]()
 
-    var regularConstraints = [NSLayoutConstraint]()
+    private var regularConstraints = [NSLayoutConstraint]()
 
-    var regulerGreaterThanOrEqualTo1024Constraints = [NSLayoutConstraint]()
+    private var regulerGreaterThanOrEqualTo1024Constraints = [NSLayoutConstraint]()
 
-    var regulerLessThan1024Constraints = [NSLayoutConstraint]()
+    private var regulerLessThan1024Constraints = [NSLayoutConstraint]()
 
-    var compactConstraints = [NSLayoutConstraint]()
+    private var compactConstraints = [NSLayoutConstraint]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,27 +85,18 @@ final class NonLayoutViewController: BaseViewController {
             redSquare.leadingAnchor.constraint(equalTo: greenSquare.leadingAnchor),
             redSquare.topAnchor.constraint(equalTo: greenSquare.topAnchor)
         ]
-
-        updateConstraints(traitCollection: view.traitCollection, size: view.bounds.size)
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { _ in
-            self.updateConstraints(traitCollection: self.view.traitCollection, size: size)
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-    }
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
 
-    func updateConstraints(traitCollection: UITraitCollection, size: CGSize) {
         NSLayoutConstraint.deactivate(activeConstraints)
         activeConstraints = []
 
-        if traitCollection.horizontalSizeClass == .regular {
+        if view.traitCollection.horizontalSizeClass == .regular {
             activeConstraints += regularConstraints
 
-            if size.width >= 1_024 {
+            if view.bounds.size.width >= 1_024 {
                 activeConstraints += regulerGreaterThanOrEqualTo1024Constraints
             } else {
                 activeConstraints += regulerLessThan1024Constraints

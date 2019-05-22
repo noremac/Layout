@@ -65,4 +65,15 @@ class BaseViewController: UIViewController {
             right: 0
         )
     }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: { _ in
+            self.view.setNeedsUpdateConstraints()
+            self.view.updateConstraintsIfNeeded()
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
