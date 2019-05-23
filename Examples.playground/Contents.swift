@@ -20,6 +20,20 @@ button.makeConstraints(
     .align(.leading)
 )
 
+// are all equivalent the following:
+
+NSLayoutConstraint(
+    item: button,
+    attribute: .leading,
+    relatedBy: .equal,
+    toItem: button.superview,
+    attribute: .leading,
+    multiplier: 1,
+    constant: 0
+)
+
+button.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+
 // Align to all edges
 container.makeConstraints(
     .alignEdges(),
