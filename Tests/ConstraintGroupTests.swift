@@ -287,14 +287,10 @@ class ConstraintGroupTests: XCTestCase {
             .setFixed(.width, to: 100),
             .setFixed(.height, to: 100)
         )
-        let c2 = view1.makeConstraints(
-            .init(file: #file, line: #line, multiple: {
-                [
-                    $0.widthAnchor.constraint(equalToConstant: 100),
-                    $0.heightAnchor.constraint(equalToConstant: 100)
-                ]
-            })
-        )
+        let c2 = [
+            view1.widthAnchor.constraint(equalToConstant: 100),
+            view1.heightAnchor.constraint(equalToConstant: 100)
+        ]
         XCTAssertEqualConstraints(c1, c2)
     }
 
@@ -406,35 +402,5 @@ class ConstraintGroupTests: XCTestCase {
             )
         )
         XCTAssertEqualConstraints(desiredConstraints, constraints)
-    }
-
-    func testSingleCreationPerformance() {
-        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
-            let parentView = UIView()
-            let views = (1...10_000).map({ _ in UIView() })
-            views.forEach({ parentView.addSubview($0) })
-            var constraintCounts = 0
-            startMeasuring()
-            for view in views {
-                constraintCounts += view.makeConstraints(.align(.leading)).count
-            }
-            stopMeasuring()
-            print(constraintCounts)
-        })
-    }
-
-    func testMultiCreationPerformance() {
-        measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
-            let parentView = UIView()
-            let views = (1...10_000).map({ _ in UIView() })
-            views.forEach({ parentView.addSubview($0) })
-            var constraintCounts = 0
-            startMeasuring()
-            for view in views {
-                constraintCounts += view.makeConstraints(.alignEdges()).count
-            }
-            stopMeasuring()
-            print(constraintCounts)
-        })
     }
 }

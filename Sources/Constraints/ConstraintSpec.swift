@@ -26,15 +26,10 @@ import UIKit
 
 /// A closure that takes a `ConstrainableItem` and returns an
 /// `NSLayoutConstraint`.
-public typealias SingleConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
-
-/// A closure that takes a `ConstrainableItem` and returns an
-/// `[NSLayoutConstraint]`.
-public typealias MultipleConstraintSpec = (ConstrainableItem) -> [NSLayoutConstraint]
+public typealias ConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
 
 @usableFromInline
 func constraintGenerator(
-    firstItem: ConstrainableItem,
     firstAttribute: NSLayoutConstraint.Attribute,
     relation: ConstraintGroup.Relation = .equal,
     secondItem: ConstrainableItem? = nil,
@@ -43,16 +38,18 @@ func constraintGenerator(
     constant: CGFloat = 0,
     file: StaticString,
     line: UInt
-    ) -> NSLayoutConstraint {
-    return NSLayoutConstraint(
-        item: firstItem,
-        attribute: firstAttribute,
-        relatedBy: relation.constraintRelation,
-        toItem: secondAttribute == .notAnAttribute
-            ? nil
-            : (secondItem ?? firstItem.parentView) ?? { fatalError("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line) }(),
-        attribute: secondAttribute ?? firstAttribute,
-        multiplier: multiplier,
-        constant: constant
-    )
+    ) -> ConstraintSpec {
+    return { firstItem in
+        NSLayoutConstraint(
+            item: firstItem,
+            attribute: firstAttribute,
+            relatedBy: relation.constraintRelation,
+            toItem: secondAttribute == .notAnAttribute
+                ? nil
+                : (secondItem ?? firstItem.parentView) ?? { fatalError("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line) }(),
+            attribute: secondAttribute ?? firstAttribute,
+            multiplier: multiplier,
+            constant: constant
+        )
+    }
 }

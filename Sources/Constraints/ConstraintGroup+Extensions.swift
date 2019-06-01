@@ -44,42 +44,12 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .top,
-                        secondItem: secondItem,
-                        constant: insets.top,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .leading,
-                        secondItem: secondItem,
-                        constant: insets.leading,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .bottom,
-                        secondItem: secondItem,
-                        constant: -insets.bottom,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .trailing,
-                        secondItem: secondItem,
-                        constant: -insets.trailing,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
+            composedOf:
+            .align(.top, to: secondItem, constant: insets.top, file: file, line: line),
+            .align(.leading, to: secondItem, constant: insets.leading, file: file, line: line),
+            .align(.bottom, to: secondItem, constant: -insets.bottom, file: file, line: line),
+            .align(.trailing, to: secondItem, constant: -insets.trailing, file: file, line: line)
+        )
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's vertical edges to
@@ -103,26 +73,10 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .leading,
-                        secondItem: secondItem,
-                        constant: leadingInset,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .trailing,
-                        secondItem: secondItem,
-                        constant: -trailingInset,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
+            composedOf:
+            .align(.leading, to: secondItem, constant: leadingInset, file: file, line: line),
+            .align(.trailing, to: secondItem, constant: -trailingInset, file: file, line: line)
+        )
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's horizontal edges to
@@ -146,26 +100,10 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .top,
-                        secondItem: secondItem,
-                        constant: topInset,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .bottom,
-                        secondItem: secondItem,
-                        constant: -bottomInset,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
+            composedOf:
+            .align(.top, to: secondItem, constant: topInset, file: file, line: line),
+            .align(.bottom, to: secondItem, constant: -bottomInset, file: file, line: line)
+        )
     }
 
     /// Returns a `ConstraintGroup` for centering an item inside another item.
@@ -184,24 +122,10 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .centerX,
-                        secondItem: secondItem,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .centerY,
-                        secondItem: secondItem,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
+            composedOf:
+            .align(.centerX, to: secondItem, file: file, line: line),
+            .align(.centerY, to: secondItem, file: file, line: line)
+        )
     }
 
     /// Returns a `ConstraintGroup` for setting the size of an item.
@@ -221,28 +145,10 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .width,
-                        relation: relation,
-                        secondAttribute: .notAnAttribute,
-                        constant: size.width,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .height,
-                        relation: relation,
-                        secondAttribute: .notAnAttribute,
-                        constant: size.height,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
+            composedOf:
+            .setFixed(.width, relation, to: size.width, file: file, line: line),
+            .setFixed(.height, relation, to: size.height, file: file, line: line)
+        )
     }
 
     /// Returns a `ConstraintGroup` for matching the size of one item to another
@@ -268,29 +174,9 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            multiple: { firstItem in
-                [
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .width,
-                        relation: relation,
-                        secondItem: secondItem,
-                        multiplier: multiplier,
-                        constant: constant,
-                        file: file,
-                        line: line
-                    ),
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: .height,
-                        relation: relation,
-                        secondItem: secondItem,
-                        multiplier: multiplier,
-                        constant: constant,
-                        file: file,
-                        line: line
-                    )
-                ]
-        })
+            composedOf:
+            .setRelative(.width, relation, to: secondItem, multiplier: multiplier, constant: constant, file: file, line: line),
+            .setRelative(.height, relation, to: secondItem, multiplier: multiplier, constant: constant, file: file, line: line)
+        )
     }
 }

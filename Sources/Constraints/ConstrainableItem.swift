@@ -84,22 +84,7 @@ extension ConstrainableItem {
     @usableFromInline
     func makeConstraints<S>(groups: S) -> [NSLayoutConstraint] where S: Sequence, S.Element == ConstraintGroup {
         setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
-        return groups.reduce(into: .init()) { result, group in
-            switch group.specs {
-            case .single(let spec):
-                let constraint = spec(self)
-                constraint.priority = group.priority
-                constraint.identifier = group.identifier
-                result.append(constraint)
-            case .multiple(let specs):
-                let constraints = specs(self)
-                constraints.forEach { constraint in
-                    constraint.priority = group.priority
-                    constraint.identifier = group.identifier
-                }
-                result += constraints
-            }
-        }
+        return groups.flatMap { $0.constraints(with: self) }
     }
 
     /// Creates and returns an array of `NSLayoutConstraint`s corresponding to

@@ -27,6 +27,11 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
+    /// When this is `true` a string with this format:
+    /// `"\(file)::\(line)"`is automatically added as each
+    /// constraint's `identifier`.
+    public static var debugConstraints = true
+
     /// Shadows NSLayoutConstraint.Relation, but is closed instead of open.
     public enum Relation {
         /// The constraint requires the first attribute to be less than or equal
@@ -51,18 +56,11 @@ public struct ConstraintGroup {
         }
     }
 
-    @usableFromInline
-    enum Specs {
-        case single(SingleConstraintSpec)
-        case multiple(MultipleConstraintSpec)
-    }
+    @usableFromInline var specs: [ConstraintSpec]
 
-    @usableFromInline let specs: Specs
+    @usableFromInline var file: StaticString
 
-    /// When this is `true` a string with this format:
-    /// `"\(file)::\(line)"`is automatically added as each
-    /// constraint's `identifier`.
-    public static var debugConstraints = true
+    @usableFromInline var line: UInt
 
     /// The priority of this group of constraints.
     public var priority: UILayoutPriority = .required
@@ -71,22 +69,14 @@ public struct ConstraintGroup {
     /// - SeeAlso: `ConstraintGroup.debugConstraints`.
     public var identifier: String?
 
-    @inlinable
-    init(file: StaticString, line: UInt, specs: Specs) {
+    /// Initializes a `ConstraintGroup` from the given specs.
+    ///
+    /// - Parameters:
+    ///   - specs: The specs.
+    public init(file: StaticString, line: UInt, specs: ConstraintSpec...) {
         self.specs = specs
-        if ConstraintGroup.debugConstraints {
-            identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(line)"
-        }
-    }
-
-    @inlinable
-    init(file: StaticString, line: UInt, single: @escaping SingleConstraintSpec) {
-        self.init(file: file, line: line, specs: .single(single))
-    }
-
-    @inlinable
-    init(file: StaticString, line: UInt, multiple: @escaping MultipleConstraintSpec) {
-        self.init(file: file, line: line, specs: .multiple(multiple))
+        self.file = file
+        self.line = line
     }
 
     /// Initializes a `ConstraintGroup` composed of other `ConstraintGroup`s.
@@ -97,17 +87,27 @@ public struct ConstraintGroup {
     ///   - groups: The groups to compose.
     @inlinable
     public init(file: StaticString, line: UInt, composedOf groups: ConstraintGroup...) {
-        let spec = Specs.multiple({ firstItem in
-            groups.reduce(into: .init()) { constraints, group in
-                switch group.specs {
-                case .single(let spec):
-                    constraints.append(spec(firstItem))
-                case .multiple(let specs):
-                    constraints.append(contentsOf: specs(firstItem))
-                }
+        self.specs = groups.flatMap({ $0.specs })
+        self.file = file
+        self.line = line
+    }
+
+    /// Creates `NSLayoutConstraints` for the receiver's specs, using the given
+    /// item as each constraint's `firstItem`.
+    ///
+    /// - Parameter firstItem: The `firstItem` of the constraints.
+    /// - Returns: An array of `NSLayoutConstraint`.
+    @inlinable
+    public func constraints(with firstItem: ConstrainableItem) -> [NSLayoutConstraint] {
+        return specs.map { spec in
+            let constraint = spec(firstItem)
+            constraint.priority = priority
+            constraint.identifier = identifier
+            if constraint.identifier == nil, ConstraintGroup.debugConstraints {
+                constraint.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(line)"
             }
-        })
-        self.init(file: file, line: line, specs: spec)
+            return constraint
+        }
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's x anchor to another
@@ -138,19 +138,18 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            single: { firstItem in
-                constraintGenerator(
-                    firstItem: firstItem,
-                    firstAttribute: firstAttribute.attribute,
-                    relation: relation,
-                    secondItem: secondItem,
-                    secondAttribute: secondAttribute?.attribute,
-                    multiplier: multiplier,
-                    constant: constant,
-                    file: file,
-                    line: line
-                )
-        })
+            specs:
+            constraintGenerator(
+                firstAttribute: firstAttribute.attribute,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+        )
+        )
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's y anchor to another
@@ -181,19 +180,18 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            single: { firstItem in
-                constraintGenerator(
-                    firstItem: firstItem,
-                    firstAttribute: firstAttribute.attribute,
-                    relation: relation,
-                    secondItem: secondItem,
-                    secondAttribute: secondAttribute?.attribute,
-                    multiplier: multiplier,
-                    constant: constant,
-                    file: file,
-                    line: line
-                )
-        })
+            specs:
+            constraintGenerator(
+                firstAttribute: firstAttribute.attribute,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
     }
 
     /// Returns a `ConstraintGroup` for applying a fixed dimension to an item.
@@ -217,17 +215,16 @@ public struct ConstraintGroup {
             return .init(
                 file: file,
                 line: line,
-                single: { firstItem in
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: firstAttribute.attribute,
-                        relation: relation,
-                        secondAttribute: .notAnAttribute,
-                        constant: constant,
-                        file: file,
-                        line: line
-                    )
-            })
+                specs:
+                constraintGenerator(
+                    firstAttribute: firstAttribute.attribute,
+                    relation: relation,
+                    secondAttribute: .notAnAttribute,
+                    constant: constant,
+                    file: file,
+                    line: line
+                )
+            )
     }
 
     /// Returns a `ConstraintGroup` for applying a relative dimension in
@@ -260,18 +257,17 @@ public struct ConstraintGroup {
             return .init(
                 file: file,
                 line: line,
-                single: { firstItem in
-                    constraintGenerator(
-                        firstItem: firstItem,
-                        firstAttribute: firstAttribute.attribute,
-                        relation: relation,
-                        secondItem: secondItem,
-                        secondAttribute: (secondAttribute ?? firstAttribute).attribute,
-                        multiplier: multiplier,
-                        constant: constant,
-                        file: file,
-                        line: line
-                    )
-            })
+                specs:
+                constraintGenerator(
+                    firstAttribute: firstAttribute.attribute,
+                    relation: relation,
+                    secondItem: secondItem,
+                    secondAttribute: (secondAttribute ?? firstAttribute).attribute,
+                    multiplier: multiplier,
+                    constant: constant,
+                    file: file,
+                    line: line
+                )
+            )
     }
 }
