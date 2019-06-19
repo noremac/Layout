@@ -73,10 +73,18 @@ public struct ConstraintGroup {
     ///
     /// - Parameters:
     ///   - specs: The specs.
-    public init(file: StaticString, line: UInt, specs: ConstraintSpec...) {
+    public init(file: StaticString, line: UInt, specs: [ConstraintSpec]) {
         self.specs = specs
         self.file = file
         self.line = line
+    }
+
+    /// Initializes a `ConstraintGroup` from the given specs.
+    ///
+    /// - Parameters:
+    ///   - specs: The specs.
+    public init(file: StaticString, line: UInt, specs: ConstraintSpec...) {
+        self.init(file: file, line: line, specs: Array(specs))
     }
 
     /// Initializes a `ConstraintGroup` composed of other `ConstraintGroup`s.

@@ -128,6 +128,39 @@ extension ConstraintGroup {
         )
     }
 
+    /// Returns a `ConstraintGroup` for aligning multiple attributes.
+    ///
+    /// - Parameters:
+    ///   - attributes: The list of attributes to match.
+    ///   - secondItem: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
+    /// - Returns: A `ConstraintGroup` that aligns multiple attributes.
+    @inlinable
+    public static func align(
+        _ attributes: [NSLayoutConstraint.Attribute],
+        to secondItem: ConstrainableItem? = nil,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            attributes.map { attribute in
+                constraintGenerator(
+                    firstAttribute: attribute,
+                    relation: .equal,
+                    secondItem: secondItem,
+                    secondAttribute: attribute,
+                    multiplier: 1,
+                    constant: 0,
+                    file: file,
+                    line: line
+                )
+            }
+        )
+    }
+
     /// Returns a `ConstraintGroup` for setting the size of an item.
     ///
     /// - Parameters:

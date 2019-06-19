@@ -189,6 +189,24 @@ class ConstraintGroupTests: XCTestCase {
         XCTAssertEqualConstraints(desiredConstraints, constraints)
     }
 
+    func testAlignMultipleDefaults() {
+        let desiredConstraints = [
+            view1.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
+            view1.centerYAnchor.constraint(equalTo: parentView.centerYAnchor)
+        ]
+        let constraints = view1.makeConstraints(.align([.centerX, .centerY]))
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
+    func testAlignMultiple() {
+        let desiredConstraints = [
+            view1.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
+            view1.centerYAnchor.constraint(equalTo: view2.centerYAnchor)
+        ]
+        let constraints = view1.makeConstraints(.align([.centerX, .centerY], to: view2))
+        XCTAssertEqualConstraints(desiredConstraints, constraints)
+    }
+
     func testCenter() {
         let desiredConstraints = [
             view1.centerXAnchor.constraint(equalTo: view2.centerXAnchor),
