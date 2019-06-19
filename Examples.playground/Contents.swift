@@ -10,16 +10,6 @@ view.addSubview(container)
 view.addSubview(button)
 view.addSubview(otherButton)
 
-// Aligning
-button.makeConstraints(
-    .align(.leading, .equal, to: button.superview, attribute: .leading, multiplier: 1, constant: 0),
-    .align(.leading, .equal, to: button.superview, attribute: .leading, multiplier: 1),
-    .align(.leading, .equal, to: button.superview, attribute: .leading),
-    .align(.leading, .equal, to: button.superview),
-    .align(.leading, .equal),
-    .align(.leading)
-)
-
 // are all equivalent the following:
 
 NSLayoutConstraint(
@@ -43,8 +33,8 @@ container.makeConstraints(
 
 // Fixed dimensions
 button.makeConstraints(
-    .setFixed(.width, to: 100),
-    .setFixed(.width, .greaterThanOrEqual, to: 100)
+    .fixedWidth(100),
+    .fixedWidth(.greaterThanOrEqual, 100)
 )
 
 // Centering
@@ -55,36 +45,36 @@ button.makeConstraints(
 
 // Relative dimensions
 button.makeConstraints(
-    .setRelative(.height),
-    .setRelative(.height, to: otherButton),
-    .setRelative(.height, to: otherButton, multiplier: 0.5),
-    .setRelative(.height, .lessThanOrEqual, to: otherButton),
-    .setRelative(.height, .equal, to: otherButton, attribute: .width, multiplier: 0.5, constant: 10)
+    .relativeHeight(),
+    .relativeHeight(to: otherButton),
+    .relativeHeight(to: otherButton, multiplier: 0.5),
+    .relativeHeight(.lessThanOrEqual, to: otherButton),
+    .relativeHeight(.equal, to: otherButton, attribute: .width, multiplier: 0.5, constant: 10)
 )
 
 // Setting size
 button.makeConstraints(
-    .setSize(.greaterThanOrEqual, to: CGSize(width: 100, height: 100)),
-    .setSize(to: CGSize(width: 100, height: 100))
+    .size(.greaterThanOrEqual, CGSize(width: 100, height: 100)),
+    .size(CGSize(width: 100, height: 100))
 )
 
 // Matching size
 button.makeConstraints(
-    .setRelativeSize(),
-    .setRelativeSize(to: otherButton),
-    .setRelativeSize(to: otherButton, multiplier: 0.5),
-    .setRelativeSize(.lessThanOrEqual, to: otherButton)
+    .relativeSize(),
+    .relativeSize(to: otherButton),
+    .relativeSize(to: otherButton, multiplier: 0.5),
+    .relativeSize(.lessThanOrEqual, to: otherButton)
 )
 
 // Adding custom debug identifiers
 button.makeConstraints(
-    .align(.leading) <- "yay"
+    .leading() <- "yay"
 )
 
 // Auto debug identifiers
 ConstraintGroup.debugConstraints = true
 let constraints = button.makeConstraints(
-    .align(.leading)
+    .leading()
 )
 
 constraints.first?.identifier
@@ -92,9 +82,9 @@ constraints.first?.identifier
 // Using priority to give a button a nice chunky width, but not go outside the
 // edges of the screen on narrower devices.
 button.makeConstraints(
-    .setFixed(.width, to: 320) ~ .defaultHigh,
-    .align(.leading, .greaterThanOrEqual, to: view.readableContentGuide),
-    .align(.trailing, .lessThanOrEqual, to: view.readableContentGuide)
+    .fixedWidth(320) ~ .defaultHigh,
+    .leading(.greaterThanOrEqual, to: view.readableContentGuide),
+    .trailing(.lessThanOrEqual, to: view.readableContentGuide)
 )
 
 // Easily write extensions for common cases...
@@ -110,9 +100,9 @@ extension ConstraintGroup {
             file: file,
             line: line,
             composedOf:
-            .setFixed(.width, to: preferred) ~ .defaultHigh,
-            .align(.leading, .greaterThanOrEqual, to: secondItem),
-            .align(.trailing, .lessThanOrEqual, to: secondItem)
+            .fixedWidth(preferred) ~ .defaultHigh,
+            .leading(.greaterThanOrEqual, to: secondItem),
+            .trailing(.lessThanOrEqual, to: secondItem)
         )
     }
 }
