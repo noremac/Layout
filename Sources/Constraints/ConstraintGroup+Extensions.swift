@@ -135,28 +135,6 @@ extension ConstraintGroup {
     ///   - size: The desired size.
     /// - Returns: A `ConstraintGroup` for setting the size of an item.
     @inlinable
-    public static func setSize(
-        _ relation: Relation = .equal,
-        to size: CGSize,
-        file: StaticString = #file,
-        line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
-            file: file,
-            line: line,
-            composedOf:
-            .setFixed(.width, relation, to: size.width, file: file, line: line),
-            .setFixed(.height, relation, to: size.height, file: file, line: line)
-        )
-    }
-
-    /// Returns a `ConstraintGroup` for setting the size of an item.
-    ///
-    /// - Parameters:
-    ///   - relation: The relation; defaults to `.equal`.
-    ///   - size: The desired size.
-    /// - Returns: A `ConstraintGroup` for setting the size of an item.
-    @inlinable
     public static func size(
         _ relation: Relation,
         _ size: CGSize,
@@ -184,35 +162,6 @@ extension ConstraintGroup {
         line: UInt = #line
         ) -> ConstraintGroup {
         return .size(.equal, size, file: file, line: line)
-    }
-
-    /// Returns a `ConstraintGroup` for matching the size of one item to another
-    /// item.
-    ///
-    /// - Parameters:
-    ///   - relation: The relation; defaults to `.equal`.
-    ///   - secondItem: The item you are making the constraint against; defaults
-    ///   to the `superview` if left as `nil`.
-    ///   - multiplier: The desired multiplier; defaults to `1`.
-    ///   - constant: The constant; defaults to `0`.
-    /// - Returns: A `ConstraintGroup` for matching the size of one item to
-    ///   another item.
-    @inlinable
-    public static func setRelativeSize(
-        _ relation: Relation = .equal,
-        to secondItem: ConstrainableItem? = nil,
-        multiplier: CGFloat = 1,
-        constant: CGFloat = 0,
-        file: StaticString = #file,
-        line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
-            file: file,
-            line: line,
-            composedOf:
-            .setRelative(.width, relation, to: secondItem, multiplier: multiplier, constant: constant, file: file, line: line),
-            .setRelative(.height, relation, to: secondItem, multiplier: multiplier, constant: constant, file: file, line: line)
-        )
     }
 
     /// Returns a `ConstraintGroup` for matching the size of one item to another

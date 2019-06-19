@@ -74,10 +74,10 @@ class DynamicLayoutTests: XCTestCase {
 
     func testMoreComplexConditions() {
         let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
-        let compact = view.makeConstraints(.align(.top))
-        let regular = view.makeConstraints(.align(.bottom))
-        let greaterThan1024 = view.makeConstraints(.align(.leading))
-        let lessThan1024 = view.makeConstraints(.align(.trailing))
+        let compact = view.makeConstraints(.top())
+        let regular = view.makeConstraints(.bottom())
+        let greaterThan1024 = view.makeConstraints(.leading())
+        let lessThan1024 = view.makeConstraints(.trailing())
         sut.configure { ctx in
             ctx.when(.horizontallyRegular, { ctx in
                 ctx.addConstraints(regular)
@@ -107,10 +107,10 @@ class DynamicLayoutTests: XCTestCase {
 
     func testMultipleTopLevelConditions() {
         let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
-        let compact = view.makeConstraints(.align(.top))
-        let regular = view.makeConstraints(.align(.bottom))
-        let greaterThan1024 = view.makeConstraints(.align(.leading))
-        let lessThan1024 = view.makeConstraints(.align(.trailing))
+        let compact = view.makeConstraints(.top())
+        let regular = view.makeConstraints(.bottom())
+        let greaterThan1024 = view.makeConstraints(.leading())
+        let lessThan1024 = view.makeConstraints(.trailing())
 
         sut.configure { ctx in
             ctx.when(.horizontallyRegular, { ctx in
@@ -187,7 +187,7 @@ class DynamicLayoutTests: XCTestCase {
                 for view in views {
                     ctx.addConstraints(
                         view.makeConstraints(
-                            .setSize(to: .init(width: 100, height: 100))
+                            .size(.init(width: 100, height: 100))
                         )
                     )
                 }
@@ -204,8 +204,8 @@ class DynamicLayoutTests: XCTestCase {
                     for view in views {
                         ctx.addConstraints(
                             view.makeConstraints(
-                                .align(.leading),
-                                .align(.top)
+                                .leading(),
+                                .top()
                             )
                         )
                     }
