@@ -11,7 +11,7 @@ An expressive and extensible DSL for creating Auto Layout constraints and defini
 // Creating inactive constraints (save and activate/manipulate later)
 let constraints = view.makeConstraints(
   .center(),
-  .setSize(CGSize(width: 100, height: 100))
+  .size(CGSize(width: 100, height: 100))
 )
 ```
 
@@ -19,7 +19,7 @@ let constraints = view.makeConstraints(
 // Creating active constraints
 view.applyConstraints(
   .center(),
-  .setSize(CGSize(width: 100, height: 100))
+  .size(CGSize(width: 100, height: 100))
 )
 ```
 
@@ -29,7 +29,7 @@ view.applyConstraints(
 ``` swift
 button.applyConstraints(
   .center(in: view.safeAreaLayoutGuide), // relating to a `UILayoutGuide`
-  .matchSize(of: otherButton) // relating to a `UIView`
+  .relativeSize(of: otherButton) // relating to a `UIView`
 )
 ```
 

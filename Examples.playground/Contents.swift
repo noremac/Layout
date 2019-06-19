@@ -10,7 +10,17 @@ view.addSubview(container)
 view.addSubview(button)
 view.addSubview(otherButton)
 
-// are all equivalent the following:
+// All of these lines...
+_ = button.makeConstraints(
+    .leading(.equal, to: otherButton, attribute: .leading, multiplier: 1, constant: 0),
+    .leading(.equal, to: otherButton, attribute: .leading, multiplier: 1),
+    .leading(.equal, to: otherButton, attribute: .leading),
+    .leading(.equal, to: otherButton),
+    .leading(.equal),
+    .leading()
+)
+
+// ...are equivalent to this...
 
 NSLayoutConstraint(
     item: button,
@@ -22,7 +32,22 @@ NSLayoutConstraint(
     constant: 0
 )
 
+// ... and this.
 button.leadingAnchor.constraint(equalTo: view.leadingAnchor)
+
+// Alignment operators examples
+container.makeConstraints(
+    .left(),
+    .right(),
+    .leading(),
+    .trailing(),
+    .centerX(),
+    .centerY(),
+    .top(),
+    .bottom(),
+    .firstBaseline(),
+    .lastBaseline()
+)
 
 // Align to all edges
 container.makeConstraints(
@@ -90,7 +115,7 @@ button.makeConstraints(
 // Easily write extensions for common cases...
 extension ConstraintGroup {
 
-    static func setButtonWidth(
+    static func buttonWidth(
         preferred: CGFloat,
         withIn secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
@@ -109,5 +134,5 @@ extension ConstraintGroup {
 
 // ...and use them as if they were part of the library.
 button.makeConstraints(
-    .setButtonWidth(preferred: 320, withIn: view.readableContentGuide)
+    .buttonWidth(preferred: 320, withIn: view.readableContentGuide)
 )
