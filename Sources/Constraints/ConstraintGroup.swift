@@ -1,18 +1,18 @@
 /*
  The MIT License (MIT)
-
+ 
  Copyright (c) 2019 Cameron Pulsford
-
+ 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
-
+ 
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
-
+ 
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -156,7 +156,7 @@ public struct ConstraintGroup {
                 constant: constant,
                 file: file,
                 line: line
-        )
+            )
         )
     }
 
@@ -202,6 +202,406 @@ public struct ConstraintGroup {
         )
     }
 
+    /// Returns a `ConstraintGroup` for aligning an item's left anchor to
+    /// another item's x anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to
+    ///     `left` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's left anchor to
+    ///   another item's x anchor.
+    @inlinable
+    public static func left(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: XAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .left,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's right anchor to
+    /// another item's x anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to
+    ///     `right` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's right anchor to
+    ///   another item's x anchor.
+    @inlinable
+    public static func right(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: XAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .right,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's leading anchor to
+    /// another item's x anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to
+    ///     `leading` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's leading anchor to
+    ///   another item's x anchor.
+    @inlinable
+    public static func leading(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: XAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .leading,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's trailing anchor to
+    /// another item's x anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to
+    ///     `trailing` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's trailing anchor to
+    ///   another item's x anchor.
+    @inlinable
+    public static func trailing(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: XAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .trailing,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's centerX anchor to
+    /// another item's x anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `XAttribute`; defaults to
+    ///     `centerX` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's centerX anchor to
+    ///   another item's x anchor.
+    @inlinable
+    public static func centerX(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: XAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .centerX,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's centerY anchor to
+    /// another item's y anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to
+    ///     `centerY` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's centerY anchor to
+    ///   another item's y anchor.
+    @inlinable
+    public static func centerY(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: YAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .centerY,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's top anchor to
+    /// another item's y anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to
+    ///     `top` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's top anchor to
+    ///   another item's y anchor.
+    @inlinable
+    public static func top(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: YAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .top,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's bottom anchor to
+    /// another item's y anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to
+    ///     `bottom` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's bottom anchor to
+    ///   another item's y anchor.
+    @inlinable
+    public static func bottom(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: YAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .bottom,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's firstBaseline anchor
+    /// to another item's y anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to
+    ///     `firstBaseline` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's firstBaseline
+    ///   anchor to another item's y anchor.
+    @inlinable
+    public static func firstBaseline(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: YAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .firstBaseline,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for aligning an item's lastBaseline anchor
+    /// to another item's y anchor.
+    ///
+    /// - Parameters:
+    ///   - relation: A layout relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults
+    ///     to the `superview` if left as `nil`.
+    ///   - secondAttribute: The second `YAttribute`; defaults to
+    ///     `lastBaseline` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant; defaults to 0.
+    /// - Returns: A `ConstraintGroup` for aligning an item's lastBaseline
+    ///   anchor to another item's y anchor.
+    @inlinable
+    public static func lastBaseline(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: YAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .lastBaseline,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
     /// Returns a `ConstraintGroup` for applying a fixed dimension to an item.
     ///
     /// - Parameters:
@@ -211,28 +611,114 @@ public struct ConstraintGroup {
     /// - Returns: A `ConstraintGroup` for applying a fixed dimension to an
     ///   item.
     @inlinable
-    public static func setFixed
-        (
+    public static func setFixed(
         _ firstAttribute: DimensionAttribute,
         _ relation: Relation = .equal,
         to constant: CGFloat,
         file: StaticString = #file,
         line: UInt = #line
-        )
-        -> ConstraintGroup {
-            return .init(
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: firstAttribute.attribute,
+                relation: relation,
+                secondAttribute: .notAnAttribute,
+                constant: constant,
                 file: file,
-                line: line,
-                specs:
-                constraintGenerator(
-                    firstAttribute: firstAttribute.attribute,
-                    relation: relation,
-                    secondAttribute: .notAnAttribute,
-                    constant: constant,
-                    file: file,
-                    line: line
-                )
+                line: line
             )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for applying a fixed width to an item.
+    ///
+    /// - Parameters:
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a fixed width to an
+    ///   item.
+    @inlinable
+    public static func fixedWidth(
+        _ relation: Relation,
+        _ constant: CGFloat,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .width,
+                relation: relation,
+                secondAttribute: .notAnAttribute,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for applying a fixed width to an item.
+    ///
+    /// - Parameters:
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a fixed width to an
+    ///   item.
+    @inlinable
+    public static func fixedWidth(
+        _ constant: CGFloat,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .fixedWidth(.equal, constant, file: file, line: line)
+    }
+
+    /// Returns a `ConstraintGroup` for applying a fixed height to an item.
+    ///
+    /// - Parameters:
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a fixed height to an
+    ///   item.
+    @inlinable
+    public static func fixedHeight(
+        _ relation: Relation,
+        _ constant: CGFloat,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .height,
+                relation: relation,
+                secondAttribute: .notAnAttribute,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for applying a fixed height to an item.
+    ///
+    /// - Parameters:
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a fixed height to an
+    ///   item.
+    @inlinable
+    public static func fixedHeight(
+        _ constant: CGFloat,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .fixedHeight(.equal, constant, file: file, line: line)
     }
 
     /// Returns a `ConstraintGroup` for applying a relative dimension in
@@ -250,8 +736,7 @@ public struct ConstraintGroup {
     /// - Returns: A `ConstraintGroup` for applying a relative dimension in
     ///   relation to another item.
     @inlinable
-    public static func setRelative
-        (
+    public static func setRelative(
         _ firstAttribute: DimensionAttribute,
         _ relation: Relation = .equal,
         to secondItem: ConstrainableItem? = nil,
@@ -260,22 +745,101 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        )
-        -> ConstraintGroup {
-            return .init(
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: firstAttribute.attribute,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
                 file: file,
-                line: line,
-                specs:
-                constraintGenerator(
-                    firstAttribute: firstAttribute.attribute,
-                    relation: relation,
-                    secondItem: secondItem,
-                    secondAttribute: (secondAttribute ?? firstAttribute).attribute,
-                    multiplier: multiplier,
-                    constant: constant,
-                    file: file,
-                    line: line
-                )
+                line: line
             )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for applying a relative width in relation to
+    /// another item.
+    ///
+    /// - Parameters:
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
+    ///   - secondAttribute: The dimension of the second item; defaults to
+    ///     `width` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a relative width in relation
+    ///   to another item.
+    @inlinable
+    public static func relativeWidth(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: DimensionAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .width,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
+    }
+
+    /// Returns a `ConstraintGroup` for applying a relative height in relation to
+    /// another item.
+    ///
+    /// - Parameters:
+    ///   - relation: The relation; defaults to `.equal`.
+    ///   - secondItem: The item you are making the constraint against; defaults to
+    ///     the `superview` if left as `nil`.
+    ///   - secondAttribute: The dimension of the second item; defaults to
+    ///     `height` if left as `nil`.
+    ///   - multiplier: The multiplier; defaults to 1.
+    ///   - constant: The constant.
+    /// - Returns: A `ConstraintGroup` for applying a relative height in
+    ///   relation to another item.
+    @inlinable
+    public static func relativeHeight(
+        _ relation: Relation = .equal,
+        to secondItem: ConstrainableItem? = nil,
+        attribute secondAttribute: DimensionAttribute? = nil,
+        multiplier: CGFloat = 1,
+        constant: CGFloat = 0,
+        file: StaticString = #file,
+        line: UInt = #line
+        ) -> ConstraintGroup {
+        return .init(
+            file: file,
+            line: line,
+            specs:
+            constraintGenerator(
+                firstAttribute: .height,
+                relation: relation,
+                secondItem: secondItem,
+                secondAttribute: secondAttribute?.attribute,
+                multiplier: multiplier,
+                constant: constant,
+                file: file,
+                line: line
+            )
+        )
     }
 }

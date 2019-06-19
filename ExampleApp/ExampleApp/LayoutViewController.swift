@@ -34,11 +34,11 @@ final class LayoutViewController: BaseViewController {
 
         layout.configure { ctx in
             ctx += button.makeConstraints(
-                .align(.bottom),
+                .bottom(),
                 .alignVerticalEdges()
             )
             ctx += redSquare.makeConstraints(
-                .setRelativeSize(to: greenSquare, multiplier: 0.5)
+                .relativeSize(to: greenSquare, multiplier: 0.5)
             )
 
             ctx.when(.horizontallyRegular, { ctx in
@@ -51,22 +51,22 @@ final class LayoutViewController: BaseViewController {
 
                 ctx.when(.width(is: >=, 1_024), { ctx in
                     ctx += greenSquare.makeConstraints(
-                        .setSize(to: CGSize(width: 400, height: 400))
+                        .size(CGSize(width: 400, height: 400))
                     )
                 }, otherwise: { ctx in
                     ctx += greenSquare.makeConstraints(
-                        .setSize(to: CGSize(width: 150, height: 150))
+                        .size(CGSize(width: 150, height: 150))
                     )
                 })
             }, otherwise: { ctx in
                 ctx += greenSquare.makeConstraints(
-                    .align(.centerX),
-                    .align(.centerY, attribute: .bottom, multiplier: 1 / 3),
-                    .setSize(to: CGSize(width: 100, height: 100))
+                    .centerX(),
+                    .centerY(attribute: .bottom, multiplier: 1 / 3),
+                    .size(CGSize(width: 100, height: 100))
                 )
                 ctx += redSquare.makeConstraints(
-                    .align(.leading, to: greenSquare),
-                    .align(.top, to: greenSquare)
+                    .leading(to: greenSquare),
+                    .top(to: greenSquare)
                 )
             })
         }
