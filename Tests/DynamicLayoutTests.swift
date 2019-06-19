@@ -45,6 +45,90 @@ class DynamicLayoutTests: XCTestCase {
         super.tearDown()
     }
 
+    func testPredicateOtherwise() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx.when(.init { $0 }, { ctx in
+                ctx += view.makeConstraints(.leading())
+            }, otherwise: { ctx in
+                ctx += view.makeConstraints(.trailing())
+            })
+        }
+        sut.update(environment: true)
+        XCTAssertEqualConstraints(view.applyConstraints(.leading()), sut.activeConstraints)
+        sut.update(environment: false)
+        XCTAssertEqualConstraints(view.applyConstraints(.trailing()), sut.activeConstraints)
+    }
+
+    func testPredicateWithoutOtherwise() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx.when(.init { $0 }, { ctx in
+                ctx += view.makeConstraints(.leading())
+            })
+        }
+        sut.update(environment: true)
+        XCTAssertEqualConstraints(view.applyConstraints(.leading()), sut.activeConstraints)
+        sut.update(environment: false)
+        XCTAssertEqualConstraints([], sut.activeConstraints)
+    }
+
+    func testClosureOtherwise() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx.when({ $0 }, { ctx in
+                ctx += view.makeConstraints(.leading())
+            }, otherwise: { ctx in
+                ctx += view.makeConstraints(.trailing())
+            })
+        }
+        sut.update(environment: true)
+        XCTAssertEqualConstraints(view.applyConstraints(.leading()), sut.activeConstraints)
+        sut.update(environment: false)
+        XCTAssertEqualConstraints(view.applyConstraints(.trailing()), sut.activeConstraints)
+    }
+
+    func testClosureWithoutOtherwise() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx.when({ $0 }, { ctx in
+                ctx += view.makeConstraints(.leading())
+            })
+        }
+        sut.update(environment: true)
+        XCTAssertEqualConstraints(view.applyConstraints(.leading()), sut.activeConstraints)
+        sut.update(environment: false)
+        XCTAssertEqualConstraints([], sut.activeConstraints)
+    }
+
+    func testEquatableOtherwise() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx.when(true, { ctx in
+                ctx += view.makeConstraints(.leading())
+            }, otherwise: { ctx in
+                ctx += view.makeConstraints(.trailing())
+            })
+        }
+        sut.update(environment: true)
+        XCTAssertEqualConstraints(view.applyConstraints(.leading()), sut.activeConstraints)
+        sut.update(environment: false)
+        XCTAssertEqualConstraints(view.applyConstraints(.trailing()), sut.activeConstraints)
+    }
+
+    func testEquatableWithoutOtherwise() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx.when(true, { ctx in
+                ctx += view.makeConstraints(.leading())
+            })
+        }
+        sut.update(environment: true)
+        XCTAssertEqualConstraints(view.applyConstraints(.leading()), sut.activeConstraints)
+        sut.update(environment: false)
+        XCTAssertEqualConstraints([], sut.activeConstraints)
+    }
+
     func testDoesNotImmediatelyActivateGlobalConstraints() {
         let sut = DynamicLayout<Bool>()
         sut.configure { ctx in
