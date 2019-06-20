@@ -52,15 +52,17 @@ enum FatalError {
         fatalError(message(), file: file, line: line)
     }
 
+    #if DEBUG
     static func withTestFatalError(_ f: () -> Void) -> Bool {
         var originalCrash = crash
         defer { crash = originalCrash }
         var crashed = false
         crash = { message, _, _ in
-            print(message())
+            print("would have crashed with message:", message())
             crashed = true
         }
         f()
         return crashed
     }
+    #endif
 }
