@@ -62,16 +62,19 @@ public class DynamicLayout<Environment> {
 
         var children: [Context] = []
 
-        private var _otherwise: [Context] = []
+        private var _otherwise: [Context]?
 
         /// This is a hack because the compiler won't let us write
         /// `var otherwise: Context?` as a regular stored property.
+        /// "Value type 'DynamicLayout<Environment>.Context' cannot have a
+        /// stored property that recursively contains it." It doesn't apply to
+        /// arrays apparently.
         var otherwise: Context? {
             get {
-                return _otherwise.first
+                return _otherwise?.first
             }
             set {
-                _otherwise = newValue.map({ [$0] }) ?? []
+                _otherwise = newValue.map { [$0] }
             }
         }
 
