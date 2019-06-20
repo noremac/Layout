@@ -28,7 +28,6 @@ import XCTest
 @testable import Layout
 
 class ConstraintGroupTests: XCTestCase {
-
     var parentView: UIView!
     var view1: UIView!
     var view2: UIView!

@@ -28,7 +28,6 @@ import XCTest
 @testable import Layout
 
 class PredicateExtensionTests: XCTestCase {
-
     func testOr() {
         let alwaysTrue = DynamicLayout<Void>.Predicate({ _ in true })
         let alwaysFalse = DynamicLayout<Void>.Predicate({ _ in false })

@@ -25,7 +25,6 @@
 import UIKit
 
 extension ConstraintGroup {
-
     /// Returns a `ConstraintGroup` for aligning an item's edges to another item.
     ///
     /// - Parameters:

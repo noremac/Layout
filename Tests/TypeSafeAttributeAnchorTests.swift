@@ -28,7 +28,6 @@ import XCTest
 @testable import Layout
 
 class TypeSafeAttributeAnchorTests: XCTestCase {
-
     func testAnchorsMatch() {
         let view = UIView()
         XCTAssertEqual(view.leftAnchor, XAttribute.left.anchor(view))

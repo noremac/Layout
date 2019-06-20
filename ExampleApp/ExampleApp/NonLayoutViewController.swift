@@ -25,7 +25,6 @@
 import UIKit
 
 final class NonLayoutViewController: BaseViewController {
-
     private var activeConstraints = [NSLayoutConstraint]()
 
     private var regularConstraints = [NSLayoutConstraint]()

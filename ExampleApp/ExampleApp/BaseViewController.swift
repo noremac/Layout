@@ -26,7 +26,6 @@ import Layout
 import UIKit
 
 class BaseViewController: UIViewController {
-
     let greenSquare: UIView = {
         let view = UIView()
         view.backgroundColor = .green

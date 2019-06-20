@@ -114,7 +114,6 @@ button.makeConstraints(
 
 // Easily write extensions for common cases...
 extension ConstraintGroup {
-
     static func buttonWidth(
         preferred: CGFloat,
         withIn secondItem: ConstrainableItem? = nil,

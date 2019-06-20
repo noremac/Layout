@@ -27,7 +27,6 @@ import UIKit
 /// This protocol defines an item that constraints can be applied to.
 /// - Note: Only `UIView` and `UILayoutGuide` should implement this protocol.
 public protocol ConstrainableItem {
-
     /// - Returns: The `UIView`'s `superview` or the `UILayoutGuide`'s
     /// `owningView`.
     var parentView: UIView? { get }
@@ -80,7 +79,6 @@ public protocol ConstrainableItem {
 }
 
 extension ConstrainableItem {
-
     @usableFromInline
     func makeConstraints<S>(groups: S) -> [NSLayoutConstraint] where S: Sequence, S.Element == ConstraintGroup {
         setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
@@ -124,7 +122,6 @@ extension ConstrainableItem {
 // MARK: - Implementations
 
 extension UIView: ConstrainableItem {
-
     /// Returns the receiver's `superview`.
     public var parentView: UIView? {
         return superview
@@ -138,7 +135,6 @@ extension UIView: ConstrainableItem {
 }
 
 extension UILayoutGuide: ConstrainableItem {
-
     /// Returns the receiver's `owningView`.
     public var parentView: UIView? {
         return owningView
@@ -155,7 +151,5 @@ extension UILayoutGuide: ConstrainableItem {
     }
 
     /// This does nothing on `UILayoutGuide`s.
-    public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
-
-    }
+    public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {}
 }

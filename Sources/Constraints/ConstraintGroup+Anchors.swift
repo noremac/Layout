@@ -25,7 +25,6 @@
 import UIKit
 
 extension ConstraintGroup {
-
     /// Returns a `ConstraintGroup` for aligning an item after another item plus
     /// system spacing.
     ///

@@ -39,7 +39,6 @@ func XCTAssertEqualConstraints<S>(_ desired: [NSLayoutConstraint], _ sut: S, fil
     }
 }
 extension NSLayoutConstraint {
-
     func isEqualToConstraint(_ otherConstraint: NSLayoutConstraint) -> Bool {
         return self.firstItem === otherConstraint.firstItem
             && self.secondItem === otherConstraint.secondItem

@@ -28,7 +28,6 @@ import XCTest
 @testable import Layout
 
 class DynamicLayoutTests: XCTestCase {
-
     var parentView: UIView!
     var view: UIView!
 

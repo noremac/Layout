@@ -26,7 +26,6 @@ import UIKit
 
 /// A wrapper around the "x" `NSLayoutConstraint.Attribute`s.
 public struct XAttribute {
-
     /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
@@ -46,7 +45,6 @@ public struct XAttribute {
 }
 
 extension XAttribute {
-
     /// An `XAttribute` representing `left`.
     public static let left = XAttribute(.left, { $0.leftAnchor })
 
@@ -65,7 +63,6 @@ extension XAttribute {
 
 /// A wrapper around the "y" `NSLayoutConstraint.Attribute`s.
 public struct YAttribute {
-
     /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
@@ -85,7 +82,6 @@ public struct YAttribute {
 }
 
 extension YAttribute {
-
     /// A `YAttribute` representing `top`.
     public static let top = YAttribute(.top, { $0.topAnchor })
 
@@ -104,7 +100,6 @@ extension YAttribute {
 
 /// A wrapper around the "dimension" `NSLayoutConstraint.Attribute`s.
 public struct DimensionAttribute {
-
     /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
@@ -124,7 +119,6 @@ public struct DimensionAttribute {
 }
 
 extension DimensionAttribute {
-
     /// A `DimensionAttribute` representing `width`.
     public static let width = DimensionAttribute(.width, { $0.widthAnchor })
 

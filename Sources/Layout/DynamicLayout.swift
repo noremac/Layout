@@ -35,12 +35,11 @@ import UIKit
 /// Constraints that should always be active regardless of any state may
 /// be added there.
 public class DynamicLayout<Environment> {
-
     /// A struct for defining a condition to be met for constraints to be
     /// activated.
     public struct Predicate {
-
-        let predicate: (Environment) -> Bool
+        /// The predicate.
+        public let predicate: (Environment) -> Bool
 
         /// Initializes a new `Predicate` with the given closure.
         ///
@@ -53,7 +52,6 @@ public class DynamicLayout<Environment> {
     /// A struct for holding a `Predicate` and its associated
     /// `NSLayoutConstraint`s.
     public struct Context {
-
         var predicate: Predicate
 
         var constraints: [NSLayoutConstraint] = []
@@ -88,9 +86,7 @@ public class DynamicLayout<Environment> {
     var activeConstraints: Set<NSLayoutConstraint> = []
 
     /// Initializes a DynamicLayout.
-    public init() {
-
-    }
+    public init() {}
 
     /// Add constraints here. The closure receives the main `Context` whose
     /// `Predicate` will always evaluate to `true`. From here, create as many

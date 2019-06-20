@@ -25,7 +25,6 @@
 import UIKit
 
 extension DynamicLayout.Predicate {
-
     /// Evaluates the receiver with the given environment.
     ///
     /// - Parameter environment: An `Environment` value.
@@ -36,7 +35,6 @@ extension DynamicLayout.Predicate {
 }
 
 extension DynamicLayout.Predicate {
-
     /// Creates a new composite `Predicate` that `or`s together two others.
     ///
     /// - Parameters:
@@ -73,7 +71,6 @@ extension DynamicLayout.Predicate {
 }
 
 extension DynamicLayout.Predicate {
-
     /// Returns a `Predicate` that always evaluates to `true`.
     public static var always: DynamicLayout<Environment>.Predicate {
         return .init { _ in true }
@@ -81,7 +78,6 @@ extension DynamicLayout.Predicate {
 }
 
 extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironmentProtocol {
-
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// vertical size class is unspecified.
     public static var verticallyUnspecified: DynamicLayout<Environment>.Predicate {
@@ -132,7 +128,6 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
 }
 
 extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmentProtocol {
-
     /// Returns a `Predicate` that is `true` when the given closure is `true`.
     ///
     /// - Parameters:

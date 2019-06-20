@@ -25,7 +25,6 @@
 import UIKit
 
 extension Array where Element == NSLayoutConstraint {
-
     /// Sets the constant of each element of the receiver to the desired
     /// constant.
     ///
@@ -48,15 +47,15 @@ extension Array where Element == NSLayoutConstraint {
 }
 
 enum FatalError {
-
-    static var crash: (@autoclosure () -> String, StaticString, UInt) -> Void = { message, file, line in
+    /// Crash. Runs `fatalError` unless overriden.
+    private(set) static var crash: (@autoclosure () -> String, StaticString, UInt) -> Void = { message, file, line in
         fatalError(message(), file: file, line: line)
     }
 
     static func withTestFatalError(_ f: () -> Void) -> Bool {
-        var crashed = false
         var originalCrash = crash
         defer { crash = originalCrash }
+        var crashed = false
         crash = { message, _, _ in
             print(message())
             crashed = true

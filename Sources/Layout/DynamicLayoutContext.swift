@@ -25,7 +25,6 @@
 import UIKit
 
 extension DynamicLayout.Context {
-
     func activeContexts(for environment: Environment) -> [DynamicLayout.Context] {
         if predicate.evaluate(with: environment) {
             return children.reduce(into: [self], { $0 += $1.activeContexts(for: environment) })
@@ -42,7 +41,7 @@ extension DynamicLayout.Context {
 
     /// Adds constraints to the receiving context.
     @discardableResult
-    public mutating func addConstraints(file: StaticString = #file, line: UInt = #line, _ constraints: [NSLayoutConstraint]...) -> [NSLayoutConstraint] {
+    public mutating func addConstraints(_ constraints: [NSLayoutConstraint]..., file: StaticString = #file, line: UInt = #line) -> [NSLayoutConstraint] {
         let flattened = constraints.flatMap({ $0 })
         self.constraints += flattened
         if flattened.contains(where: { $0.isActive }) {
@@ -53,7 +52,6 @@ extension DynamicLayout.Context {
 }
 
 extension DynamicLayout.Context {
-
     /// Adds constraints to the receiving context.
     @discardableResult
     public static func += (lhs: inout DynamicLayout.Context, rhs: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
@@ -62,7 +60,6 @@ extension DynamicLayout.Context {
 }
 
 extension DynamicLayout.Context {
-
     /// Adds a new nested `Context` to the receiver with the given `Predicate`.
     ///
     /// - Parameters:
@@ -126,7 +123,6 @@ extension DynamicLayout.Context {
 }
 
 extension DynamicLayout.Context where Environment: Equatable {
-
     /// Adds a new nested `Context` to the receiver. A predicate will be
     /// implicitly created that will evaluate to `true` when the current
     /// `Environment` is equal to the given value.

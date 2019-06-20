@@ -26,7 +26,6 @@ import Layout
 import UIKit
 
 final class LayoutViewController: BaseViewController {
-
     let layout = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
 
     override func viewDidLoad() {
