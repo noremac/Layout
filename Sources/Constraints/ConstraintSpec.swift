@@ -31,9 +31,9 @@ public typealias ConstraintSpec = (ConstrainableItem) -> NSLayoutConstraint
 @usableFromInline
 func constraintGenerator(
     firstAttribute: NSLayoutConstraint.Attribute,
-    relation: ConstraintGroup.Relation = .equal,
+    relation: ConstraintGroup.Relation,
     secondItem: ConstrainableItem? = nil,
-    secondAttribute: NSLayoutConstraint.Attribute? = nil,
+    secondAttribute: NSLayoutConstraint.Attribute?,
     multiplier: CGFloat = 1,
     constant: CGFloat = 0,
     file: StaticString,
