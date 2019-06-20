@@ -106,9 +106,9 @@ public class DynamicLayout<Environment> {
     ///
     /// - Attention: A `fatalError` will be hit if this method is called more
     ///   than once.
-    public func configure(_ main: (_ ctx: inout Context) -> Void) {
-        if !mainContext.constraints.isEmpty || !mainContext.children.isEmpty {
-            fatalError("\(#function) should only be called once")
+    public func configure(file: StaticString = #file, line: UInt = #line, _ main: (_ ctx: inout Context) -> Void) {
+        if !mainContext.constraints.isEmpty || !mainContext.actions.isEmpty || !mainContext.children.isEmpty {
+            return FatalError.crash("\(#function) should only be called once", file, line)
         }
         main(&mainContext)
     }

@@ -29,9 +29,8 @@ extension DynamicLayout.Context {
     func activeContexts(for environment: Environment) -> [DynamicLayout.Context] {
         if predicate.evaluate(with: environment) {
             return children.reduce(into: [self], { $0 += $1.activeContexts(for: environment) })
-        } else {
-            return otherwise?.activeContexts(for: environment) ?? []
         }
+        return otherwise?.activeContexts(for: environment) ?? []
     }
 
     /// Adds an action to be run when this `Context`'s `Predicate` is `true`.
@@ -43,11 +42,11 @@ extension DynamicLayout.Context {
 
     /// Adds constraints to the receiving context.
     @discardableResult
-    public mutating func addConstraints(_ constraints: [NSLayoutConstraint]...) -> [NSLayoutConstraint] {
+    public mutating func addConstraints(file: StaticString = #file, line: UInt = #line, _ constraints: [NSLayoutConstraint]...) -> [NSLayoutConstraint] {
         let flattened = constraints.flatMap({ $0 })
         self.constraints += flattened
         if flattened.contains(where: { $0.isActive }) {
-            assertionFailure("Constraints added to contexts should not already be active. If you are using `applyConstraints`, use `makeConstraints` instead.")
+            FatalError.crash("Constraints added to contexts should not already be active. If you are using `applyConstraints`, use `makeConstraints` instead.", file, line)
         }
         return flattened
     }
@@ -76,7 +75,9 @@ extension DynamicLayout.Context {
         var otherCtx = DynamicLayout.Context(predicate: !predicate)
         when(&ctx)
         otherwise(&otherCtx)
-        ctx.otherwise = otherCtx
+        if !otherCtx.constraints.isEmpty || !otherCtx.actions.isEmpty {
+            ctx.otherwise = otherCtx
+        }
         children.append(ctx)
     }
 

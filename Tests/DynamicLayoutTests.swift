@@ -45,6 +45,29 @@ class DynamicLayoutTests: XCTestCase {
         super.tearDown()
     }
 
+    func testConfigureOnlyCalledOnce() {
+        let sut = DynamicLayout<Bool>()
+        sut.configure { ctx in
+            ctx += view.makeConstraints(.leading())
+        }
+        let crashed = FatalError.withTestFatalError {
+            sut.configure { ctx in
+                ctx += view.makeConstraints(.leading())
+            }
+        }
+        XCTAssertTrue(crashed)
+    }
+
+    func testApplyConstraintsFatalError() {
+        let crashed = FatalError.withTestFatalError {
+            let sut = DynamicLayout<Bool>()
+            sut.configure { ctx in
+                ctx += view.applyConstraints(.leading())
+            }
+        }
+        XCTAssertTrue(crashed)
+    }
+
     func testPredicateOtherwise() {
         let sut = DynamicLayout<Bool>()
         sut.configure { ctx in

@@ -46,3 +46,22 @@ extension Array where Element == NSLayoutConstraint {
         NSLayoutConstraint.deactivate(self)
     }
 }
+
+enum FatalError {
+
+    static var crash: (@autoclosure () -> String, StaticString, UInt) -> Void = { message, file, line in
+        fatalError(message(), file: file, line: line)
+    }
+
+    static func withTestFatalError(_ f: () -> Void) -> Bool {
+        var crashed = false
+        var originalCrash = crash
+        defer { crash = originalCrash }
+        crash = { message, _, _ in
+            print(message())
+            crashed = true
+        }
+        f()
+        return crashed
+    }
+}

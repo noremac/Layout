@@ -51,6 +51,13 @@ class ConstraintGroupTests: XCTestCase {
         super.tearDown()
     }
 
+    func testNoParentViewCrash() {
+        let crashed = FatalError.withTestFatalError {
+            UIView().applyConstraints(.leading())
+        }
+        XCTAssertTrue(crashed)
+    }
+
     func testLeft() {
         let desiredConstraints = [
             NSLayoutConstraint(

@@ -40,13 +40,23 @@ func constraintGenerator(
     line: UInt
     ) -> ConstraintSpec {
     return { firstItem in
-        NSLayoutConstraint(
+        let toItem: ConstrainableItem?
+        if secondAttribute == .notAnAttribute {
+            toItem = nil
+        } else {
+            if let item = secondItem ?? firstItem.parentView {
+                toItem = item
+            } else {
+                FatalError.crash("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file, line)
+                // Return nonsense, will only be executed in tests.
+                return NSLayoutConstraint(item: firstItem, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+            }
+        }
+        return NSLayoutConstraint(
             item: firstItem,
             attribute: firstAttribute,
             relatedBy: relation.constraintRelation,
-            toItem: secondAttribute == .notAnAttribute
-                ? nil
-                : (secondItem ?? firstItem.parentView) ?? { fatalError("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file: file, line: line) }(),
+            toItem: toItem,
             attribute: secondAttribute ?? firstAttribute,
             multiplier: multiplier,
             constant: constant
