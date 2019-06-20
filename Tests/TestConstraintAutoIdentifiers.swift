@@ -31,6 +31,6 @@ class TestConstraintAutoIdentifiers: XCTestCase {
     func testConstraintAutoIdentifiers() {
         let view = UIView()
         let constraints = view.makeConstraints(.fixedWidth(1))
-        XCTAssertEqual(constraints[0].identifier, "TestConstraintAutoIdentifiers.swift::34")
+        XCTAssertEqual(constraints[0].identifier, "TestConstraintAutoIdentifiers.swift::33")
     }
 }
