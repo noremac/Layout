@@ -32,10 +32,6 @@ public protocol ConstrainableItem {
     /// `owningView`.
     var parentView: UIView? { get }
 
-    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` for
-    /// `UIView`s. It does nothing for `UILayoutGuide`s.
-    func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
-
     /// The item's left anchor.
     var leftAnchor: NSLayoutXAxisAnchor { get }
 
@@ -77,6 +73,10 @@ public protocol ConstrainableItem {
     /// - Note: This will be the `bottom` for `UILayoutGuide`s which do not
     ///   natively have this property.
     var lastBaselineAnchor: NSLayoutYAxisAnchor { get }
+
+    /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` for
+    /// `UIView`s. It does nothing for `UILayoutGuide`s.
+    func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
 }
 
 extension ConstrainableItem {
@@ -144,11 +144,6 @@ extension UILayoutGuide: ConstrainableItem {
         return owningView
     }
 
-    /// This does nothing on `UILayoutGuide`s.
-    public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
-
-    }
-
     /// Returns the receiver's `topAnchor`.
     public var firstBaselineAnchor: NSLayoutYAxisAnchor {
         return topAnchor
@@ -157,5 +152,10 @@ extension UILayoutGuide: ConstrainableItem {
     /// Returns the receiver's `bottomAnchor`.
     public var lastBaselineAnchor: NSLayoutYAxisAnchor {
         return bottomAnchor
+    }
+
+    /// This does nothing on `UILayoutGuide`s.
+    public func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
+
     }
 }

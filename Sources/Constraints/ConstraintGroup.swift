@@ -27,11 +27,6 @@ import UIKit
 /// A struct that helps create constraints.
 public struct ConstraintGroup {
 
-    /// When this is `true` a string with this format:
-    /// `"\(file)::\(line)"`is automatically added as each
-    /// constraint's `identifier`.
-    public static var debugConstraints = true
-
     /// Shadows NSLayoutConstraint.Relation, but is closed instead of open.
     public enum Relation {
         /// The constraint requires the first attribute to be less than or equal
@@ -55,6 +50,11 @@ public struct ConstraintGroup {
             }
         }
     }
+
+    /// When this is `true` a string with this format:
+    /// `"\(file)::\(line)"`is automatically added as each
+    /// constraint's `identifier`.
+    public static var debugConstraints = true
 
     @usableFromInline var specs: [ConstraintSpec]
 
@@ -98,24 +98,6 @@ public struct ConstraintGroup {
         self.specs = groups.flatMap({ $0.specs })
         self.file = file
         self.line = line
-    }
-
-    /// Creates `NSLayoutConstraints` for the receiver's specs, using the given
-    /// item as each constraint's `firstItem`.
-    ///
-    /// - Parameter firstItem: The `firstItem` of the constraints.
-    /// - Returns: An array of `NSLayoutConstraint`.
-    @inlinable
-    public func constraints(with firstItem: ConstrainableItem) -> [NSLayoutConstraint] {
-        return specs.map { spec in
-            let constraint = spec(firstItem)
-            constraint.priority = priority
-            constraint.identifier = identifier
-            if constraint.identifier == nil, ConstraintGroup.debugConstraints {
-                constraint.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(line)"
-            }
-            return constraint
-        }
     }
 
     /// Returns a `ConstraintGroup` for aligning an item's left anchor to
@@ -684,5 +666,23 @@ public struct ConstraintGroup {
                 line: line
             )
         )
+    }
+
+    /// Creates `NSLayoutConstraints` for the receiver's specs, using the given
+    /// item as each constraint's `firstItem`.
+    ///
+    /// - Parameter firstItem: The `firstItem` of the constraints.
+    /// - Returns: An array of `NSLayoutConstraint`.
+    @inlinable
+    public func constraints(with firstItem: ConstrainableItem) -> [NSLayoutConstraint] {
+        return specs.map { spec in
+            let constraint = spec(firstItem)
+            constraint.priority = priority
+            constraint.identifier = identifier
+            if constraint.identifier == nil, ConstraintGroup.debugConstraints {
+                constraint.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(line)"
+            }
+            return constraint
+        }
     }
 }

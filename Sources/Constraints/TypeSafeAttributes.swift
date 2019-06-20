@@ -43,6 +43,9 @@ public struct XAttribute {
         self.attribute = attribute
         self.anchor = anchor
     }
+}
+
+extension XAttribute {
 
     /// An `XAttribute` representing `left`.
     public static let left = XAttribute(.left, { $0.leftAnchor })
@@ -79,6 +82,9 @@ public struct YAttribute {
         self.attribute = attribute
         self.anchor = anchor
     }
+}
+
+extension YAttribute {
 
     /// A `YAttribute` representing `top`.
     public static let top = YAttribute(.top, { $0.topAnchor })
@@ -115,6 +121,9 @@ public struct DimensionAttribute {
         self.attribute = attribute
         self.anchor = anchor
     }
+}
+
+extension DimensionAttribute {
 
     /// A `DimensionAttribute` representing `width`.
     public static let width = DimensionAttribute(.width, { $0.widthAnchor })

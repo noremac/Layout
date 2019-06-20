@@ -50,6 +50,9 @@ extension DynamicLayout.Context {
         }
         return flattened
     }
+}
+
+extension DynamicLayout.Context {
 
     /// Adds constraints to the receiving context.
     @discardableResult

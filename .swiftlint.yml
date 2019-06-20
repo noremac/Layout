@@ -47,6 +47,7 @@ opt_in_rules:
   - static_operator
   - switch_case_on_newline
   - toggle_bool
+  - type_contents_order
   - unavailable_function
   - unneeded_parentheses_in_closure_argument
   - unused_private_declaration
