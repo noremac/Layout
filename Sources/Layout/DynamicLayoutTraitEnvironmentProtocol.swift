@@ -69,3 +69,34 @@ public struct DynamicLayoutTraitAndSizeEnvironment: DynamicLayoutTraitEnvironmen
         self.size = size
     }
 }
+
+extension DynamicLayout where Environment: DynamicLayoutTraitEnvironmentProtocol {
+    /// Configures a layout with the three most common configurations.
+    ///
+    /// - Parameters:
+    ///   - regularHeightCompactWidth: A block for configuring constraints when
+    ///   the height is regular and the width is compact.
+    ///   - regularHeightRegularWidth: A block for configuring constraints when
+    ///   the height is regular and the width is regular.
+    ///   - compactHeight: A block for configuring constraints when the height
+    ///   is compact regardless of width.
+    public func configure(
+        file: StaticString = #file,
+        line: UInt = #line,
+        regularHeightCompactWidth: (_ ctx: inout Context) -> Void,
+        regularHeightRegularWidth: (_ ctx: inout Context) -> Void,
+        compactHeight: (_ ctx: inout Context) -> Void
+        ) {
+        configure(file: file, line: line) { ctx in
+            ctx.when(.verticallyRegular && .horizontallyCompact) { ctx in
+                regularHeightCompactWidth(&ctx)
+            }
+            ctx.when(.verticallyRegular && .horizontallyRegular) { ctx in
+                regularHeightRegularWidth(&ctx)
+            }
+            ctx.when(.verticallyCompact) { ctx in
+                compactHeight(&ctx)
+            }
+        }
+    }
+}
