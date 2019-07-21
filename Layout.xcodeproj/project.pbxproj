@@ -483,6 +483,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LD_VERIFY_BITCODE = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wigglydog.Layout;
 				PRODUCT_NAME = Layout;
 				SKIP_INSTALL = YES;
@@ -501,6 +502,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LD_VERIFY_BITCODE = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wigglydog.Layout;
 				PRODUCT_NAME = Layout;
 				SKIP_INSTALL = YES;
