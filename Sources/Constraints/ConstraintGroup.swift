@@ -68,22 +68,14 @@ public struct ConstraintGroup {
     /// - SeeAlso: `ConstraintGroup.debugConstraints`.
     public var identifier: String?
 
-    /// Initializes a `ConstraintGroup` from the given specs.
+    /// Initializes a `ConstraintGroup` with the given spec.
     ///
     /// - Parameters:
-    ///   - specs: The specs.
-    public init(file: StaticString, line: UInt, specs: [ConstraintSpec]) {
-        self.specs = specs
+    ///   - spec: The spec.
+    public init(file: StaticString, line: UInt, spec: @escaping ConstraintSpec) {
+        self.specs = [spec]
         self.file = file
         self.line = line
-    }
-
-    /// Initializes a `ConstraintGroup` from the given specs.
-    ///
-    /// - Parameters:
-    ///   - specs: The specs.
-    public init(file: StaticString, line: UInt, specs: ConstraintSpec...) {
-        self.init(file: file, line: line, specs: Array(specs))
     }
 
     /// Initializes a `ConstraintGroup` composed of other `ConstraintGroup`s.
@@ -125,7 +117,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .left,
                 relation: relation,
@@ -165,7 +157,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .right,
                 relation: relation,
@@ -205,7 +197,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .leading,
                 relation: relation,
@@ -245,7 +237,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .trailing,
                 relation: relation,
@@ -285,7 +277,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .centerX,
                 relation: relation,
@@ -325,7 +317,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .centerY,
                 relation: relation,
@@ -365,7 +357,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .top,
                 relation: relation,
@@ -405,7 +397,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .bottom,
                 relation: relation,
@@ -445,7 +437,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .firstBaseline,
                 relation: relation,
@@ -485,7 +477,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .lastBaseline,
                 relation: relation,
@@ -516,7 +508,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .width,
                 relation: relation,
@@ -560,7 +552,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .height,
                 relation: relation,
@@ -613,7 +605,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .width,
                 relation: relation,
@@ -653,7 +645,7 @@ public struct ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs:
+            spec:
             constraintGenerator(
                 firstAttribute: .height,
                 relation: relation,

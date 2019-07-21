@@ -47,7 +47,7 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs: { item in
+            spec: { item in
                 let firstAnchor = firstAttribute.anchor(item)
                 switch relation {
                 case .lessThanOrEqual:
@@ -91,7 +91,7 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs: { item in
+            spec: { item in
                 let firstAnchor = firstAttribute.anchor(item)
                 switch relation {
                 case .lessThanOrEqual:
@@ -139,7 +139,7 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs: { item in
+            spec: { item in
                 let anchor = dimension.anchor(item)
                 let space: NSLayoutDimension = firstAnchor.anchorWithOffset(
                     to: secondAnchor
@@ -193,7 +193,7 @@ extension ConstraintGroup {
         return .init(
             file: file,
             line: line,
-            specs: { item in
+            spec: { item in
                 let anchor = dimension.anchor(item)
                 let space: NSLayoutDimension = firstAnchor.anchorWithOffset(
                     to: secondAnchor
