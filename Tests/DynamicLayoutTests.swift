@@ -242,6 +242,30 @@ class DynamicLayoutTests: XCTestCase {
         XCTAssertEqualConstraints(compact + lessThan1024, sut.activeConstraints)
     }
 
+    func testOtherCaseWithoutDirectConstraints() {
+        let sut = DynamicLayout<Int>()
+        let lessThan10 = view.makeConstraints(.fixedWidth(1))
+        let exactly10 = view.makeConstraints(.fixedWidth(10))
+        let greaterThan10 = view.makeConstraints(.fixedWidth(11))
+        sut.configure { ctx in
+            ctx.when({ $0 < 10 }, { ctx in
+                ctx.addConstraints(lessThan10)
+            }, otherwise: { ctx in
+                ctx.when({ $0 == 10 }, { ctx in
+                    ctx.addConstraints(exactly10)
+                }, otherwise: { ctx in
+                    ctx.addConstraints(greaterThan10)
+                })
+            })
+        }
+        sut.update(environment: 1)
+        XCTAssertEqualConstraints(lessThan10, sut.activeConstraints)
+        sut.update(environment: 10)
+        XCTAssertEqualConstraints(exactly10, sut.activeConstraints)
+        sut.update(environment: 11)
+        XCTAssertEqualConstraints(greaterThan10, sut.activeConstraints)
+    }
+
     func testMultipleTopLevelConditionsActions() {
         let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
         var sizeClass = UIUserInterfaceSizeClass.unspecified
