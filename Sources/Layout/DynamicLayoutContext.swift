@@ -75,7 +75,7 @@ extension DynamicLayout.Context {
         var otherCtx = DynamicLayout.Context(predicate: !predicate)
         when(&ctx)
         otherwise(&otherCtx)
-        if !otherCtx.constraints.isEmpty || !otherCtx.actions.isEmpty {
+        if otherCtx.hasConstraintsOrActions {
             ctx.otherwise = otherCtx
         }
         children.append(ctx)

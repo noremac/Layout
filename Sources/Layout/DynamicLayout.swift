@@ -79,6 +79,17 @@ public class DynamicLayout<Environment> {
         init(predicate: Predicate) {
             self.predicate = predicate
         }
+
+        /// Inspects self and children/other for constraints or actions.
+        var hasConstraintsOrActions: Bool {
+            if !constraints.isEmpty || !actions.isEmpty {
+                return true
+            }
+            if children.contains(where: { $0.hasConstraintsOrActions }) {
+                return true
+            }
+            return otherwise?.hasConstraintsOrActions ?? false
+        }
     }
 
     var mainContext: Context = .init(predicate: .always)
