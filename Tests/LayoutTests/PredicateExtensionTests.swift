@@ -58,55 +58,55 @@ class PredicateExtensionTests: XCTestCase {
     func testSizeClasses() {
         XCTAssertTrue(
             DynamicLayout<UITraitCollection>
-            .Predicate
-            .verticallyUnspecified
-            .evaluate(with: UITraitCollection(verticalSizeClass: .unspecified))
+                .Predicate
+                .verticallyUnspecified
+                .evaluate(with: UITraitCollection(verticalSizeClass: .unspecified))
         )
         XCTAssertTrue(
             DynamicLayout<UITraitCollection>
-            .Predicate
-            .verticallyRegular
-            .evaluate(with: UITraitCollection(verticalSizeClass: .regular))
+                .Predicate
+                .verticallyRegular
+                .evaluate(with: UITraitCollection(verticalSizeClass: .regular))
         )
         XCTAssertTrue(
             DynamicLayout<UITraitCollection>
-            .Predicate
-            .verticallyCompact
-            .evaluate(with: UITraitCollection(verticalSizeClass: .compact))
+                .Predicate
+                .verticallyCompact
+                .evaluate(with: UITraitCollection(verticalSizeClass: .compact))
         )
 
         XCTAssertTrue(
             DynamicLayout<UITraitCollection>
-            .Predicate
-            .horizontallyUnspecified
-            .evaluate(with: UITraitCollection(horizontalSizeClass: .unspecified))
+                .Predicate
+                .horizontallyUnspecified
+                .evaluate(with: UITraitCollection(horizontalSizeClass: .unspecified))
         )
         XCTAssertTrue(
             DynamicLayout<UITraitCollection>
-            .Predicate
-            .horizontallyRegular
-            .evaluate(with: UITraitCollection(horizontalSizeClass: .regular))
+                .Predicate
+                .horizontallyRegular
+                .evaluate(with: UITraitCollection(horizontalSizeClass: .regular))
         )
         XCTAssertTrue(
             DynamicLayout<UITraitCollection>
-            .Predicate
-            .horizontallyCompact
-            .evaluate(with: UITraitCollection(horizontalSizeClass: .compact))
+                .Predicate
+                .horizontallyCompact
+                .evaluate(with: UITraitCollection(horizontalSizeClass: .compact))
         )
     }
 
     func testSize() {
         XCTAssertTrue(
             DynamicLayout<CGSize>
-            .Predicate
-            .width(is: >, 10)
-            .evaluate(with: .init(width: 11, height: 10))
+                .Predicate
+                .width(is: >, 10)
+                .evaluate(with: .init(width: 11, height: 10))
         )
         XCTAssertTrue(
             DynamicLayout<CGSize>
-            .Predicate
-            .height(is: >, 10)
-            .evaluate(with: .init(width: 10, height: 11))
+                .Predicate
+                .height(is: >, 10)
+                .evaluate(with: .init(width: 10, height: 11))
         )
     }
 }

@@ -1,18 +1,18 @@
 /*
  The MIT License (MIT)
- 
+
  Copyright (c) 2019 Cameron Pulsford
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -97,7 +97,7 @@ extension ConstrainableItem {
     ///   the receiver automatically.
     @inlinable
     public func makeConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
-        return makeConstraints(groups: groups)
+        makeConstraints(groups: groups)
     }
 
     /// Creates, immediately activates, and returns an array of
@@ -124,7 +124,7 @@ extension ConstrainableItem {
 extension UIView: ConstrainableItem {
     /// Returns the receiver's `superview`.
     public var parentView: UIView? {
-        return superview
+        superview
     }
 
     /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` on the
@@ -137,17 +137,17 @@ extension UIView: ConstrainableItem {
 extension UILayoutGuide: ConstrainableItem {
     /// Returns the receiver's `owningView`.
     public var parentView: UIView? {
-        return owningView
+        owningView
     }
 
     /// Returns the receiver's `topAnchor`.
     public var firstBaselineAnchor: NSLayoutYAxisAnchor {
-        return topAnchor
+        topAnchor
     }
 
     /// Returns the receiver's `bottomAnchor`.
     public var lastBaselineAnchor: NSLayoutYAxisAnchor {
-        return bottomAnchor
+        bottomAnchor
     }
 
     /// This does nothing on `UILayoutGuide`s.

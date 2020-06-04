@@ -39,8 +39,8 @@ extension ConstraintGroup {
         insets: NSDirectionalEdgeInsets = .zero,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             composedOf:
@@ -68,8 +68,8 @@ extension ConstraintGroup {
         trailingInset: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             composedOf:
@@ -95,8 +95,8 @@ extension ConstraintGroup {
         bottomInset: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             composedOf:
@@ -117,8 +117,8 @@ extension ConstraintGroup {
         in secondItem: ConstrainableItem? = nil,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             composedOf:
@@ -139,8 +139,8 @@ extension ConstraintGroup {
         _ size: CGSize,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             composedOf:
@@ -159,8 +159,8 @@ extension ConstraintGroup {
         _ size: CGSize,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .size(.equal, size, file: file, line: line)
+    ) -> ConstraintGroup {
+        .size(.equal, size, file: file, line: line)
     }
 
     /// Returns a `ConstraintGroup` for matching the size of one item to another
@@ -182,8 +182,8 @@ extension ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             composedOf:

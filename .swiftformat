@@ -1,0 +1,35 @@
+# format options
+
+--allman false
+--binarygrouping 4,8
+--commas inline
+--comments indent
+--elseposition same-line
+--empty void
+--exponentcase lowercase
+--exponentgrouping disabled
+--fractiongrouping disabled
+--header ignore
+--hexgrouping 4,8
+--hexliteralcase uppercase
+--ifdef indent
+--importgrouping testable-bottom
+--indent 4
+--indentcase false
+--linebreaks lf
+--nospaceoperators ...,..<
+--octalgrouping 4,8
+--operatorfunc spaced
+--self init-only
+--semicolons inline
+--stripunusedargs unnamed-only
+--trimwhitespace always
+--wraparguments preserve
+--wrapcollections preserve
+
+# rules
+
+--enable blankLinesBetweenScopes
+--disable emptyBraces
+--disable trailingClosures
+--disable hoistPatternLet

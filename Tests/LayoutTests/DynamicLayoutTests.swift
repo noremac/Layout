@@ -1,18 +1,18 @@
 /*
  The MIT License (MIT)
- 
+
  Copyright (c) 2019 Cameron Pulsford
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -188,7 +188,7 @@ class DynamicLayoutTests: XCTestCase {
             ctx.when(.horizontallyRegular, { ctx in
                 ctx.addConstraints(regular)
 
-                ctx.when(.width(is: >=, 1_024), { ctx in
+                ctx.when(.width(is: >=, 1024), { ctx in
                     ctx.addConstraints(greaterThan1024)
                 }, otherwise: { ctx in
                     ctx.addConstraints(lessThan1024)
@@ -203,11 +203,11 @@ class DynamicLayoutTests: XCTestCase {
         greaterThan1024.activate()
         lessThan1024.activate()
 
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1_024, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1024, height: 1024)))
         XCTAssertEqualConstraints(compact, sut.activeConstraints)
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_024, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1024, height: 1024)))
         XCTAssertEqualConstraints(regular + greaterThan1024, sut.activeConstraints)
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_023, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1023, height: 1024)))
         XCTAssertEqualConstraints(regular + lessThan1024, sut.activeConstraints)
     }
 
@@ -225,16 +225,16 @@ class DynamicLayoutTests: XCTestCase {
                 ctx.addConstraints(compact)
             })
 
-            ctx.when(.width(is: >=, 1_024), { ctx in
+            ctx.when(.width(is: >=, 1024), { ctx in
                 ctx.addConstraints(greaterThan1024)
             }, otherwise: { ctx in
                 ctx.addConstraints(lessThan1024)
             })
         }
 
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_024, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1024, height: 1024)))
         XCTAssertEqualConstraints(regular + greaterThan1024, sut.activeConstraints)
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1_024, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1024, height: 1024)))
         XCTAssertEqualConstraints(compact + greaterThan1024, sut.activeConstraints)
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 10, height: 10)))
         XCTAssertEqualConstraints(regular + lessThan1024, sut.activeConstraints)
@@ -282,7 +282,7 @@ class DynamicLayoutTests: XCTestCase {
                 }
             })
 
-            ctx.when(.width(is: >=, 1_024), { ctx in
+            ctx.when(.width(is: >=, 1024), { ctx in
                 ctx.addAction { _ in
                     biggerThan1024 = true
                 }
@@ -293,10 +293,10 @@ class DynamicLayoutTests: XCTestCase {
             })
         }
 
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1_024, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1024, height: 1024)))
         XCTAssertEqual(sizeClass, .regular)
         XCTAssertEqual(biggerThan1024, true)
-        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1_024, height: 1_024)))
+        sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1024, height: 1024)))
         XCTAssertEqual(sizeClass, .compact)
         XCTAssertEqual(biggerThan1024, true)
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 10, height: 10)))
@@ -311,7 +311,7 @@ class DynamicLayoutTests: XCTestCase {
         measureMetrics([.wallClockTime], automaticallyStartMeasuring: false, for: {
             let sut = DynamicLayout<Bool>()
             let parentView = UIView()
-            let views = (1...10_000).map({ _ in UIView() })
+            let views = (1...10000).map({ _ in UIView() })
             views.forEach({ parentView.addSubview($0) })
             sut.configure { ctx in
                 for view in views {

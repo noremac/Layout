@@ -31,24 +31,25 @@ func XCTAssertEqualConstraints<S>(_ desired: [NSLayoutConstraint], _ sut: S, fil
     }
 
     let missingConstraints = desired.filter { c1 in
-        return !sut.contains(where: { c2 in c1.isEqualToConstraint(c2) })
+        !sut.contains(where: { c2 in c1.isEqualToConstraint(c2) })
     }
 
     guard missingConstraints.isEmpty else {
         return XCTFail("Could not find constraint\(missingConstraints.count > 1 ? "s" : "") matching: \(missingConstraints)", file: file, line: line)
     }
 }
+
 extension NSLayoutConstraint {
     func isEqualToConstraint(_ otherConstraint: NSLayoutConstraint) -> Bool {
-        return self.firstItem === otherConstraint.firstItem
-            && self.secondItem === otherConstraint.secondItem
-            && self.firstAttribute == otherConstraint.firstAttribute
-            && self.secondAttribute == otherConstraint.secondAttribute
-            && self.relation == otherConstraint.relation
-            && self.multiplier == otherConstraint.multiplier
-            && self.constant == otherConstraint.constant
-            && self.priority == otherConstraint.priority
-            && self.identifier == otherConstraint.identifier
-            && self.isActive == otherConstraint.isActive
+        firstItem === otherConstraint.firstItem
+            && secondItem === otherConstraint.secondItem
+            && firstAttribute == otherConstraint.firstAttribute
+            && secondAttribute == otherConstraint.secondAttribute
+            && relation == otherConstraint.relation
+            && multiplier == otherConstraint.multiplier
+            && constant == otherConstraint.constant
+            && priority == otherConstraint.priority
+            && identifier == otherConstraint.identifier
+            && isActive == otherConstraint.isActive
     }
 }

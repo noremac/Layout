@@ -36,7 +36,7 @@ extension DynamicLayout.Context {
     ///
     /// - Parameter action: The action to be run.
     public mutating func addAction(_ action: @escaping (Environment) -> Void) {
-        self.actions.append(action)
+        actions.append(action)
     }
 
     /// Adds constraints to the receiving context.
@@ -55,7 +55,7 @@ extension DynamicLayout.Context {
     /// Adds constraints to the receiving context.
     @discardableResult
     public static func += (lhs: inout DynamicLayout.Context, rhs: [NSLayoutConstraint]) -> [NSLayoutConstraint] {
-        return lhs.addConstraints(rhs)
+        lhs.addConstraints(rhs)
     }
 }
 
