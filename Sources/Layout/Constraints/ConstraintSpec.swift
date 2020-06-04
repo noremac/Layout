@@ -38,7 +38,8 @@ func constraintGenerator(
     constant: CGFloat = 0,
     file: StaticString,
     line: UInt
-    ) -> ConstraintSpec {
+) -> ConstraintSpec {
+    // swiftformat:disable redundantReturn
     return { firstItem in
         let toItem: ConstrainableItem?
         if secondAttribute == .notAnAttribute {

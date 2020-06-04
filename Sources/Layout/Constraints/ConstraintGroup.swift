@@ -1,18 +1,18 @@
 /*
  The MIT License (MIT)
- 
+
  Copyright (c) 2019 Cameron Pulsford
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -113,8 +113,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -153,8 +153,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -193,8 +193,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -233,8 +233,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -273,8 +273,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -313,8 +313,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -353,8 +353,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -393,8 +393,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -433,8 +433,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -473,8 +473,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -504,8 +504,8 @@ public struct ConstraintGroup {
         _ constant: CGFloat,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -531,8 +531,8 @@ public struct ConstraintGroup {
         _ constant: CGFloat,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .fixedWidth(.equal, constant, file: file, line: line)
+    ) -> ConstraintGroup {
+        .fixedWidth(.equal, constant, file: file, line: line)
     }
 
     /// Returns a `ConstraintGroup` for applying a fixed height to an item.
@@ -548,8 +548,8 @@ public struct ConstraintGroup {
         _ constant: CGFloat,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -575,8 +575,8 @@ public struct ConstraintGroup {
         _ constant: CGFloat,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .fixedHeight(.equal, constant, file: file, line: line)
+    ) -> ConstraintGroup {
+        .fixedHeight(.equal, constant, file: file, line: line)
     }
 
     /// Returns a `ConstraintGroup` for applying a relative width in relation to
@@ -601,8 +601,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -641,8 +641,8 @@ public struct ConstraintGroup {
         constant: CGFloat = 0,
         file: StaticString = #file,
         line: UInt = #line
-        ) -> ConstraintGroup {
-        return .init(
+    ) -> ConstraintGroup {
+        .init(
             file: file,
             line: line,
             spec:
@@ -666,7 +666,7 @@ public struct ConstraintGroup {
     /// - Returns: An array of `NSLayoutConstraint`.
     @inlinable
     public func constraints(with firstItem: ConstrainableItem) -> [NSLayoutConstraint] {
-        return specs.map { spec in
+        specs.map { spec in
             let constraint = spec(firstItem)
             constraint.priority = priority
             constraint.identifier = identifier

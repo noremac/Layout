@@ -30,7 +30,7 @@ extension Array where Element == NSLayoutConstraint {
     ///
     /// - Parameter constant: The new constant.
     public func setConstant(_ constant: CGFloat) {
-        self.forEach {
+        forEach {
             $0.constant = constant
         }
     }
@@ -53,16 +53,16 @@ enum FatalError {
     }
 
     #if DEBUG
-    static func withTestFatalError(_ f: () -> Void) -> Bool {
-        var originalCrash = crash
-        defer { crash = originalCrash }
-        var crashed = false
-        crash = { message, _, _ in
-            print("would have crashed with message:", message())
-            crashed = true
+        static func withTestFatalError(_ f: () -> Void) -> Bool {
+            var originalCrash = crash
+            defer { crash = originalCrash }
+            var crashed = false
+            crash = { message, _, _ in
+                print("would have crashed with message:", message())
+                crashed = true
+            }
+            f()
+            return crashed
         }
-        f()
-        return crashed
-    }
     #endif
 }

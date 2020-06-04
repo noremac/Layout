@@ -30,7 +30,7 @@ extension DynamicLayout.Predicate {
     /// - Parameter environment: An `Environment` value.
     /// - Returns: The vale of the predicate with the given environment.
     public func evaluate(with environment: Environment) -> Bool {
-        return predicate(environment)
+        predicate(environment)
     }
 }
 
@@ -42,7 +42,7 @@ extension DynamicLayout.Predicate {
     ///   - rhs: The second `Predicate`.
     /// - Returns: A new composite `Predicate` that `or`s together two others.
     public static func || (lhs: DynamicLayout<Environment>.Predicate, rhs: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             lhs.evaluate(with: env) || rhs.evaluate(with: env)
         }
     }
@@ -54,7 +54,7 @@ extension DynamicLayout.Predicate {
     ///   - rhs: The second `Predicate`.
     /// - Returns: A new composite `Predicate` that `and`s together two others.
     public static func && (lhs: DynamicLayout<Environment>.Predicate, rhs: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             lhs.evaluate(with: env) && rhs.evaluate(with: env)
         }
     }
@@ -64,7 +64,7 @@ extension DynamicLayout.Predicate {
     /// - Parameter predicate: The `Predicate` to negate.
     /// - Returns: A new `Predicate` that negates the given `Predicate`.
     public static prefix func ! (predicate: DynamicLayout<Environment>.Predicate) -> DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             !predicate.evaluate(with: env)
         }
     }
@@ -73,7 +73,7 @@ extension DynamicLayout.Predicate {
 extension DynamicLayout.Predicate {
     /// Returns a `Predicate` that always evaluates to `true`.
     public static var always: DynamicLayout<Environment>.Predicate {
-        return .init { _ in true }
+        .init { _ in true }
     }
 }
 
@@ -81,7 +81,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// vertical size class is unspecified.
     public static var verticallyUnspecified: DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             env.traitCollection.verticalSizeClass == .unspecified
         }
     }
@@ -89,7 +89,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// vertical size class is regular.
     public static var verticallyRegular: DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             env.traitCollection.verticalSizeClass == .regular
         }
     }
@@ -97,7 +97,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// vertical size class is compact.
     public static var verticallyCompact: DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             env.traitCollection.verticalSizeClass == .compact
         }
     }
@@ -105,7 +105,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// horizontal size class is unspecified.
     public static var horizontallyUnspecified: DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             env.traitCollection.horizontalSizeClass == .unspecified
         }
     }
@@ -113,7 +113,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// horizontal size class is regular.
     public static var horizontallyRegular: DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             env.traitCollection.horizontalSizeClass == .regular
         }
     }
@@ -121,7 +121,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutTraitEnvironme
     /// Returns a `Predicate` that is `true` if the `Environment`'s current
     /// horizontal size class is compact.
     public static var horizontallyCompact: DynamicLayout<Environment>.Predicate {
-        return .init { env in
+        .init { env in
             env.traitCollection.horizontalSizeClass == .compact
         }
     }
@@ -137,7 +137,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmen
     /// - Returns: A `Predicate` that is `true` when the given closure is
     ///   `true`.
     public static func width(is f: @escaping (_ width: CGFloat, _ other: CGFloat) -> Bool, _ other: CGFloat) -> DynamicLayout.Predicate {
-        return .init { env in
+        .init { env in
             f(env.size.width, other)
         }
     }
@@ -151,7 +151,7 @@ extension DynamicLayout.Predicate where Environment: DynamicLayoutSizeEnvironmen
     /// - Returns: A `Predicate` that is `true` when the given closure is
     ///   `true`.
     public static func height(is f: @escaping (_ height: CGFloat, _ other: CGFloat) -> Bool, _ other: CGFloat) -> DynamicLayout.Predicate {
-        return .init { env in
+        .init { env in
             f(env.size.height, other)
         }
     }

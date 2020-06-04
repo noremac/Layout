@@ -35,7 +35,7 @@ extension UITraitCollection: DynamicLayoutTraitEnvironmentProtocol {
     /// Returns the receiver. This exists to satisfy
     /// `DynamicLayoutTraitEnvironmentProtocol`.
     public var traitCollection: UITraitCollection {
-        return self
+        self
     }
 }
 
@@ -50,7 +50,7 @@ extension CGSize: DynamicLayoutSizeEnvironmentProtocol {
     /// Returns the receiver. This exists to satisfy
     /// `DynamicLayoutSizeEnvironmentProtocol`.
     public var size: CGSize {
-        return self
+        self
     }
 }
 
@@ -86,7 +86,7 @@ extension DynamicLayout where Environment: DynamicLayoutTraitEnvironmentProtocol
         regularHeightCompactWidth: (_ ctx: inout Context) -> Void,
         regularHeightRegularWidth: (_ ctx: inout Context) -> Void,
         compactHeight: (_ ctx: inout Context) -> Void
-        ) {
+    ) {
         configure(file: file, line: line) { ctx in
             ctx.when(.verticallyRegular && .horizontallyCompact) { ctx in
                 regularHeightCompactWidth(&ctx)

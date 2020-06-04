@@ -69,7 +69,7 @@ public class DynamicLayout<Environment> {
         /// arrays apparently.
         var otherwise: Context? {
             get {
-                return _otherwise?.first
+                _otherwise?.first
             }
             set {
                 _otherwise = newValue.map { [$0] }
