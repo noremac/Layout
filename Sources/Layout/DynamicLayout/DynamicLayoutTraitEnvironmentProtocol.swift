@@ -83,20 +83,21 @@ extension DynamicLayout where Environment: DynamicLayoutTraitEnvironmentProtocol
     public func configure(
         file: StaticString = #file,
         line: UInt = #line,
-        regularHeightCompactWidth: (_ ctx: inout Context) -> Void,
-        regularHeightRegularWidth: (_ ctx: inout Context) -> Void,
-        compactHeight: (_ ctx: inout Context) -> Void
+        regularHeightCompactWidth: () -> Void,
+        regularHeightRegularWidth: () -> Void,
+        compactHeight: () -> Void
     ) {
-        configure(file: file, line: line) { ctx in
-            ctx.when(.verticallyRegular && .horizontallyCompact) { ctx in
-                regularHeightCompactWidth(&ctx)
-            }
-            ctx.when(.verticallyRegular && .horizontallyRegular) { ctx in
-                regularHeightRegularWidth(&ctx)
-            }
-            ctx.when(.verticallyCompact) { ctx in
-                compactHeight(&ctx)
-            }
-        }
+        // TODO:
+//        configure(file: file, line: line) { ctx in
+//            ctx.when(.verticallyRegular && .horizontallyCompact) { ctx in
+//                regularHeightCompactWidth(&ctx)
+//            }
+//            ctx.when(.verticallyRegular && .horizontallyRegular) { ctx in
+//                regularHeightRegularWidth(&ctx)
+//            }
+//            ctx.when(.verticallyCompact) { ctx in
+//                compactHeight(&ctx)
+//            }
+//        }
     }
 }

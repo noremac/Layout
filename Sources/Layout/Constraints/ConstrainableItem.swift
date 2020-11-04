@@ -82,7 +82,11 @@ extension ConstrainableItem {
     @usableFromInline
     func makeConstraints<S>(groups: S) -> [NSLayoutConstraint] where S: Sequence, S.Element == ConstraintGroup {
         setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
-        return groups.flatMap { $0.constraints(with: self) }
+        let constraints = groups.flatMap { $0.constraints(with: self) }
+        if let container = _globalConstraintContainer {
+            container.addConstraints(constraints)
+        }
+        return constraints
     }
 
     /// Creates and returns an array of `NSLayoutConstraint`s corresponding to
@@ -96,6 +100,7 @@ extension ConstrainableItem {
     ///   `setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()` on
     ///   the receiver automatically.
     @inlinable
+    @discardableResult
     public func makeConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
         makeConstraints(groups: groups)
     }
@@ -112,7 +117,11 @@ extension ConstrainableItem {
     ///    the receiver automatically.
     @inlinable
     @discardableResult
-    public func applyConstraints(_ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
+    public func applyConstraints(file: StaticString = #file, line: UInt = #line, _ groups: ConstraintGroup...) -> [NSLayoutConstraint] {
+        guard _globalConstraintContainer == nil else {
+            FatalError.crash("Call makeConstraints, not applyConstraints, when configurationg a DynamicLayout.", file, line)
+            return []
+        }
         let constraints = makeConstraints(groups: groups)
         constraints.activate()
         return constraints

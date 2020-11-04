@@ -46,15 +46,17 @@ extension Array where Element == NSLayoutConstraint {
     }
 }
 
+@usableFromInline
 enum FatalError {
     /// Crash. Runs `fatalError` unless overriden.
+    @usableFromInline
     private(set) static var crash: (@autoclosure () -> String, StaticString, UInt) -> Void = { message, file, line in
         fatalError(message(), file: file, line: line)
     }
 
     #if DEBUG
         static func withTestFatalError(_ f: () -> Void) -> Bool {
-            var originalCrash = crash
+            let originalCrash = crash
             defer { crash = originalCrash }
             var crashed = false
             crash = { message, _, _ in
