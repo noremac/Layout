@@ -99,27 +99,6 @@ class DynamicLayoutTests: XCTestCase {
         XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.trailing()))
     }
 
-    func testPredicateOtherwiseActions() {
-        var x = 0
-        let sut = DynamicLayout<Bool>()
-        sut.configure { config in
-            config.when(.init { $0 }) {
-                config.addAction {
-                    x = 1
-                }
-            } otherwise: {
-                config.addAction {
-                    x = 2
-                }
-            }
-        }
-        XCTAssertEqual(x, 0)
-        sut.update(environment: true)
-        XCTAssertEqual(x, 1)
-        sut.update(environment: false)
-        XCTAssertEqual(x, 2)
-    }
-
     func testPredicateWithoutOtherwise() {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
@@ -261,6 +240,27 @@ class DynamicLayoutTests: XCTestCase {
         XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.top()))
         sut.update(environment: 11)
         XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.bottom()))
+    }
+
+    func testBasicActions() {
+        var x = 0
+        let sut = DynamicLayout<Bool>()
+        sut.configure { config in
+            config.when(true) {
+                config.addAction {
+                    x = 1
+                }
+            } otherwise: {
+                config.addAction {
+                    x = 2
+                }
+            }
+        }
+        XCTAssertEqual(x, 0)
+        sut.update(environment: true)
+        XCTAssertEqual(x, 1)
+        sut.update(environment: false)
+        XCTAssertEqual(x, 2)
     }
 
     func testMultipleTopLevelConditionsActions() {
