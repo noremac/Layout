@@ -24,6 +24,14 @@
 
 import UIKit
 
+@usableFromInline
+protocol _GlobalConstraintContainer {
+    func addConstraints(_ constraints: [NSLayoutConstraint])
+}
+
+@usableFromInline
+var _globalConstraintContainer: _GlobalConstraintContainer?
+
 /// A class for creating, storing, and activating `NSLayoutConstraint`s based on
 /// arbitrary predicates.
 ///
@@ -51,7 +59,7 @@ public class DynamicLayout<Environment> {
 
     /// A struct for holding a `Predicate` and its associated
     /// `NSLayoutConstraint`s.
-    public struct Context {
+    final class Context: _GlobalConstraintContainer {
         var predicate: Predicate
 
         var constraints: [NSLayoutConstraint] = []
@@ -60,21 +68,7 @@ public class DynamicLayout<Environment> {
 
         var children: [Context] = []
 
-        private var _otherwise: [Context]?
-
-        /// This is a hack because the compiler won't let us write
-        /// `var otherwise: Context?` as a regular stored property.
-        /// "Value type 'DynamicLayout<Environment>.Context' cannot have a
-        /// stored property that recursively contains it." It doesn't apply to
-        /// arrays apparently.
-        var otherwise: Context? {
-            get {
-                _otherwise?.first
-            }
-            set {
-                _otherwise = newValue.map { [$0] }
-            }
-        }
+        var otherwise: Context?
 
         init(predicate: Predicate) {
             self.predicate = predicate
@@ -90,7 +84,20 @@ public class DynamicLayout<Environment> {
             }
             return otherwise?.hasConstraintsOrActions ?? false
         }
+
+        func activeContexts(for environment: Environment) -> [DynamicLayout.Context] {
+            if predicate.evaluate(with: environment) {
+                return children.reduce(into: [self], { $0 += $1.activeContexts(for: environment) })
+            }
+            return otherwise?.activeContexts(for: environment) ?? []
+        }
+
+        func addConstraints(_ constraints: [NSLayoutConstraint]) {
+            self.constraints += constraints
+        }
     }
+
+    var hasBeenConfigured = false
 
     var mainContext: Context = .init(predicate: .always)
 
@@ -113,11 +120,14 @@ public class DynamicLayout<Environment> {
     ///
     /// - Attention: A `fatalError` will be hit if this method is called more
     ///   than once.
-    public func configure(file: StaticString = #file, line: UInt = #line, _ main: (_ ctx: inout Context) -> Void) {
-        if !mainContext.constraints.isEmpty || !mainContext.actions.isEmpty || !mainContext.children.isEmpty {
+    public func configure(file: StaticString = #file, line: UInt = #line, _ main: (_ configuration: Configuration) -> Void) {
+        guard !hasBeenConfigured else {
             return FatalError.crash("\(#function) should only be called once", file, line)
         }
-        main(&mainContext)
+        hasBeenConfigured = true
+        _globalConstraintContainer = mainContext
+        main(Configuration(mainContext))
+        _globalConstraintContainer = nil
     }
 
     /// Walks the tree of `Context`s and activates all the constraints whose
