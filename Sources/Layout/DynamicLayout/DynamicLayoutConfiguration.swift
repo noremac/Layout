@@ -75,7 +75,7 @@ public extension DynamicLayout.Configuration {
     }
 }
 
-extension DynamicLayout.Configuration where Environment: Equatable {
+public extension DynamicLayout.Configuration where Environment: Equatable {
     func when(_ environment: Environment, _ when: () -> Void, otherwise: () -> Void) {
         self.when(.init({ $0 == environment }), when, otherwise: otherwise)
     }

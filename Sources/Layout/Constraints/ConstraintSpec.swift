@@ -45,7 +45,7 @@ func constraintGenerator(
         if secondAttribute == .notAnAttribute {
             toItem = nil
         } else {
-            if let item = secondItem ?? firstItem.parentView {
+            if let item = secondItem ?? firstItem.toItem ?? firstItem.parentView {
                 toItem = item
             } else {
                 FatalError.crash("To automatically relate your constraints to the parent view, your item must already be a part of the view hierarchy.", file, line)

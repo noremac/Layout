@@ -26,7 +26,7 @@ import UIKit
 
 /// This protocol defines an item that constraints can be applied to.
 /// - Note: Only `UIView` and `UILayoutGuide` should implement this protocol.
-public protocol ConstrainableItem {
+public protocol ConstrainableItem: AnyObject {
     /// - Returns: The `UIView`'s `superview` or the `UILayoutGuide`'s
     /// `owningView`.
     var parentView: UIView? { get }
@@ -76,6 +76,19 @@ public protocol ConstrainableItem {
     /// Sets `translatesAutoresizingMaskIntoConstraints` to `false` for
     /// `UIView`s. It does nothing for `UILayoutGuide`s.
     func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary()
+}
+
+private var constrainableItemToItemKey: UInt8 = 0
+
+internal extension ConstrainableItem {
+    var toItem: ConstrainableItem? {
+        get {
+            objc_getAssociatedObject(self, &constrainableItemToItemKey) as? ConstrainableItem
+        }
+        set {
+            objc_setAssociatedObject(self, &constrainableItemToItemKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
 }
 
 extension ConstrainableItem {
