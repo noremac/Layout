@@ -31,7 +31,7 @@ public final class HorizontalSpacer: UIView {
         self.minimumLength = minimumLength
         super.init(frame: .zero)
         setContentHuggingPriority(.init(1), for: .horizontal)
-        setContentCompressionResistancePriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.init(1), for: .horizontal)
         applyConstraints(.fixedWidth(minimumLength) ~ .defaultLow)
     }
 
@@ -41,7 +41,7 @@ public final class HorizontalSpacer: UIView {
     }
 
     public override var intrinsicContentSize: CGSize {
-        CGSize(width: minimumLength, height: UIView.noIntrinsicMetric)
+        CGSize(width: 8000, height: UIView.noIntrinsicMetric)
     }
 }
 
@@ -52,7 +52,7 @@ public final class VerticalSpacer: UIView {
         self.minimumLength = minimumLength
         super.init(frame: .zero)
         setContentHuggingPriority(.init(1), for: .vertical)
-        setContentCompressionResistancePriority(.required, for: .vertical)
+        setContentCompressionResistancePriority(.init(1), for: .vertical)
         applyConstraints(.fixedHeight(minimumLength) ~ .defaultLow)
     }
 
@@ -62,6 +62,6 @@ public final class VerticalSpacer: UIView {
     }
 
     public override var intrinsicContentSize: CGSize {
-        CGSize(width: UIView.noIntrinsicMetric, height: minimumLength)
+        CGSize(width: UIView.noIntrinsicMetric, height: 8000)
     }
 }
