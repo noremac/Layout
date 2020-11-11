@@ -6,6 +6,12 @@ public extension UIView {
         add(constrainableItems: items(), to: superview)
         return superview
     }
+
+    @discardableResult
+    func overlay(@ArrayBuilder<ConstrainableItem> items: () -> [ConstrainableItem]) -> Self {
+        add(constrainableItems: items(), to: self)
+        return self
+    }
 }
 
 public extension UILayoutGuide {
