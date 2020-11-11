@@ -34,6 +34,62 @@ enum TestEnum {
     case three
 }
 
+class BadThing: ConstrainableItem {
+    var parentView: UIView?
+
+    var leftAnchor: NSLayoutXAxisAnchor {
+        fatalError("")
+    }
+
+    var rightAnchor: NSLayoutXAxisAnchor {
+        fatalError("")
+    }
+
+    var leadingAnchor: NSLayoutXAxisAnchor {
+        fatalError("")
+    }
+
+    var trailingAnchor: NSLayoutXAxisAnchor {
+        fatalError("")
+    }
+
+    var topAnchor: NSLayoutYAxisAnchor {
+        fatalError("")
+    }
+
+    var bottomAnchor: NSLayoutYAxisAnchor {
+        fatalError("")
+    }
+
+    var widthAnchor: NSLayoutDimension {
+        fatalError("")
+    }
+
+    var heightAnchor: NSLayoutDimension {
+        fatalError("")
+    }
+
+    var centerXAnchor: NSLayoutXAxisAnchor {
+        fatalError("")
+    }
+
+    var centerYAnchor: NSLayoutYAxisAnchor {
+        fatalError("")
+    }
+
+    var firstBaselineAnchor: NSLayoutYAxisAnchor {
+        fatalError("")
+    }
+
+    var lastBaselineAnchor: NSLayoutYAxisAnchor {
+        fatalError("")
+    }
+
+    func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
+
+    }
+}
+
 class StackBuilderTests: XCTestCase {
     func testVerticalDefaultInitializers() {
         let stack = UIStackView.vertical {}
@@ -248,5 +304,14 @@ class StackBuilderTests: XCTestCase {
         XCTAssertEqual(label.superview, view)
         XCTAssertEqual(view.constraints.count, 8)
         XCTAssertTrue(view.constraints.allSatisfy({ $0.secondItem is UILayoutGuide }))
+    }
+
+    func testFatalErrorsIfYouPassSomethingWrong() {
+        let crashed = FatalError.withTestFatalError {
+            _ = UIView.build {
+                BadThing()
+            }
+        }
+        XCTAssertTrue(crashed)
     }
 }
