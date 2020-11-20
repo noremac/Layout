@@ -1,52 +1,82 @@
 import Layout
 import PlaygroundSupport
-import UIKit
 import SwiftUI
+import UIKit
 
-class MyViewController : UIViewController {
-    let red: UIView = {
+class MyViewController: UIViewController {
+    let image: UIView = {
         let view = UIView()
         view.backgroundColor = .red
         return view
     }()
 
-    let green: UIView = {
+    let badge: UIView = {
         let view = UIView()
         view.backgroundColor = .green
         return view
     }()
 
-    let labels: [UILabel] = {
-        (1..<10).map({
-            let label = UILabel()
-            label.text = "Hello, world \($0)"
-            return label
-        })
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Title!"
+        label.font = .preferredFont(forTextStyle: .headline)
+        label.numberOfLines = 0
+        return label
+    }()
+
+    let summaryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Summary!"
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 0
+        return label
+    }()
+
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "30 minutes"
+        label.textColor = .secondaryLabel
+        return label
+    }()
+
+    let playButton: UIButton = {
+        let view = UIButton(type: .system)
+        view.setImage(UIImage(systemName: "play"), for: .normal)
+        return view
     }()
 
     override func loadView() {
-        self.view = UIView.build {
-            red.constraints(
-                .bottom(),
-                .leading(),
-                .size(CGSize(width: 100, height: 100))
-            )
-            green.constraints(
-                .center(in: red),
-                .relativeSize(to: red, multiplier: 0.5)
-            )
+        view = UIStackView.vertical(spacing: 10) {
+            image
+                .overlay {
+                    badge.constraints {
+                        AlignEdges([.bottom, .trailing], insets: 8)
+                        Size(width: 20, height: 20)
+                    }
+                }
+                .constraints {
+                    AspectRatio(3 / 2)
+                }
 
-            UIStackView.vertical(spacing: 8) {
-                labels[0]
-                labels[1]
-                    .spacingAfter(40)
-                labels[2]
-                labels[3]
-                labels[4]
-                    .spacingAfter(0)
-                labels[5]
+            UIView.build {
+                UIStackView.vertical(spacing: 10) {
+                    titleLabel
+
+                    summaryLabel
+                        .spacingAfter(20)
+
+                    UIStackView.horizontal {
+                        timeLabel
+                        HorizontalSpacer()
+                        playButton
+                    }
+                }
+                .constraints {
+                    AlignEdges(insets: .init(top: 0, leading: 8, bottom: 0, trailing: 8))
+                }
             }
-            .constraints(.center())
+
+            VerticalSpacer()
         }
     }
 }

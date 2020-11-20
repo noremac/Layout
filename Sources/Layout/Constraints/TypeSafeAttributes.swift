@@ -1,103 +1,55 @@
 import UIKit
 
-/// A wrapper around the "x" `NSLayoutConstraint.Attribute`s.
 public struct XAttribute {
-    /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
-    /// A closure that returns the anchor logically associated with this
-    /// attribute.
-    public let anchor: (ConstrainableItem) -> NSLayoutXAxisAnchor
-
-    /// Initializes an `XAttribute`.
-    ///
-    /// - Parameters:
-    ///   - attribute: The associated attribute.
-    ///   - anchor: The associated anchor.
-    public init(_ attribute: NSLayoutConstraint.Attribute, _ anchor: @escaping (ConstrainableItem) -> NSLayoutXAxisAnchor) {
+    public init(_ attribute: NSLayoutConstraint.Attribute) {
         self.attribute = attribute
-        self.anchor = anchor
     }
 }
 
-extension XAttribute {
-    /// An `XAttribute` representing `left`.
-    public static let left = XAttribute(.left, { $0.leftAnchor })
+public extension XAttribute {
+    static let left = XAttribute(.left)
 
-    /// An `XAttribute` representing `right`.
-    public static let right = XAttribute(.right, { $0.rightAnchor })
+    static let right = XAttribute(.right)
 
-    /// An `XAttribute` representing `leading`.
-    public static let leading = XAttribute(.leading, { $0.leadingAnchor })
+    static let leading = XAttribute(.leading)
 
-    /// An `XAttribute` representing `trailing`.
-    public static let trailing = XAttribute(.trailing, { $0.trailingAnchor })
+    static let trailing = XAttribute(.trailing)
 
-    /// An `XAttribute` representing `centerX`.
-    public static let centerX = XAttribute(.centerX, { $0.centerXAnchor })
+    static let centerX = XAttribute(.centerX)
 }
 
-/// A wrapper around the "y" `NSLayoutConstraint.Attribute`s.
 public struct YAttribute {
-    /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
-    /// A closure that returns the anchor logically associated with this
-    /// attribute.
-    public let anchor: (ConstrainableItem) -> NSLayoutYAxisAnchor
-
-    /// Initializes a `YAttribute`.
-    ///
-    /// - Parameters:
-    ///   - attribute: The associated attribute.
-    ///   - anchor: The associated anchor.
-    public init(_ attribute: NSLayoutConstraint.Attribute, _ anchor: @escaping (ConstrainableItem) -> NSLayoutYAxisAnchor) {
+    public init(_ attribute: NSLayoutConstraint.Attribute) {
         self.attribute = attribute
-        self.anchor = anchor
     }
 }
 
-extension YAttribute {
-    /// A `YAttribute` representing `top`.
-    public static let top = YAttribute(.top, { $0.topAnchor })
+public extension YAttribute {
+    static let top = YAttribute(.top)
 
-    /// A `YAttribute` representing `bottom`.
-    public static let bottom = YAttribute(.bottom, { $0.bottomAnchor })
+    static let bottom = YAttribute(.bottom)
 
-    /// A `YAttribute` representing `firstBaseline`.
-    public static let firstBaseline = YAttribute(.firstBaseline, { $0.firstBaselineAnchor })
+    static let firstBaseline = YAttribute(.firstBaseline)
 
-    /// A `YAttribute` representing `lastBaseline`.
-    public static let lastBaseline = YAttribute(.lastBaseline, { $0.lastBaselineAnchor })
+    static let lastBaseline = YAttribute(.lastBaseline)
 
-    /// A `YAttribute` representing `centerY`.
-    public static let centerY = YAttribute(.centerY, { $0.centerYAnchor })
+    static let centerY = YAttribute(.centerY)
 }
 
-/// A wrapper around the "dimension" `NSLayoutConstraint.Attribute`s.
 public struct DimensionAttribute {
-    /// The associated attribute.
     public let attribute: NSLayoutConstraint.Attribute
 
-    /// A closure that returns the anchor logically associated with this
-    /// attribute.
-    public let anchor: (ConstrainableItem) -> NSLayoutDimension
-
-    /// Initializes a `DimensionAttribute`.
-    ///
-    /// - Parameters:
-    ///   - attribute: The associated attribute.
-    ///   - anchor: The associated anchor.
-    public init(_ attribute: NSLayoutConstraint.Attribute, _ anchor: @escaping (ConstrainableItem) -> NSLayoutDimension) {
+    public init(_ attribute: NSLayoutConstraint.Attribute) {
         self.attribute = attribute
-        self.anchor = anchor
     }
 }
 
-extension DimensionAttribute {
-    /// A `DimensionAttribute` representing `width`.
-    public static let width = DimensionAttribute(.width, { $0.widthAnchor })
+public extension DimensionAttribute {
+    static let width = DimensionAttribute(.width)
 
-    /// A `DimensionAttribute` representing `height`.
-    public static let height = DimensionAttribute(.height, { $0.heightAnchor })
+    static let height = DimensionAttribute(.height)
 }

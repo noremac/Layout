@@ -98,7 +98,7 @@ public class DynamicLayout<Environment> {
     ///   than once.
     public func configure(file: StaticString = #file, line: UInt = #line, _ main: (_ configuration: Configuration) -> Void) {
         guard !hasBeenConfigured else {
-            return FatalError.crash("\(#function) should only be called once", file, line)
+            return FatalError.crash("\(#function) should only be called once", file: file, line: line)
         }
         hasBeenConfigured = true
         _globalConstraintContainer = mainContext

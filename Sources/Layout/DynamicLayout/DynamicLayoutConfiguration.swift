@@ -1,7 +1,7 @@
 import UIKit
 
-extension DynamicLayout {
-    public final class Configuration {
+public extension DynamicLayout {
+    final class Configuration {
         var currentContext: DynamicLayout.Context {
             didSet {
                 _globalConstraintContainer = currentContext

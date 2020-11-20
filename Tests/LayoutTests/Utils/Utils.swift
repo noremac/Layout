@@ -25,7 +25,6 @@ extension NSLayoutConstraint {
             && multiplier == otherConstraint.multiplier
             && constant == otherConstraint.constant
             && priority == otherConstraint.priority
-            && identifier == otherConstraint.identifier
             && isActive == otherConstraint.isActive
     }
 }

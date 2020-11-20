@@ -32,4 +32,3 @@ public enum ArrayBuilder<Element> {
         child
     }
 }
-
