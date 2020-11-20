@@ -1,88 +1,125 @@
-# Layout
+# Layout <!-- omit in toc -->
 
-[![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://swift.org)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+- [Availability and Requirements](#availability-and-requirements)
+- [Creating Constraints](#creating-constraints)
+- [View builder DSL](#view-builder-dsl)
+- [`UIView` and `UILayoutGuide`](#uiview-and-uilayoutguide)
+- [Autoresizing Mask](#autoresizing-mask)
+- [Debugging Constraints](#debugging-constraints)
+- [License](#license)
 
 An expressive and extensible DSL for creating Auto Layout constraints and defining declarative layouts.
 
-# Creating Constraints
+## Availability and Requirements
+
+- Available as a Swift Package.
+- Requires Xcode 12 or higher.
+- Supports iOS 13+, and tvOS 13+.
+
+## Creating Constraints
 
 ``` swift
 // Creating inactive constraints (save and activate/manipulate later)
-let constraints = view.makeConstraints(
-  .center(),
-  .size(CGSize(width: 100, height: 100))
-)
+let constraints = view.makeConstraints {
+  Center()
+  Size(width: 100, height: 100)
+}
 ```
 
 ``` swift
 // Creating active constraints
-view.applyConstraints(
-  .center(),
-  .size(CGSize(width: 100, height: 100))
-)
+view.applyConstraints {
+  Center()
+  Size(width: 100, height: 100)
+}
 ```
 
-## `UIView` and `UILayoutGuide`
-`makeConstraints` and `applyConstraints` operate on both `UIView` and `UILayoutGuide`. All constraints that are setup up in relation to other items may also be either `UIView` or `UILayoutGuide`. 
+## View builder DSL
+
+Create UIKit layouts with a view builder DSL.
 
 ``` swift
-button.applyConstraints(
-  .center(in: view.safeAreaLayoutGuide), // relating to a `UILayoutGuide`
-  .relativeSize(of: otherButton) // relating to a `UIView`
-)
+UIStackView.vertical(spacing: 10) {
+    image
+        .overlay {
+            badge.constraints {
+                AlignEdges([.bottom, .trailing], insets: 8)
+                Size(width: 20, height: 20)
+            }
+        }
+        .constraints {
+            AspectRatio(3 / 2)
+        }
+
+    UIView.build {
+        UIStackView.vertical(spacing: 10) {
+            titleLabel
+
+            summaryLabel
+                .spacingAfter(20)
+
+            UIStackView.horizontal {
+                timeLabel
+                HorizontalSpacer()
+                playButton
+            }
+        }
+        .constraints {
+            AlignEdges(insets: .init(top: 0, leading: 8, bottom: 0, trailing: 8))
+        }
+    }
+
+    VerticalSpacer()
+}
+```
+
+Generates this layout:
+
+![Layout](./images/layout.png)
+
+## `UIView` and `UILayoutGuide`
+
+`makeConstraints` and `applyConstraints` operate on both `UIView` and `UILayoutGuide`. All constraints that are setup up in relation to other items may also be either `UIView` or `UILayoutGuide`.
+
+``` swift
+button.applyConstraints {
+  Center(in: view.safeAreaLayoutGuide), // relating to a `UILayoutGuide`
+  Size(to: otherButton) // relating to a `UIView`
+}
 ```
 
 Constraints that are related to another item default to the receiver’s parent view. Therefore, the following two examples are identical:
 
 ``` swift
 // Preferred
-button.applyConstraints(
-  .center()
-)
+button.applyConstraints {
+  Center()
+}
 ```
 
 ``` swift
 // Not-preferred
-button.applyConstraints(
-  .center(in: button.superview)
-)
+button.applyConstraints {
+  Center(in: button.superview)
+}
 ```
 
 ## Autoresizing Mask
-Layout sets `translatesAutoresizingMaskIntoConstraints` to `false` on the receiver of the `makeContstraints` and `applyConstraints` calls.
+
+Layout sets `translatesAutoresizingMaskIntoConstraints` to `false` on the receiver of the `makeConstraints` and `applyConstraints` calls.
 
 ## Debugging Constraints
-Layout has the ability to add debug identifiers to all constraints that include the file, function, and line number of where the constraint was created. If you are having trouble with ambiguous constraints, you can enable these identifiers like this:
+
+Layout automatically adds debug identifiers to all constraints that include the file, and line number of where the constraint was created.
+
+You may also set custom identifiers:
 
 ``` swift
-// Call this in your AppDelegate
-ConstraintGroup.debugConstraints = true
+button.applyConstraints {
+  Center() <- "my first custom identifier"
+}
 ```
 
-# Declarative Layout
-wip
+## License
 
----
-
-# Installation
-## CocoaPods
-Layout has not yet been published as a CocoaPod, but you may still use it. 
-
-To integrate Layout into your Xcode project using CocoaPods, specify it in your Podfile:
-
-```ruby
-pod 'Layout', :git => 'git@github.com:/noremac/Layout.git', :tag => '0.0.2'
-```
-
-## Carthage
-To integrate Layout into your Xcode project using Carthage, specify it in your Cartfile:
-``` ogdl
-github "noremac/Layout"
-```
-
-Run `carthage update` to build the framework and drag the built
-`Layout.framework` into your Xcode project.
-
-# License
 This code and tool is under the MIT License. See `LICENSE` file in this repository.

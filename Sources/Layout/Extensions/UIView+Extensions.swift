@@ -54,37 +54,38 @@ public extension UIView {
         return self
     }
 
-    func constraints(_ constraints: ConstraintGroup...) -> Self {
-        _additionalConstraints = constraints
-        return self
-    }
-
     func spacingAfter(_ spacing: CGFloat) -> Self {
         _spacingAfter = spacing
         return self
     }
 }
 
-public extension UILayoutGuide {
-    func constraints(_ constraints: ConstraintGroup...) -> Self {
-        _additionalConstraints = constraints
+var allowAdditionalConstraints = false
+
+private var _additionalConstraintsKey: UInt8 = 0
+
+public extension ConstrainableItem {
+    internal var _additionalConstraints: [MultipleConstraintGenerator]? {
+        get {
+            objc_getAssociatedObject(self, &_additionalConstraintsKey) as? [MultipleConstraintGenerator]
+        }
+        set {
+            objc_setAssociatedObject(self, &_additionalConstraintsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+
+    func constraints(@ArrayBuilder <MultipleConstraintGenerator> _ constraints: () -> [MultipleConstraintGenerator]) -> Self {
+        guard allowAdditionalConstraints else {
+            FatalError.crash("\(#function) is only allowed when using the layout DSL.")
+            return self
+        }
+        _additionalConstraints = constraints()
         return self
     }
 }
 
 extension UIView {
-    static var _additionalConstraintsKey: UInt8 = 0
-
     static var _spacingAfterKey: UInt8 = 0
-
-    var _additionalConstraints: [ConstraintGroup]? {
-        get {
-            objc_getAssociatedObject(self, &Self._additionalConstraintsKey) as? [ConstraintGroup]
-        }
-        set {
-            objc_setAssociatedObject(self, &Self._additionalConstraintsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
 
     var _spacingAfter: CGFloat? {
         get {
@@ -92,19 +93,6 @@ extension UIView {
         }
         set {
             objc_setAssociatedObject(self, &Self._spacingAfterKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
-extension UILayoutGuide {
-    static var _additionalConstraintsKey: UInt8 = 0
-
-    var _additionalConstraints: [ConstraintGroup]? {
-        get {
-            objc_getAssociatedObject(self, &Self._additionalConstraintsKey) as? [ConstraintGroup]
-        }
-        set {
-            objc_setAssociatedObject(self, &Self._additionalConstraintsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }

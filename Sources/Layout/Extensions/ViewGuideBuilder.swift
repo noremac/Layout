@@ -1,22 +1,31 @@
 import UIKit
 
 public extension UIView {
-    static func build(@ArrayBuilder<ConstrainableItem> items: () -> [ConstrainableItem]) -> UIView {
+    static func build(@ArrayBuilder <ConstrainableItem> items: () -> [ConstrainableItem]) -> UIView {
+        let previous = allowAdditionalConstraints
+        allowAdditionalConstraints = true
+        defer { allowAdditionalConstraints = previous }
         let superview = UIView()
         add(constrainableItems: items(), to: superview)
         return superview
     }
 
     @discardableResult
-    func overlay(@ArrayBuilder<ConstrainableItem> items: () -> [ConstrainableItem]) -> Self {
+    func overlay(@ArrayBuilder <ConstrainableItem> items: () -> [ConstrainableItem]) -> Self {
+        let previous = allowAdditionalConstraints
+        allowAdditionalConstraints = true
+        defer { allowAdditionalConstraints = previous }
         add(constrainableItems: items(), to: self)
         return self
     }
 }
 
 public extension UILayoutGuide {
-    static func build(@ArrayBuilder<ConstrainableItem> items: () -> [ConstrainableItem]) -> UILayoutGuide {
-        GuideBuilder(constrainableItems: items())
+    static func build(@ArrayBuilder <ConstrainableItem> items: () -> [ConstrainableItem]) -> UILayoutGuide {
+        let previous = allowAdditionalConstraints
+        allowAdditionalConstraints = true
+        defer { allowAdditionalConstraints = previous }
+        return GuideBuilder(constrainableItems: items())
     }
 }
 
@@ -54,7 +63,7 @@ private func add(constrainableItems: [ConstrainableItem], to superview: UIView) 
             superview.addLayoutGuide(guide)
             return guide._additionalConstraints.map(guide.makeConstraints(groups:)) ?? []
         } else {
-            FatalError.crash("Unknown item type: \(type(of: item))", #file, #line)
+            FatalError.crash("Unknown item type: \(type(of: item))")
             return []
         }
     }

@@ -32,9 +32,12 @@ public extension UIStackView {
         distribution: UIStackView.Distribution = .fill,
         alignment: UIStackView.Alignment = .fill,
         spacing: CGFloat = UIStackView.spacingUseDefault,
-        @ArrayBuilder<UIView> arrangedSubviews: () -> [UIView]
+        @ArrayBuilder <UIView> arrangedSubviews: () -> [UIView]
     ) -> UIStackView {
-        UIStackView(
+        let previous = allowAdditionalConstraints
+        allowAdditionalConstraints = true
+        defer { allowAdditionalConstraints = previous }
+        return UIStackView(
             axis: .horizontal,
             distribution: distribution,
             alignment: alignment,
@@ -47,9 +50,12 @@ public extension UIStackView {
         distribution: UIStackView.Distribution = .fill,
         alignment: UIStackView.Alignment = .fill,
         spacing: CGFloat = UIStackView.spacingUseDefault,
-        @ArrayBuilder<UIView> arrangedSubviews: () -> [UIView]
+        @ArrayBuilder <UIView> arrangedSubviews: () -> [UIView]
     ) -> UIStackView {
-        UIStackView(
+        let previous = allowAdditionalConstraints
+        allowAdditionalConstraints = true
+        defer { allowAdditionalConstraints = previous }
+        return UIStackView(
             axis: .vertical,
             distribution: distribution,
             alignment: alignment,

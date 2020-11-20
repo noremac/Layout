@@ -1,6 +1,6 @@
+import SwiftUI
 import UIKit
 import XCTest
-import SwiftUI
 
 @testable import Layout
 
@@ -10,63 +10,13 @@ enum TestEnum {
     case three
 }
 
-class BadThing: ConstrainableItem {
+final class BadConstrainableItem: ConstrainableItem {
     var parentView: UIView?
 
-    var leftAnchor: NSLayoutXAxisAnchor {
-        fatalError("")
-    }
-
-    var rightAnchor: NSLayoutXAxisAnchor {
-        fatalError("")
-    }
-
-    var leadingAnchor: NSLayoutXAxisAnchor {
-        fatalError("")
-    }
-
-    var trailingAnchor: NSLayoutXAxisAnchor {
-        fatalError("")
-    }
-
-    var topAnchor: NSLayoutYAxisAnchor {
-        fatalError("")
-    }
-
-    var bottomAnchor: NSLayoutYAxisAnchor {
-        fatalError("")
-    }
-
-    var widthAnchor: NSLayoutDimension {
-        fatalError("")
-    }
-
-    var heightAnchor: NSLayoutDimension {
-        fatalError("")
-    }
-
-    var centerXAnchor: NSLayoutXAxisAnchor {
-        fatalError("")
-    }
-
-    var centerYAnchor: NSLayoutYAxisAnchor {
-        fatalError("")
-    }
-
-    var firstBaselineAnchor: NSLayoutYAxisAnchor {
-        fatalError("")
-    }
-
-    var lastBaselineAnchor: NSLayoutYAxisAnchor {
-        fatalError("")
-    }
-
-    func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {
-
-    }
+    func setTranslatesAutoresizingMaskIntoConstraintsFalseIfNecessary() {}
 }
 
-class StackBuilderTests: XCTestCase {
+final class StackBuilderTests: XCTestCase {
     func testVerticalDefaultInitializers() {
         let stack = UIStackView.vertical {}
         XCTAssertEqual(stack.axis, .vertical)
@@ -261,7 +211,9 @@ class StackBuilderTests: XCTestCase {
     func testViewParent() {
         let label = UILabel()
         let view = UIView.build {
-            label.constraints(.alignEdges())
+            label.constraints {
+                AlignEdges()
+            }
         }
         let constraint = view.constraints.first
         XCTAssertTrue(constraint?.secondItem === view)
@@ -272,8 +224,12 @@ class StackBuilderTests: XCTestCase {
         let label = UILabel()
         let view = UIView.build {
             UILayoutGuide.build {
-                guide.constraints(.alignEdges())
-                label.constraints(.alignEdges())
+                guide.constraints {
+                    AlignEdges()
+                }
+                label.constraints {
+                    AlignEdges()
+                }
             }
         }
         XCTAssertEqual(guide.owningView, view)
@@ -285,7 +241,7 @@ class StackBuilderTests: XCTestCase {
     func testFatalErrorsIfYouPassSomethingWrong() {
         let crashed = FatalError.withTestFatalError {
             _ = UIView.build {
-                BadThing()
+                BadConstrainableItem()
             }
         }
         XCTAssertTrue(crashed)

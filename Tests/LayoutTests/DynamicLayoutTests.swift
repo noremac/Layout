@@ -9,15 +9,9 @@ class DynamicLayoutTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        ConstraintGroup.debugConstraints = false
         parentView = .init()
         view = .init()
         parentView.addSubview(view)
-    }
-
-    override func tearDown() {
-        ConstraintGroup.debugConstraints = true
-        super.tearDown()
     }
 
     func testConfigureOnlyCalledOnce() {
@@ -33,7 +27,9 @@ class DynamicLayoutTests: XCTestCase {
         let crashed = FatalError.withTestFatalError {
             let sut = DynamicLayout<Bool>()
             sut.configure { _ in
-                view.applyConstraints(.leading())
+                view.applyConstraints {
+                    Leading()
+                }
             }
         }
         XCTAssertTrue(crashed)
@@ -42,10 +38,12 @@ class DynamicLayoutTests: XCTestCase {
     func testGlobalConstraints() {
         let sut = DynamicLayout<Void>()
         sut.configure { _ in
-            view.makeConstraints(.leading())
+            view.makeConstraints {
+                Leading()
+            }
         }
         sut.update(environment: ())
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
     }
 
     func testGlobalActions() {
@@ -64,26 +62,32 @@ class DynamicLayoutTests: XCTestCase {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
             config.when(.init { $0 }) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             } otherwise: {
-                view.makeConstraints(.trailing())
+                view.makeConstraints {
+                    Trailing()
+                }
             }
         }
         sut.update(environment: true)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: false)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.trailing()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Trailing() })
     }
 
     func testPredicateWithoutOtherwise() {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
             config.when(.init { $0 }) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             }
         }
         sut.update(environment: true)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: false)
         XCTAssertEqualConstraints(sut.activeConstraints, [])
     }
@@ -92,26 +96,32 @@ class DynamicLayoutTests: XCTestCase {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
             config.when({ $0 }) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             } otherwise: {
-                view.makeConstraints(.trailing())
+                view.makeConstraints {
+                    Trailing()
+                }
             }
         }
         sut.update(environment: true)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: false)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.trailing()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Trailing() })
     }
 
     func testClosureWithoutOtherwise() {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
             config.when({ $0 }) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             }
         }
         sut.update(environment: true)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: false)
         XCTAssertEqualConstraints(sut.activeConstraints, [])
     }
@@ -120,26 +130,32 @@ class DynamicLayoutTests: XCTestCase {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
             config.when(true) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             } otherwise: {
-                view.makeConstraints(.trailing())
+                view.makeConstraints {
+                    Trailing()
+                }
             }
         }
         sut.update(environment: true)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: false)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.trailing()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Trailing() })
     }
 
     func testEquatableWithoutOtherwise() {
         let sut = DynamicLayout<Bool>()
         sut.configure { config in
             config.when(true) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             }
         }
         sut.update(environment: true)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: false)
         XCTAssertEqualConstraints(sut.activeConstraints, [])
     }
@@ -148,74 +164,96 @@ class DynamicLayoutTests: XCTestCase {
         let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
         sut.configure { config in
             config.when(.horizontallyRegular) {
-                view.makeConstraints(.top())
+                view.makeConstraints {
+                    Top()
+                }
 
                 config.when(.width(is: >=, 1024)) {
-                    view.makeConstraints(.leading())
+                    view.makeConstraints {
+                        Leading()
+                    }
                 } otherwise: {
-                    view.makeConstraints(.trailing())
+                    view.makeConstraints {
+                        Trailing()
+                    }
                 }
             } otherwise: {
-                view.makeConstraints(.bottom())
+                view.makeConstraints {
+                    Bottom()
+                }
             }
         }
 
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1024, height: 1024)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.bottom()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Bottom() })
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1024, height: 1024)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.top(), .leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Top(); Leading() })
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1023, height: 1024)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.top(), .trailing()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Top(); Trailing() })
     }
 
     func testMultipleTopLevelConditions() {
         let sut = DynamicLayout<DynamicLayoutTraitAndSizeEnvironment>()
         sut.configure { ctx in
             ctx.when(.horizontallyRegular) {
-                view.makeConstraints(.top())
+                view.makeConstraints {
+                    Top()
+                }
             } otherwise: {
-                view.makeConstraints(.bottom())
+                view.makeConstraints {
+                    Bottom()
+                }
             }
 
             ctx.when(.width(is: >=, 1024)) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             } otherwise: {
-                view.makeConstraints(.trailing())
+                view.makeConstraints {
+                    Trailing()
+                }
             }
         }
 
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 1024, height: 1024)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.top(), .leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Top(); Leading() })
 
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 1024, height: 1024)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.bottom(), .leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Bottom(); Leading() })
 
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .regular), size: CGSize(width: 10, height: 10)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.top(), .trailing()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Top(); Trailing() })
 
         sut.update(environment: .init(traitCollection: .init(horizontalSizeClass: .compact), size: CGSize(width: 10, height: 10)))
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.bottom(), .trailing()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Bottom(); Trailing() })
     }
 
     func testOtherCaseWithoutDirectConstraints() {
         let sut = DynamicLayout<Int>()
         sut.configure { config in
             config.when({ $0 < 10 }) {
-                view.makeConstraints(.leading())
+                view.makeConstraints {
+                    Leading()
+                }
             } otherwise: {
                 config.when(10) {
-                    view.makeConstraints(.top())
+                    view.makeConstraints {
+                        Top()
+                    }
                 } otherwise: {
-                    view.makeConstraints(.bottom())
+                    view.makeConstraints {
+                        Bottom()
+                    }
                 }
             }
         }
         sut.update(environment: 1)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.leading()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Leading() })
         sut.update(environment: 10)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.top()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Top() })
         sut.update(environment: 11)
-        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints(.bottom()))
+        XCTAssertEqualConstraints(sut.activeConstraints, view.applyConstraints { Bottom() })
     }
 
     func testBasicActions() {
@@ -288,23 +326,23 @@ class DynamicLayoutTests: XCTestCase {
             views.forEach({ parentView.addSubview($0) })
             sut.configure { config in
                 for view in views {
-                    view.makeConstraints(
-                        .size(.init(width: 100, height: 100))
-                    )
+                    view.makeConstraints {
+                        Size(width: 100, height: 100)
+                    }
                 }
 
                 config.when(true) {
                     for view in views {
-                        view.makeConstraints(
-                            .center()
-                        )
+                        view.makeConstraints {
+                            Center()
+                        }
                     }
                 } otherwise: {
                     for view in views {
-                        view.makeConstraints(
-                            .leading(),
-                            .top()
-                        )
+                        view.makeConstraints {
+                            Leading()
+                            Top()
+                        }
                     }
                 }
             }
