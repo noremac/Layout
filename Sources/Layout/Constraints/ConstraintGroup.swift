@@ -27,7 +27,7 @@ public struct ConstraintGroup {
     }
 
     /// When this is `true` a string with this format:
-    /// `"\(file)::\(line)"`is automatically added as each
+    /// `"\(file):\(line)"`is automatically added as each
     /// constraint's `identifier`.
     public static var debugConstraints = true
 
@@ -647,7 +647,7 @@ public struct ConstraintGroup {
             constraint.priority = priority
             constraint.identifier = identifier
             if constraint.identifier == nil, ConstraintGroup.debugConstraints {
-                constraint.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent)::\(line)"
+                constraint.identifier = "\(URL(fileURLWithPath: file.description).lastPathComponent):\(line)"
             }
             return constraint
         }
