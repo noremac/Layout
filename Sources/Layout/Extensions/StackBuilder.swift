@@ -1,22 +1,27 @@
 import UIKit
 
 public extension UIStackView {
-    private convenience init(
+    public static func layoutBased(
         axis: NSLayoutConstraint.Axis,
         distribution: UIStackView.Distribution,
         alignment: UIStackView.Alignment,
         spacing: CGFloat,
-        arrangedSubviews: [UIView]
-    ) {
-        self.init(arrangedSubviews: arrangedSubviews)
-        self.axis = axis
-        self.distribution = distribution
-        self.alignment = alignment
-        self.spacing = spacing
+        arrangedSubviews: () -> [UIView]
+    ) -> UIStackView {
+        let previous = allowAdditionalConstraints
+        allowAdditionalConstraints = true
+        defer { allowAdditionalConstraints = previous }
+
+        let arrangedSubviews = arrangedSubviews()
+        let stack = UIStackView(arrangedSubviews: arrangedSubviews)
+        stack.axis = axis
+        stack.distribution = distribution
+        stack.alignment = alignment
+        stack.spacing = spacing
 
         arrangedSubviews.flatMap { view -> [NSLayoutConstraint] in
             if let spacing = view._spacingAfter {
-                setCustomSpacing(spacing, after: view)
+                stack.setCustomSpacing(spacing, after: view)
             }
 
             if let groups = view._additionalConstraints {
@@ -26,6 +31,8 @@ public extension UIStackView {
             }
         }
         .activate()
+
+        return stack
     }
 
     static func horizontal(
@@ -34,15 +41,12 @@ public extension UIStackView {
         spacing: CGFloat = UIStackView.spacingUseDefault,
         @ArrayBuilder <UIView> arrangedSubviews: () -> [UIView]
     ) -> UIStackView {
-        let previous = allowAdditionalConstraints
-        allowAdditionalConstraints = true
-        defer { allowAdditionalConstraints = previous }
-        return UIStackView(
+        return UIStackView.layoutBased(
             axis: .horizontal,
             distribution: distribution,
             alignment: alignment,
             spacing: spacing,
-            arrangedSubviews: arrangedSubviews()
+            arrangedSubviews: arrangedSubviews
         )
     }
 
@@ -52,15 +56,12 @@ public extension UIStackView {
         spacing: CGFloat = UIStackView.spacingUseDefault,
         @ArrayBuilder <UIView> arrangedSubviews: () -> [UIView]
     ) -> UIStackView {
-        let previous = allowAdditionalConstraints
-        allowAdditionalConstraints = true
-        defer { allowAdditionalConstraints = previous }
-        return UIStackView(
+        return UIStackView.layoutBased(
             axis: .vertical,
             distribution: distribution,
             alignment: alignment,
             spacing: spacing,
-            arrangedSubviews: arrangedSubviews()
+            arrangedSubviews: arrangedSubviews
         )
     }
 }
