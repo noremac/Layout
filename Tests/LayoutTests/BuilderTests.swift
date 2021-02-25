@@ -10,6 +10,13 @@ enum TestEnum {
     case three
 }
 
+extension UILabel {
+    convenience init(int: Int) {
+        self.init(frame: .zero)
+        text = "\(int)"
+    }
+}
+
 final class BadConstrainableItem: ConstrainableItem {
     var parentView: UIView?
 
@@ -245,5 +252,12 @@ final class StackBuilderTests: XCTestCase {
             }
         }
         XCTAssertTrue(crashed)
+    }
+
+    func testArray() {
+        let view = UIStackView.vertical {
+            (0..<100).map(UILabel.init(int:))
+        }
+        XCTAssertEqual(view.arrangedSubviews.count, 100)
     }
 }

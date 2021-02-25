@@ -16,6 +16,10 @@ public enum ArrayBuilder<Element> {
         children.flatMap({ $0 })
     }
 
+    public static func buildExpression(_ expressions: [Expression]) -> Component {
+        expressions
+    }
+
     public static func buildOptional(_ children: Component?) -> Component {
         children ?? []
     }
