@@ -1,38 +1,47 @@
+#if swift(<5.4)
 @_functionBuilder
 public enum ArrayBuilder<Element> {
-    public typealias Expression = Element
+}
+#else
+@resultBuilder
+public enum ArrayBuilder<Element> {
+}
+#endif
 
-    public typealias Component = [Element]
+public extension ArrayBuilder {
+    typealias Expression = Element
 
-    public static func buildExpression(_ expression: Expression) -> Component {
+    typealias Component = [Element]
+
+    static func buildExpression(_ expression: Expression) -> Component {
         [expression]
     }
 
-    public static func buildExpression(_ expression: Expression?) -> Component {
+    static func buildExpression(_ expression: Expression?) -> Component {
         expression.map({ [$0] }) ?? []
     }
 
-    public static func buildBlock(_ children: Component...) -> Component {
+    static func buildBlock(_ children: Component...) -> Component {
         children.flatMap({ $0 })
     }
 
-    public static func buildExpression(_ expressions: [Expression]) -> Component {
+    static func buildExpression(_ expressions: [Expression]) -> Component {
         expressions
     }
 
-    public static func buildOptional(_ children: Component?) -> Component {
+    static func buildOptional(_ children: Component?) -> Component {
         children ?? []
     }
 
-    public static func buildBlock(_ component: Component) -> Component {
+    static func buildBlock(_ component: Component) -> Component {
         component
     }
 
-    public static func buildEither(first child: Component) -> Component {
+    static func buildEither(first child: Component) -> Component {
         child
     }
 
-    public static func buildEither(second child: Component) -> Component {
+    static func buildEither(second child: Component) -> Component {
         child
     }
 }
