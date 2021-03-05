@@ -18,6 +18,20 @@ public extension UIView {
         add(constrainableItems: items(), to: self)
         return self
     }
+
+    func padding(
+        _ edges: NSDirectionalRectEdge = .all,
+        insets: NSDirectionalEdgeInsets = .zero,
+        file: String = #file,
+        line: UInt = #line
+    ) -> UIView {
+        let view = UIView()
+        view.addSubview(self)
+        self.applyConstraints {
+            AlignEdges(edges, insets: insets, file: file, line: line)
+        }
+        return view
+    }
 }
 
 public extension UILayoutGuide {

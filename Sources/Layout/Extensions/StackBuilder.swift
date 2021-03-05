@@ -6,6 +6,9 @@ public extension UIStackView {
         distribution: UIStackView.Distribution,
         alignment: UIStackView.Alignment,
         spacing: CGFloat,
+        isLayoutMarginsRelativeArrangement: Bool,
+        directionalLayoutMargins: NSDirectionalEdgeInsets?,
+        isBaselineRelativeArrangement: Bool,
         arrangedSubviews: [UIView]
     ) {
         self.init(arrangedSubviews: arrangedSubviews)
@@ -13,6 +16,11 @@ public extension UIStackView {
         self.distribution = distribution
         self.alignment = alignment
         self.spacing = spacing
+        self.isLayoutMarginsRelativeArrangement = isLayoutMarginsRelativeArrangement
+        if let directionalLayoutMargins = directionalLayoutMargins {
+            self.directionalLayoutMargins = directionalLayoutMargins
+        }
+        self.isBaselineRelativeArrangement = isBaselineRelativeArrangement
 
         arrangedSubviews.flatMap { view -> [NSLayoutConstraint] in
             if let spacing = view._spacingAfter {
@@ -32,6 +40,8 @@ public extension UIStackView {
         distribution: UIStackView.Distribution = .fill,
         alignment: UIStackView.Alignment = .fill,
         spacing: CGFloat = UIStackView.spacingUseDefault,
+        isLayoutMarginsRelativeArrangement: Bool = false,
+        directionalLayoutMargins: NSDirectionalEdgeInsets? = nil,
         @ArrayBuilder <UIView> arrangedSubviews: () -> [UIView]
     ) -> UIStackView {
         let previous = allowAdditionalConstraints
@@ -42,6 +52,9 @@ public extension UIStackView {
             distribution: distribution,
             alignment: alignment,
             spacing: spacing,
+            isLayoutMarginsRelativeArrangement: isLayoutMarginsRelativeArrangement,
+            directionalLayoutMargins: directionalLayoutMargins,
+            isBaselineRelativeArrangement: false,
             arrangedSubviews: arrangedSubviews()
         )
     }
@@ -50,6 +63,9 @@ public extension UIStackView {
         distribution: UIStackView.Distribution = .fill,
         alignment: UIStackView.Alignment = .fill,
         spacing: CGFloat = UIStackView.spacingUseDefault,
+        isLayoutMarginsRelativeArrangement: Bool = false,
+        directionalLayoutMargins: NSDirectionalEdgeInsets? = nil,
+        isBaselineRelativeArrangement: Bool = false,
         @ArrayBuilder <UIView> arrangedSubviews: () -> [UIView]
     ) -> UIStackView {
         let previous = allowAdditionalConstraints
@@ -60,6 +76,9 @@ public extension UIStackView {
             distribution: distribution,
             alignment: alignment,
             spacing: spacing,
+            isLayoutMarginsRelativeArrangement: isLayoutMarginsRelativeArrangement,
+            directionalLayoutMargins: directionalLayoutMargins,
+            isBaselineRelativeArrangement: isBaselineRelativeArrangement,
             arrangedSubviews: arrangedSubviews()
         )
     }
