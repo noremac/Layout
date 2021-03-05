@@ -188,3 +188,20 @@ public func AspectRatio(
         line: line
     )
 }
+
+public func AspectRatio(
+    _ size: CGSize,
+    file: String = #file,
+    line: UInt = #line
+) -> SingleConstraintGenerator {
+    SingleConstraint(
+        attribute: .width,
+        relatedBy: .equal,
+        to: .self,
+        attribute: .height,
+        multiplier: size.width / size.height,
+        constant: 0,
+        file: file,
+        line: line
+    )
+}
