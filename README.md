@@ -1,5 +1,7 @@
 # Layout <!-- omit in toc -->
 
+An expressive and extensible DSL for creating Auto Layout constraints and defining declarative layouts.
+
 - [Availability and Requirements](#availability-and-requirements)
 - [Creating Constraints](#creating-constraints)
 - [View builder DSL](#view-builder-dsl)
@@ -7,8 +9,6 @@
 - [Autoresizing Mask](#autoresizing-mask)
 - [Debugging Constraints](#debugging-constraints)
 - [License](#license)
-
-An expressive and extensible DSL for creating Auto Layout constraints and defining declarative layouts.
 
 ## Availability and Requirements
 
