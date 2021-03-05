@@ -1,11 +1,11 @@
 #if swift(<5.4)
-@_functionBuilder
-public enum ArrayBuilder<Element> {
-}
+    @_functionBuilder
+    public enum ArrayBuilder<Element> {
+    }
 #else
-@resultBuilder
-public enum ArrayBuilder<Element> {
-}
+    @resultBuilder
+    public enum ArrayBuilder<Element> {
+    }
 #endif
 
 public extension ArrayBuilder {

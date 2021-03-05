@@ -27,7 +27,7 @@ public extension UIView {
     ) -> UIView {
         let view = UIView()
         view.addSubview(self)
-        self.applyConstraints {
+        applyConstraints {
             AlignEdges(edges, insets: insets, file: file, line: line)
         }
         return view
