@@ -51,26 +51,23 @@ UIStackView.vertical(spacing: 10) {
             AspectRatio(3 / 2)
         }
 
-    UIView.build {
-        UIStackView.vertical(spacing: 10) {
-            titleLabel
+    UIStackView.vertical(spacing: 10) {
+        titleLabel
 
-            summaryLabel
-                .spacingAfter(20)
+        summaryLabel
+            .spacingAfter(20)
 
-            UIStackView.horizontal {
-                timeLabel
-                HorizontalSpacer()
-                playButton
-            }
-        }
-        .constraints {
-            AlignEdges(insets: .init(top: 0, leading: 8, bottom: 0, trailing: 8))
+        UIStackView.horizontal {
+            timeLabel
+            HorizontalSpacer()
+            playButton
         }
     }
+    .padding(.horizontal, insets: 8)
 
     VerticalSpacer()
 }
+
 ```
 
 Generates this layout:
