@@ -32,7 +32,6 @@ opt_in_rules:
   - joined_default_parameter
   - legacy_random
   - lower_acl_than_parent
-  # - missing_docs
   - modifier_order
   - multiline_literal_brackets
   - multiline_parameters
@@ -51,6 +50,3 @@ opt_in_rules:
   - toggle_bool
   - unavailable_function
   - unneeded_parentheses_in_closure_argument
-
-excluded:
-  - Scripts
