@@ -1,12 +1,5 @@
-#if swift(<5.4)
-    @_functionBuilder
-    public enum ArrayBuilder<Element> {
-    }
-#else
-    @resultBuilder
-    public enum ArrayBuilder<Element> {
-    }
-#endif
+@resultBuilder
+public enum ArrayBuilder<Element> {}
 
 public extension ArrayBuilder {
     typealias Expression = Element
@@ -43,5 +36,13 @@ public extension ArrayBuilder {
 
     static func buildEither(second child: Component) -> Component {
         child
+    }
+
+    static func buildArray(_ components: [Component]) -> Component {
+        components.flatMap({ $0 })
+    }
+
+    static func buildLimitedAvailability(_ component: Component) -> Component {
+        component
     }
 }
