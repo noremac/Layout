@@ -260,4 +260,37 @@ final class StackBuilderTests: XCTestCase {
         }
         XCTAssertEqual(view.arrangedSubviews.count, 100)
     }
+
+    func testForEach() {
+        let view = UIStackView.vertical {
+            for i in 0..<100 {
+                UILabel(int: i)
+            }
+        }
+        XCTAssertEqual(view.arrangedSubviews.count, 100)
+    }
+
+    func testAvailabilityAvailable() throws {
+        let view = UIStackView.vertical {
+            if #available(iOS 13, *) {
+                UILabel()
+            } else {
+                UITextField()
+            }
+        }
+        let item = try XCTUnwrap(view.arrangedSubviews.first)
+        XCTAssertTrue(item is UILabel)
+    }
+
+    func testAvailabilityNotAvailable() throws {
+        let view = UIStackView.vertical {
+            if #available(iOS 9999, *) {
+                UILabel()
+            } else {
+                UITextField()
+            }
+        }
+        let item = try XCTUnwrap(view.arrangedSubviews.first)
+        XCTAssertTrue(item is UITextField)
+    }
 }
