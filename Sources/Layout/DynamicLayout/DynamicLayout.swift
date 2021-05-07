@@ -55,7 +55,7 @@ public class DynamicLayout<Environment> {
             if !constraints.isEmpty || !actions.isEmpty {
                 return true
             }
-            if children.contains(where: { $0.hasConstraintsOrActions }) {
+            if children.contains(where: \.hasConstraintsOrActions) {
                 return true
             }
             return otherwise?.hasConstraintsOrActions ?? false
