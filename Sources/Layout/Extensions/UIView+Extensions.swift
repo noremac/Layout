@@ -64,8 +64,8 @@ var allowAdditionalConstraints = false
 
 private var _additionalConstraintsKey: UInt8 = 0
 
-public extension ConstrainableItem {
-    internal var _additionalConstraints: [MultipleConstraintGenerator]? {
+extension ConstrainableItem {
+    var _additionalConstraints: [MultipleConstraintGenerator]? {
         get {
             objc_getAssociatedObject(self, &_additionalConstraintsKey) as? [MultipleConstraintGenerator]
         }
@@ -74,7 +74,7 @@ public extension ConstrainableItem {
         }
     }
 
-    func constraints(@ArrayBuilder <MultipleConstraintGenerator> _ constraints: () -> [MultipleConstraintGenerator]) -> Self {
+    public func constraints(@ArrayBuilder <MultipleConstraintGenerator> _ constraints: () -> [MultipleConstraintGenerator]) -> Self {
         guard allowAdditionalConstraints else {
             FatalError.crash("\(#function) is only allowed when using the layout DSL.")
             return self
